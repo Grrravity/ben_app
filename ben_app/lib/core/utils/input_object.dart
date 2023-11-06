@@ -1,7 +1,7 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:ben_app/core/error/input_failure.dart';
 import 'package:ben_app/core/utils/field_helper.dart';
 import 'package:ben_app/core/utils/value_object.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part '../generated/utils/input_object.g.dart';
 

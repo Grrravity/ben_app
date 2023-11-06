@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:ben_app/core/config/flavor/flavor.dart';
 import 'package:ben_app/core/injection/clients_dep.dart';
 import 'package:ben_app/core/injection/cubit_dep.dart';
@@ -6,6 +5,7 @@ import 'package:ben_app/core/injection/datasource_dep.dart';
 import 'package:ben_app/core/injection/repository_dep.dart';
 import 'package:ben_app/core/injection/service_dep.dart';
 import 'package:ben_app/core/injection/usecase_dep.dart';
+import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
 

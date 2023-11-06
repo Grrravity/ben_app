@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/utils/logger.dart';
 import 'package:ben_app/data/client/utils/json_typedef.dart';
 import 'package:ben_app/data/client/utils/response_extension.dart';
+import 'package:dio/dio.dart';
 
 class RestApiHandler {
   RestApiHandler({required this.client});

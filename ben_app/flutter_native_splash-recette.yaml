@@ -10,4 +10,4 @@ flutter_native_splash:
     image_dark: assets/launcher_icons/splash_recette.png
     icon_background_color_dark: "#ffffff"
 
-  web: false
+  web: true

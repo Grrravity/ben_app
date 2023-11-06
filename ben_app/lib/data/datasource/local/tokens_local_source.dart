@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ben_app/data/model/jwt_dto.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class TokensLocalSource {
   Future<JwtDto?> fetch();

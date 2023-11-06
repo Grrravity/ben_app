@@ -1,5 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ben_app/domain/entities/user.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/session.freezed.dart';
 

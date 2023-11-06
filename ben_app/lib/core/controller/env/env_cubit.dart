@@ -1,7 +1,7 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:ben_app/core/config/flavor/flavor.dart';
 import 'package:ben_app/core/injection/dependency_injection.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 // part 'package:senior_gold/core/generated/controller/env_controller/env_cubit.freezed.dart';
 part '../../generated/controller/env/env_cubit.freezed.dart';

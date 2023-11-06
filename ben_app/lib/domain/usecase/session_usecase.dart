@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:ben_app/core/enum/sso_enum.dart';
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/extension/either.dart';
@@ -8,6 +7,7 @@ import 'package:ben_app/domain/entities/credentials.dart';
 import 'package:ben_app/domain/entities/token.dart';
 import 'package:ben_app/domain/entities/user.dart';
 import 'package:ben_app/domain/repositories/session_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class SessionUsecase {
   SessionUsecase({

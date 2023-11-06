@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:ben_app/core/router/path.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
 import 'package:ben_app/presentation/pages/events/presentation/events_page.dart';
+import 'package:flutter/material.dart';
 
 enum ShellDestinations {
   dashboard(

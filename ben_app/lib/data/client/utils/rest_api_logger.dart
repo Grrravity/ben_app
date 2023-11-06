@@ -1,45 +1,79 @@
-import 'dart:developer';
-
+import 'package:ben_app/core/error/logger.dart';
 import 'package:dio/dio.dart';
 
 class DioApiLogger {
+  DioApiLogger(this.clientName);
+  final logger = Logger('API');
+
+  final String clientName;
+
   static String normalColor = '\x1B[36m';
   static String errorColor = '\x1B[31m';
   static String resetColor = '\x1B[0m';
+  static String yellowColor = '\x1B[33m';
+  static String greenColor = '\x1B[32m';
+
   RequestOptions onRequestLogger(RequestOptions request) {
-    log(
-      '''
-${normalColor}REQUEST[${request.method}]
-  BASE URL: ${request.baseUrl} - PATH: ${request.path}
-  HEADERS: ${request.headers}
-  QUERY-PARAMETERS: ${request.queryParameters}$resetColor
-''',
-    );
+    final requestHeader = {...request.headers};
+    if (requestHeader['Authorization'] != null) {
+      requestHeader
+        ..remove('Authorization')
+        ..addAll(
+          {
+            'Authorization':
+                '${(request.headers['Authorization'] as String).substring(0, 20)}...',
+          },
+        );
+    }
+
+    logger.request('''
+REQUEST [${request.method}] - CLIENT [${_yellow(clientName)}]
+BASE URL: ${_yellow(request.baseUrl)} - PATH: ${_yellow(request.path)}
+HEADERS: ${_yellow(requestHeader)}
+QUERY-PARAMETERS: ${_yellow(request.queryParameters)}
+''');
 
     return request;
   }
 
   Response<dynamic> onResponseLogger(Response<dynamic> response) {
-    log(
+    final data = response.data == null
+        ? 'empty'
+        : response.data.toString().length > 100
+            ? '${response.data.toString().substring(0, 100)}...'
+            : response.data.toString();
+
+    logger.request(
       '''
-${normalColor}RESPONSE[${response.statusCode}]
-  PATH: ${response.requestOptions.path}
-  DATA: ${response.data == null ? 'empty' : response.data.toString().length > 100 ? "${response.data.toString().substring(0, 100)}..." : response.data.toString()}
-$resetColor''',
+RESPONSE[${_green(response.statusCode)}] - CLIENT [${_yellow(clientName)}]
+PATH: ${_yellow(response.requestOptions.path)}
+DATA: ${_yellow(data)}
+''',
     );
     return response;
   }
 
   DioException onErrorLogger(DioException err) {
-    log(
+    logger.error(
       '''
-${errorColor}ERROR[${err.response?.statusCode ?? '---'}]
-  PATH: ${err.requestOptions.path}
-  MESSAGE: ${err.response?.statusMessage ?? ''}
-  DATA: ${err.response?.data ?? ''}
-$resetColor
+ERROR[${err.response?.statusCode ?? '---'}] - CLIENT [${_yellowErr(clientName)}]
+PATH: ${_yellowErr(err.requestOptions.path)}
+MESSAGE: ${_yellowErr(err.response?.statusMessage ?? 'empty')}
+DATA: ${_yellowErr(err.response?.data ?? 'empty')}
 ''',
     );
     return err;
+  }
+
+  String _green(dynamic data) {
+    return greenColor + data.toString() + normalColor;
+  }
+
+  String _yellow(dynamic data) {
+    return yellowColor + data.toString() + normalColor;
+  }
+
+  String _yellowErr(dynamic data) {
+    return yellowColor + data.toString() + errorColor;
   }
 }

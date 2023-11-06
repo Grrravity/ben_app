@@ -1,5 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ben_app/core/error/failure.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../generated/utils/form_state.freezed.dart';
 

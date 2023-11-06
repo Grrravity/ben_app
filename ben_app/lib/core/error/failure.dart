@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:ben_app/core/utils/logger.dart';
+import 'package:dartz/dartz.dart';
 
 enum Failure implements Exception {
   authentication('Email ou mot de passe incorrect'),

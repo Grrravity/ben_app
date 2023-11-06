@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:ben_app/domain/entities/session.dart';
 import 'package:ben_app/domain/repositories/session_repository.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 /// [SessionCubit] exposes current [Session] state to
 /// widgets.

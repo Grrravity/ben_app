@@ -7,9 +7,6 @@ import 'package:ben_app/domain/repositories/session_repository.dart';
 
 Future<void> registerRepository() async {
   getIt
-    ..registerLazySingleton<CurrentUserMapper>(
-      CurrentUserMapper.new,
-    )
     ..registerLazySingleton<CreationUserMapper>(
       CreationUserMapper.new,
     )

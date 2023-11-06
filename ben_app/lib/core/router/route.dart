@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:ben_app/core/controller/session/session_cubit.dart';
 import 'package:ben_app/core/router/path.dart';
 import 'package:ben_app/core/router/transition/fade_go_route.dart';
-import 'package:ben_app/core/controller/session/session_cubit.dart';
-import 'package:ben_app/presentation/shell_destination.dart';
 import 'package:ben_app/presentation/pages/auth/login/presentation/login_page.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
 import 'package:ben_app/presentation/pages/events/presentation/events_page.dart';
+import 'package:ben_app/presentation/shell_destination.dart';
 import 'package:ben_app/presentation/widgets/bottom_navigation/shell_layout.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 mixin RouterMixin<T extends StatefulWidget> on State<T> {
   final _parentKey = GlobalKey<NavigatorState>();
@@ -64,7 +64,8 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
 
       if (location == Paths.login) {
         final res = sessionState.mapOrNull(
-          authenticated: (authenticated) => Paths.dashboard,
+          authenticated: (authenticated) =>
+              !authenticated.hasProfile ? Paths.dashboard : Paths.login,
         );
         if (res != null) return res;
       }

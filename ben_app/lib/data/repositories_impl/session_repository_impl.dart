@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:ben_app/core/enum/sso_enum.dart';
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/extension/either.dart';
@@ -8,12 +7,12 @@ import 'package:ben_app/data/datasource/remote/session_api.dart';
 import 'package:ben_app/data/datasource/remote/user_api.dart';
 import 'package:ben_app/data/model/jwt_dto.dart';
 import 'package:ben_app/data/model/mapper/user_dto_mapper.dart';
-import 'package:ben_app/data/model/user_dto.dart';
 import 'package:ben_app/domain/entities/credentials.dart';
 import 'package:ben_app/domain/entities/session.dart';
 import 'package:ben_app/domain/entities/token.dart';
 import 'package:ben_app/domain/entities/user.dart';
 import 'package:ben_app/domain/repositories/session_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class SessionRepositoryImpl implements SessionRepository {
   SessionRepositoryImpl({

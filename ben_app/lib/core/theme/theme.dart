@@ -1,6 +1,6 @@
+import 'package:ben_app/core/theme/theme_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ben_app/core/theme/theme_color.dart';
 
 final lightTheme = ThemeData.from(
   useMaterial3: true,

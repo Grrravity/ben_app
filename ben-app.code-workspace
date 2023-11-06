@@ -17,104 +17,71 @@
       "version": "0.2.0",
       "configurations": [
         {
-            "name": "DEV Mob (current device)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "program": "${workspaceFolder:App}/lib/main.dart",
-            "args": [
-              "--flavor",
-              "recette",
-              "--target",
-              "lib/main.dart"
-            ],
-            "toolArgs": [
-              "--dart-define=env=dev",
-            ]
-          },
-          {
-            "name": "INTE Mob (current device)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "program": "${workspaceFolder:App}/lib/main.dart",
-            "args": [
-              "--flavor",
-              "recette",
-              "--target",
-              "lib/main.dart"
-            ],
-            "toolArgs": [
-              "--dart-define=env=inte",
-            ]
-          },
-          {
-            "name": "PROD Mob (current device)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "program": "${workspaceFolder:App}/lib/main.dart",
-            "args": [
-              "--flavor",
-              "prod",
-              "--target",
-              "lib/main.dart"
-            ],
-            "toolArgs": [
-              "--dart-define=env=prod",
-            ]
-          },
+          "name": "DEV Mob (current device)",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "program": "${workspaceFolder:App}/lib/main_inte.dart",
+          "args": [
+            "--flavor",
+            "inte",
+            "--target",
+            "lib/main_inte.dart"
+          ],
+          "toolArgs": [
+            "--dart-define-from-file .config.inte.json"
+          ]
+        },
         {
-          "name": "DEV Web",
+          "name": "PROD Mob (current device)",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "program": "${workspaceFolder:App}/lib/main_prod.dart",
+          "args": [
+              "--flavor",
+              "production",
+              "--target",
+              "lib/main_prod.dart"
+          ],
+          "toolArgs": [
+            "--dart-define-from-file .config.json"
+          ]
+        },
+        {
+          "name": "DEV Web (chrome)",
           "request": "launch",
           "type": "dart",
           "flutterMode": "debug",
           "deviceId": "chrome",
-          "program": "${workspaceFolder:App}/lib/main.dart",
+          "program": "${workspaceFolder:App}/lib/main_inte.dart",
           "args": [
-            "--flavor",
-            "recette",
+              "--web-port",
+              "8888",
             "--target",
-            "lib/main.dart"
+            "lib/main_inte.dart"
           ],
           "toolArgs": [
-            "--dart-define=env=dev",
+            "--dart-define-from-file .config.inte.json"
           ]
         },
         {
-          "name": "INTE Web",
+          "name": "PROD Web (chrome)",
           "request": "launch",
           "type": "dart",
           "flutterMode": "debug",
           "deviceId": "chrome",
-          "program": "${workspaceFolder:App}/lib/main.dart",
+          "program": "${workspaceFolder:App}/lib/main_prod.dart",
           "args": [
-            "--flavor",
-            "recette",
-            "--target",
-            "lib/main.dart"
+              "--web-port",
+              "8888",
+              "--target",
+              "lib/main_prod.dart"
           ],
           "toolArgs": [
-            "--dart-define=env=inte",
+            "--dart-define-from-file .config.json"
           ]
-        },
-        {
-          "name": "PROD Web",
-          "request": "launch",
-          "type": "dart",
-          "flutterMode": "debug",
-          "deviceId": "chrome",
-          "program": "${workspaceFolder:App}/lib/main.dart",
-          "args": [
-            "--flavor",
-            "prod",
-            "--target",
-            "lib/main.dart"
-          ],
-          "toolArgs": [
-            "--dart-define=env=prod",
-          ]
-        },
+        }
       ]
     }
   }

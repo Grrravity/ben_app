@@ -11,7 +11,7 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		2F1E2D890D742E83C25F5296 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8136DE6D9732450E1432A0BB /* GoogleService-Info.plist */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		40BD97F229B6233200D0B49C /* LaunchScreenInte.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BD97E829B6233100D0B49C /* LaunchScreenInte.storyboard */; };
+		40BD97F229B6233200D0B49C /* LaunchScreenRecette.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BD97E829B6233100D0B49C /* LaunchScreenRecette.storyboard */; };
 		40BD97F329B6233200D0B49C /* LaunchScreenProd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BD97EA29B6233200D0B49C /* LaunchScreenProd.storyboard */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -39,7 +39,7 @@
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		4003F48029B8865A0079C3C6 /* firebase_app_id_file.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase_app_id_file.json; sourceTree = "<group>"; };
 		4003F48129B886810079C3C6 /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = "<group>"; };
-		40BD97E929B6233100D0B49C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenInte.storyboard; sourceTree = "<group>"; };
+		40BD97E929B6233100D0B49C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenRecette.storyboard; sourceTree = "<group>"; };
 		40BD97EB29B6233200D0B49C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenProd.storyboard; sourceTree = "<group>"; };
 		40EB218F29EB52B90049DD83 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		40EC94E229A5049B00FF1337 /* Profile-inte.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Profile-inte.xcconfig"; path = "Flutter/Profile-inte.xcconfig"; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
-				40BD97E829B6233100D0B49C /* LaunchScreenInte.storyboard */,
+				40BD97E829B6233100D0B49C /* LaunchScreenRecette.storyboard */,
 				40BD97EA29B6233200D0B49C /* LaunchScreenProd.storyboard */,
 				97C147021CF9000F007C117D /* Info.plist */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
@@ -220,7 +220,7 @@
 				40BD97F329B6233200D0B49C /* LaunchScreenProd.storyboard in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
-				40BD97F229B6233200D0B49C /* LaunchScreenInte.storyboard in Resources */,
+				40BD97F229B6233200D0B49C /* LaunchScreenRecette.storyboard in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 				2F1E2D890D742E83C25F5296 /* GoogleService-Info.plist in Resources */,
@@ -333,12 +333,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		40BD97E829B6233100D0B49C /* LaunchScreenInte.storyboard */ = {
+		40BD97E829B6233100D0B49C /* LaunchScreenRecette.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				40BD97E929B6233100D0B49C /* Base */,
 			);
-			name = LaunchScreenInte.storyboard;
+			name = LaunchScreenRecette.storyboard;
 			sourceTree = "<group>";
 		};
 		40BD97EA29B6233200D0B49C /* LaunchScreenProd.storyboard */ = {
@@ -515,7 +515,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 40EC94E429A5049B00FF1337 /* Debug-inte.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-inte";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-recette";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -526,7 +526,7 @@
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Je;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				LAUNCH_SCREEN_STORYBOARD = LaunchScreenInte;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenRecette;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,7 +602,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 40EC94E729A5049C00FF1337 /* Release-inte.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-inte";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-recette";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_STYLE = Manual;
@@ -613,7 +613,7 @@
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Je;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				LAUNCH_SCREEN_STORYBOARD = LaunchScreenInte;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenRecette;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -686,7 +686,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 40EC94E229A5049B00FF1337 /* Profile-inte.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-inte";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-recette";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -697,7 +697,7 @@
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Je;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				LAUNCH_SCREEN_STORYBOARD = LaunchScreenInte;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreenRecette;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

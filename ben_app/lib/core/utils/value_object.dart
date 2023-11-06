@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:ben_app/core/extension/extension_export.dart';
+import 'package:equatable/equatable.dart';
 
 typedef MultivalueValidator<T, F> = F? Function({
   required List<T> values,
