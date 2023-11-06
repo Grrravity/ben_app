@@ -1,0 +1,87 @@
+{
+    "folders": [
+      {
+        "name": "App",
+        "path": "./ben_app",
+      },
+      {
+        "name": "Firebase",
+        "path": "./firebase",
+      },
+      {
+        "name": "Root",
+        "path": "./",
+      },
+    ],
+    "launch": {
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "name": "DEV Mob (current device)",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "program": "${workspaceFolder:App}/lib/main_inte.dart",
+          "args": [
+            "--flavor",
+            "inte",
+            "--target",
+            "lib/main_inte.dart"
+          ],
+          "toolArgs": [
+            "--dart-define-from-file .config.inte.json"
+          ]
+        },
+        {
+          "name": "PROD Mob (current device)",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "program": "${workspaceFolder:App}/lib/main_prod.dart",
+          "args": [
+              "--flavor",
+              "production",
+              "--target",
+              "lib/main_prod.dart"
+          ],
+          "toolArgs": [
+            "--dart-define-from-file .config.json"
+          ]
+        },
+        {
+          "name": "DEV Web (chrome)",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "deviceId": "chrome",
+          "program": "${workspaceFolder:App}/lib/main_inte.dart",
+          "args": [
+              "--web-port",
+              "8888",
+            "--target",
+            "lib/main_inte.dart"
+          ],
+          "toolArgs": [
+            "--dart-define-from-file .config.inte.json"
+          ]
+        },
+        {
+          "name": "PROD Web (chrome)",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "deviceId": "chrome",
+          "program": "${workspaceFolder:App}/lib/main_prod.dart",
+          "args": [
+              "--web-port",
+              "8888",
+              "--target",
+              "lib/main_prod.dart"
+          ],
+          "toolArgs": [
+            "--dart-define-from-file .config.json"
+          ]
+        }
+      ]
+    }
+  }

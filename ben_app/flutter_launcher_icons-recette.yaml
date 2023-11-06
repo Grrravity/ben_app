@@ -1,0 +1,9 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: "assets/launcher_icons/recette.jpeg"
+  image_path: "assets/launcher_icons/recette.jpeg"
+  min_sdk_android: 29
+  remove_alpha_ios: true
