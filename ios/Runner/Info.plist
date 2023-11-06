@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>L'app a besoin de votre accord pour prendre des photos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>L'app à besoin de votre accord pour utiliser le microphone</string>
 </dict>
 </plist>

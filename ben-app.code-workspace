@@ -1,0 +1,121 @@
+{
+    "folders": [
+      {
+        "name": "App",
+        "path": "./",
+      },
+      {
+        "name": "Firebase",
+        "path": "./firebase",
+      },
+    ],
+    "settings": {
+      "files.exclude": {
+        "firebase": true,
+      },
+    },
+    "launch": {
+      "version": "0.2.0",
+      "configurations": [
+        {
+            "name": "DEV Mob (current device)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "${workspaceFolder:Mobile}/lib/main.dart",
+            "args": [
+              "--flavor",
+              "recette",
+              "--target",
+              "lib/main.dart"
+            ],
+            "toolArgs": [
+              "--dart-define=env=dev",
+            ]
+          },
+          {
+            "name": "INTE Mob (current device)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "${workspaceFolder:Mobile}/lib/main.dart",
+            "args": [
+              "--flavor",
+              "recette",
+              "--target",
+              "lib/main.dart"
+            ],
+            "toolArgs": [
+              "--dart-define=env=inte",
+            ]
+          },
+          {
+            "name": "PROD Mob (current device)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "${workspaceFolder:Mobile}/lib/main.dart",
+            "args": [
+              "--flavor",
+              "prod",
+              "--target",
+              "lib/main.dart"
+            ],
+            "toolArgs": [
+              "--dart-define=env=prod",
+            ]
+          },
+        {
+          "name": "DEV Web",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "deviceId": "chrome",
+          "program": "${workspaceFolder:Root}/lib/main.dart",
+          "args": [
+            "--flavor",
+            "recette",
+            "--target",
+            "lib/main.dart"
+          ],
+          "toolArgs": [
+            "--dart-define=env=dev",
+          ]
+        },
+        {
+          "name": "INTE Web",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "deviceId": "chrome",
+          "program": "${workspaceFolder:Mobile}/lib/main.dart",
+          "args": [
+            "--flavor",
+            "recette",
+            "--target",
+            "lib/main.dart"
+          ],
+          "toolArgs": [
+            "--dart-define=env=inte",
+          ]
+        },
+        {
+          "name": "PROD Web",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug",
+          "deviceId": "chrome",
+          "program": "${workspaceFolder:Mobile}/lib/main.dart",
+          "args": [
+            "--flavor",
+            "prod",
+            "--target",
+            "lib/main.dart"
+          ],
+          "toolArgs": [
+            "--dart-define=env=prod",
+          ]
+        },
+      ]
+    }
+  }

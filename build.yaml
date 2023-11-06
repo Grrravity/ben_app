@@ -1,0 +1,19 @@
+targets:
+  $default:
+    builders:
+      source_gen:combining_builder:
+        options:
+          build_extensions:
+            "^lib/data/model/{{}}.dart": "lib/data/model/generated/{{}}.g.dart"
+            "^lib/domain/entities/{{}}.dart": "lib/domain/entities/generated/{{}}.g.dart"
+            "^lib/core/{{}}.dart": "lib/core/generated/{{}}.g.dart"
+            "^lib/presentation/{{}}.dart": "lib/presentation/generated/{{}}.g.dart"
+      freezed|freezed:
+        options:
+          # runs_before:
+          #   - isar_generator:isar_generator
+          build_extensions:
+            "^lib/data/model/{{}}.dart": "lib/data/model/generated/{{}}.freezed.dart"
+            "^lib/domain/entities/{{}}.dart": "lib/domain/entities/generated/{{}}.freezed.dart"
+            "^lib/core/{{}}.dart": "lib/core/generated/{{}}.freezed.dart"
+            "^lib/presentation/{{}}.dart": "lib/presentation/generated/{{}}.freezed.dart"
