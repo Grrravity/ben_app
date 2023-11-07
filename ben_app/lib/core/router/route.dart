@@ -2,19 +2,15 @@ import 'dart:async';
 
 import 'package:ben_app/core/controller/session/session_cubit.dart';
 import 'package:ben_app/core/router/path.dart';
-import 'package:ben_app/core/router/transition/fade_go_route.dart';
 import 'package:ben_app/presentation/pages/auth/login/presentation/login_page.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
 import 'package:ben_app/presentation/pages/events/presentation/events_page.dart';
-import 'package:ben_app/presentation/shell_destination.dart';
-import 'package:ben_app/presentation/widgets/bottom_navigation/shell_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 mixin RouterMixin<T extends StatefulWidget> on State<T> {
   final _parentKey = GlobalKey<NavigatorState>();
-  final _shellKey = GlobalKey<NavigatorState>();
 
   late final router = GoRouter(
     initialLocation: Paths.login,
@@ -26,24 +22,17 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         parentNavigatorKey: _parentKey,
         builder: (context, state) => LoginPage(),
       ),
-      ShellRoute(
-        navigatorKey: _shellKey,
-        builder: (context, state, child) => ShellLayout(
-          currentChild: child,
-        ),
-        routes: ShellDestinations.values
-            .map(
-              (tab) => FadeGoRoute(
-                path: tab.path,
-                name: tab.routeName,
-                parentNavigatorKey: _shellKey,
-                child: switch (tab) {
-                  ShellDestinations.dashboard => DashboardPage(),
-                  ShellDestinations.events => EventsPage(),
-                },
-              ),
-            )
-            .toList(),
+      GoRoute(
+        path: Paths.dashboard,
+        name: DashboardPage.routeName,
+        parentNavigatorKey: _parentKey,
+        builder: (context, state) => DashboardPage(),
+      ),
+      GoRoute(
+        path: Paths.events,
+        name: EventsPage.routeName,
+        parentNavigatorKey: _parentKey,
+        builder: (context, state) => EventsPage(),
       ),
     ],
     refreshListenable: StreamChangeNotifier(

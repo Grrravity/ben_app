@@ -4,17 +4,8 @@ part 'generated/user.freezed.dart';
 
 @freezed
 class User with _$User {
-  const factory User.current({
+  const factory User({
     required final String uuid,
-    required final String username,
-  }) = CurrentUser;
-
-  const factory User.member({
-    required final String uuid,
-    required final String username,
-  }) = MemberUser;
-
-  const factory User.creation({
-    required final String username,
-  }) = CreationUser;
+    required final String email,
+  }) = _User;
 }

@@ -1,10 +1,12 @@
+import 'package:ben_app/data/client/api_client.dart';
 import 'package:ben_app/data/client/utils/response_extension.dart';
 import 'package:ben_app/data/client/utils/rest_api_handler.dart';
 import 'package:ben_app/data/model/user_dto.dart';
 
 abstract class UserApiSource {
-  Future<CurrentUserDto> getCurrentUser({required String uuid});
-  Future<MemberUserDto> getMember({required String uuid});
+  Future<UserDto> getCurrentUser({required String uuid});
+
+  Future<void> saveFcm({required String fcmToken});
 }
 
 class UserApiSourceImpl extends UserApiSource {
@@ -13,17 +15,21 @@ class UserApiSourceImpl extends UserApiSource {
   final RestApiHandler client;
 
   @override
-  Future<CurrentUserDto> getCurrentUser({required String uuid}) async {
+  Future<UserDto> getCurrentUser({required String uuid}) async {
     final response = await client.get(route: 'users/me');
 
-    return CurrentUserDto.fromJson(response.item);
+    return UserDto.fromJson(response.item);
   }
 
   @override
-  Future<MemberUserDto> getMember({required String uuid}) async {
-    final response = await client.get(
-      route: 'users/$uuid',
+  Future<void> saveFcm({
+    required String fcmToken,
+  }) async {
+    await client.post(
+      route: ApiEndpoints.fcm,
+      body: {
+        'token': fcmToken,
+      },
     );
-    return MemberUserDto.fromJson(response.item);
   }
 }

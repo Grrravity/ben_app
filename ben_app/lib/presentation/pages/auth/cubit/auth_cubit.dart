@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ben_app/core/enum/sso_enum.dart';
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/utils/form_state.dart';
 import 'package:ben_app/core/utils/input_object.dart';
@@ -79,17 +78,6 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     );
 
     return _emitSubmissionStatus(okOrFailure);
-  }
-
-  Future<bool> signInWithSSO(SsoIdentityProvider idp) async {
-    final lState = state.asLoaded;
-    if (lState == null) return false;
-
-    emit(lState.toSubmitting);
-
-    final sessionOrFailure = await sessionUsecase.signInWithSSO(idp);
-
-    return _emitSubmissionStatus(sessionOrFailure);
   }
 
   Future<bool> register() async {
