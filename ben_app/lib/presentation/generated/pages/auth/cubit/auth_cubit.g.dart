@@ -17,8 +17,8 @@ _$AuthFormDataImpl _$$AuthFormDataImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$AuthFormDataImplToJson(_$AuthFormDataImpl instance) =>
     <String, dynamic>{
-      'email': instance.email.toJson(),
-      'password': instance.password.toJson(),
-      'confirmPassword': instance.confirmPassword.toJson(),
+      'email': instance.email,
+      'password': instance.password,
+      'confirmPassword': instance.confirmPassword,
       'hidden': instance.hidden,
     };

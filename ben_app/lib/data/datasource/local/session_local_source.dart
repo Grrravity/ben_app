@@ -1,23 +1,23 @@
 import 'dart:convert';
 
-import 'package:ben_app/data/model/jwt_dto.dart';
+import 'package:ben_app/data/model/user_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-abstract class TokensLocalSource {
-  Future<JwtDto?> fetch();
-  Future<void> upsert({required JwtDto data});
+abstract class SessionLocalSource {
+  Future<UserDto?> fetch();
+  Future<void> upsert({required UserDto data});
   Future<void> clear();
 }
 
-class TokensLocalSourceImpl implements TokensLocalSource {
-  TokensLocalSourceImpl();
+class SessionLocalSourceImpl implements SessionLocalSource {
+  SessionLocalSourceImpl();
 
   final _storage = const FlutterSecureStorage();
-  static const String _tokenKey = 'SeniorGoldToken';
+  static const String _tokenKey = 'sessionKey';
 
   @override
   Future<void> upsert({
-    required JwtDto data,
+    required UserDto data,
   }) async {
     await clear();
     await _storage.write(
@@ -27,11 +27,11 @@ class TokensLocalSourceImpl implements TokensLocalSource {
   }
 
   @override
-  Future<JwtDto?> fetch() async {
+  Future<UserDto?> fetch() async {
     final tokenValue = await _storage.read(key: _tokenKey);
     if (tokenValue == null) return null;
 
-    return JwtDto.fromJson(
+    return UserDto.fromJson(
       jsonDecode(tokenValue) as Map<String, dynamic>,
     );
   }

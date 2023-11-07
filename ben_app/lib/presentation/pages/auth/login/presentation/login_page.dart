@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   static const String routeName = 'login';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Hello ben :)'),
       ),
