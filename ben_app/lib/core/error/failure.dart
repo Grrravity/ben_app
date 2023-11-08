@@ -8,7 +8,6 @@ enum Failure implements Exception {
   connectivity('Merci de vérifier votre connection internet'),
   other('Une erreur inattendu est survenue'),
   unauthorized('Accès refusé'),
-  emailAlreadyUsed('Cette addresse email est déjà utilisée'),
   passwordsNotIdenticals('Les mots de passes doivent etre identiques'),
   invalidCommand('Commande invalide'),
   elementNotFound('Élement introuvable'),
@@ -16,7 +15,7 @@ enum Failure implements Exception {
   textIsEmpty('Le champs est vide'),
   notVerified("L'email doit être vérifié"),
   expiredSession('Session expirée'),
-  ssoModalClosed('');
+  widgetTreeError("Impossible d'afficher la page");
 
   const Failure(this.label);
 
@@ -30,12 +29,6 @@ enum Failure implements Exception {
       return right(result);
     } on Failure catch (e) {
       return left(e);
-    } on Exception catch (e, s) {
-      Logger.e(e, error: e, stackTrace: s);
-      if (e.toString().contains(Failure.ssoModalClosed.name)) {
-        return left(Failure.ssoModalClosed);
-      }
-      return left(Failure.other);
     } catch (e, s) {
       Logger.e(e, error: e, stackTrace: s);
       return left(Failure.other);

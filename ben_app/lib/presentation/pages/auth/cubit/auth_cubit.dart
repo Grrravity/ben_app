@@ -129,12 +129,6 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
 
     return successOrFailure.fold(
       (l) {
-        if (l == Failure.ssoModalClosed) {
-          emit(
-            lState.copyWithNoFailure(),
-          );
-          return false;
-        }
         emit(
           lState.toSubmissionFailed(l),
         );

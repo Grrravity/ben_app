@@ -1,12 +1,15 @@
 import 'package:ben_app/core/controller/env/env_cubit.dart';
 import 'package:ben_app/core/controller/session/session_cubit.dart';
+import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/injection/dependency_injection.dart';
 import 'package:ben_app/core/router/route.dart';
 import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/localization/l10n.dart';
+import 'package:ben_app/presentation/widgets/layout/error_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class AppProvider extends StatefulWidget {
   const AppProvider({super.key});
@@ -66,6 +69,14 @@ class _AppState extends State<_App> with RouterMixin {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
+      builder: (context, child) => ResponsiveBreakpoints.builder(
+        child: child ?? const ErrorLayout(Failure.widgetTreeError),
+        breakpoints: [
+          const Breakpoint(start: 0, end: 450, name: MOBILE),
+          const Breakpoint(start: 451, end: 800, name: TABLET),
+          const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+        ],
+      ),
     );
   }
 }

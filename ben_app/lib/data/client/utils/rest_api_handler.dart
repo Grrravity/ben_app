@@ -182,7 +182,7 @@ class RestApiHandler {
               }
               throw Failure.invalidCommand;
             case HttpStatus.conflict:
-              throw Failure.emailAlreadyUsed;
+              throw Failure.other;
           }
       }
       throw Failure.other;
