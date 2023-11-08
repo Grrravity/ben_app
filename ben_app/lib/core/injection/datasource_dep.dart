@@ -5,6 +5,7 @@ import 'package:ben_app/data/datasource/local/session_local_source.dart';
 import 'package:ben_app/data/datasource/remote/session_api_source.dart';
 import 'package:ben_app/data/datasource/remote/user_api.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> registerDataSources() async {
   await _registerLocalSources();
@@ -22,6 +23,7 @@ Future<void> _registerApiSources() async {
     ..registerLazySingleton<SessionApiSource>(
       () => SessionApiSourceImpl(
         localSource: getIt<SessionLocalSource>(),
+        firebaseAuth: getIt<FirebaseAuth>(),
       ),
     )
     ..registerLazySingleton<UserApiSource>(

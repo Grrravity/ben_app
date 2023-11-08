@@ -62,10 +62,10 @@ Future<void> initServices() async {
   final bindings = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: bindings);
 
-  HydratedBloc.storage = await BenAppHydratedStorage.build();
-  await EnvCubit.instance.init();
   final flavorType = await getFlavor();
   await FirebaseInitDataSource().init(flavorType);
+  HydratedBloc.storage = await BenAppHydratedStorage.build();
+  await EnvCubit.instance.init();
   FlutterNativeSplash.remove();
 
   return;

@@ -20,19 +20,19 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         path: Paths.login,
         name: LoginPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => LoginPage(),
+        builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
         path: Paths.dashboard,
         name: DashboardPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => DashboardPage(),
+        builder: (context, state) => const DashboardPage(),
       ),
       GoRoute(
         path: Paths.events,
         name: EventsPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => EventsPage(),
+        builder: (context, state) => const EventsPage(),
       ),
     ],
     refreshListenable: StreamChangeNotifier(
