@@ -30,8 +30,8 @@ abstract class SessionApiSource {
 class SessionApiSourceImpl implements SessionApiSource {
   SessionApiSourceImpl({
     required this.localSource,
-    FirebaseAuth? firebaseAuth,
-  }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance {
+    required this.firebaseAuth,
+  }) {
     _getUserTask = AsyncTask<UserDto?>(
       name: 'GetToken',
       task: () async {
@@ -46,11 +46,11 @@ class SessionApiSourceImpl implements SessionApiSource {
   // token renewal operation.
   late final AsyncTask<UserDto?> _getUserTask;
   final SessionLocalSource localSource;
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth firebaseAuth;
 
   @override
   Stream<UserDto?> get sessionStateStream =>
-      _firebaseAuth.authStateChanges().map((firebaseUser) {
+      firebaseAuth.authStateChanges().map((firebaseUser) {
         if (firebaseUser == null) {
           return null;
         }
@@ -62,7 +62,7 @@ class SessionApiSourceImpl implements SessionApiSource {
     Credentials credentials,
   ) async {
     try {
-      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+      final credential = await firebaseAuth.signInWithEmailAndPassword(
         email: credentials.login,
         password: credentials.password,
       );
@@ -80,7 +80,7 @@ class SessionApiSourceImpl implements SessionApiSource {
   @override
   Future<void> logout() async {
     try {
-      await _firebaseAuth.signOut();
+      await firebaseAuth.signOut();
     } catch (error) {
       throw Exception('Sign out failed: $error');
     }
@@ -89,7 +89,7 @@ class SessionApiSourceImpl implements SessionApiSource {
   @override
   Future<UserDto> signupWithEmailPassword(Credentials credentials) async {
     try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      final credential = await firebaseAuth.createUserWithEmailAndPassword(
         email: credentials.login,
         password: credentials.password,
       );
@@ -107,7 +107,7 @@ class SessionApiSourceImpl implements SessionApiSource {
   @override
   Future<bool> requestNewPassword(String email) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      await firebaseAuth.sendPasswordResetEmail(email: email);
       return true;
     } catch (error) {
       throw Exception('Sign up failed: $error');
@@ -120,7 +120,7 @@ class SessionApiSourceImpl implements SessionApiSource {
     required String password,
   }) async {
     try {
-      await _firebaseAuth.confirmPasswordReset(
+      await firebaseAuth.confirmPasswordReset(
         code: code,
         newPassword: password,
       );
@@ -137,7 +137,7 @@ class SessionApiSourceImpl implements SessionApiSource {
   }
 
   Future<UserDto?> _getCurrentAuthUser() async {
-    final currentUser = _firebaseAuth.currentUser;
+    final currentUser = firebaseAuth.currentUser;
     return currentUser != null
         ? UserDto.fromFirebaseAuthUser(currentUser)
         : null;
