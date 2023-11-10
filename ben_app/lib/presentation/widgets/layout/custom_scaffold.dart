@@ -18,7 +18,7 @@ class MainScaffold extends StatelessWidget {
       backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: appBar != null
           ? PreferredSize(
-              preferredSize: const Size(double.maxFinite, 66),
+              preferredSize: const Size(double.maxFinite, 60),
               child: appBar!,
             )
           : null,
