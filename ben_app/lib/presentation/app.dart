@@ -53,7 +53,7 @@ class _App extends StatefulWidget {
   State<_App> createState() => _AppState();
 }
 
-class _AppState extends State<_App> with RouterMixin {
+class _AppState extends State<_App> with AppThemeMixin, RouterMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -61,7 +61,7 @@ class _AppState extends State<_App> with RouterMixin {
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
-      theme: lightTheme,
+      theme: lightTheme.materialTheme,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -71,10 +71,10 @@ class _AppState extends State<_App> with RouterMixin {
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child ?? const ErrorLayout(Failure.widgetTreeError),
-        breakpoints: [
-          const Breakpoint(start: 0, end: 450, name: MOBILE),
-          const Breakpoint(start: 451, end: 800, name: TABLET),
-          const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+        breakpoints: const [
+          Breakpoint(start: 0, end: 450, name: MOBILE),
+          Breakpoint(start: 451, end: 800, name: TABLET),
+          Breakpoint(start: 801, end: double.infinity, name: DESKTOP),
         ],
       ),
     );

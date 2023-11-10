@@ -1,3 +1,4 @@
+import 'package:ben_app/core/extension/extension_export.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,10 @@ class MainScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: appBar != null
           ? PreferredSize(
-              preferredSize: const Size(double.infinity, 66),
+              preferredSize: const Size(double.maxFinite, 66),
               child: appBar!,
             )
           : null,
