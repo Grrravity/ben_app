@@ -9,6 +9,7 @@ enum Failure implements Exception {
   other('Une erreur inattendu est survenue'),
   unauthorized('Accès refusé'),
   passwordsNotIdenticals('Les mots de passes doivent etre identiques'),
+  passwordInvalid('Le mot de passe est invalide'),
   invalidCommand('Commande invalide'),
   elementNotFound('Élement introuvable'),
   emailNotValid("L'email n'est pas valide"),

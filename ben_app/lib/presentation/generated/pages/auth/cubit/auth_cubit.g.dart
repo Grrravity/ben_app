@@ -9,9 +9,10 @@ part of '../../../../pages/auth/cubit/auth_cubit.dart';
 _$AuthFormDataImpl _$$AuthFormDataImplFromJson(Map<String, dynamic> json) =>
     _$AuthFormDataImpl(
       email: EmailInput.fromJson(json['email'] as Map<String, dynamic>),
-      password: StringInput.fromJson(json['password'] as Map<String, dynamic>),
-      confirmPassword:
-          StringInput.fromJson(json['confirmPassword'] as Map<String, dynamic>),
+      password:
+          PasswordInput.fromJson(json['password'] as Map<String, dynamic>),
+      confirmPassword: PasswordInput.fromJson(
+          json['confirmPassword'] as Map<String, dynamic>),
       hidden: json['hidden'] as bool,
     );
 
