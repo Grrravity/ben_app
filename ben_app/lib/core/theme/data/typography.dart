@@ -2,7 +2,7 @@ part of '../theme.dart';
 
 class ManropeTextStyle extends TextStyle {
   const ManropeTextStyle({
-    super.color = const Color(0XFF383838),
+    super.color = const Color(0xFF3C3C3C),
     super.backgroundColor,
     super.fontSize,
     super.fontWeight,

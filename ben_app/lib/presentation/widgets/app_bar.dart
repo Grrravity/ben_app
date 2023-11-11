@@ -20,14 +20,7 @@ class MainAppBar extends StatelessWidget {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: context.theme.shadowColor.withOpacity(0.2),
-            offset: const Offset(0, 2),
-            blurRadius: 4,
-          ),
-        ],
+        color: context.theme.colorScheme.onTertiaryContainer,
       ),
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -47,7 +40,7 @@ class MainAppBar extends StatelessWidget {
                         padding: const EdgeInsets.all(4),
                         child: Icon(
                           Icons.arrow_back_ios,
-                          color: Theme.of(context).iconTheme.color,
+                          color: context.theme.colorScheme.tertiaryContainer,
                           size: 28,
                         ),
                       ),
@@ -60,16 +53,20 @@ class MainAppBar extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20),
                 child: InkWell(
                   onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(4),
-                    child: Icon(Icons.menu, size: 28),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Icon(
+                      Icons.menu,
+                      size: 28,
+                      color: context.theme.colorScheme.tertiaryContainer,
+                    ),
                   ),
                 ),
               ),
           const SizedBox(
             width: 40,
           ),
-          Text(title, style: context.textTheme.titleMedium),
+          Text(title, style: context.theme.primaryTextTheme.titleLarge),
           const Spacer(),
           if (hasLogout)
             ResponsiveVisibility(
@@ -83,9 +80,10 @@ class MainAppBar extends StatelessWidget {
                   onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.all(4),
-                    child: const Icon(
+                    child: Icon(
                       Icons.create,
                       size: 28,
+                      color: context.theme.colorScheme.tertiaryContainer,
                     ),
                   ),
                 ),

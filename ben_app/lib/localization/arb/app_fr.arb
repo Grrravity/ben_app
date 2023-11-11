@@ -1,7 +1,18 @@
 {
-    "@@locale": "fr",
-    "counterAppBarTitle": "Compteur",
-    "@counterAppBarTitle": {
-        "description": "Text affiché dans l'appbar de l'application de compteur"
-    }
+  "@@locale": "fr",
+  "counterAppBarTitle": "Compteur",
+  "@counterAppBarTitle": {
+    "description": "Text affiché dans l'appbar de l'application de compteur"
+  },
+  "drawerItem_Export": "Export",
+  "drawerItem_Import": "Import",
+  "drawerItem_Project": "Projets",
+  "loginPage_AppBarTitle": "Connection",
+  "loginPage_emailFieldHint": "Entrez votre email",
+  "loginPage_emailFieldLabel": "Email",
+  "loginPage_loginButton": "Connection",
+  "loginPage_microsoftLogin": "Utiliser Microsoft",
+  "loginPage_pageTitle": "Connectez-vous",
+  "loginPage_passwordFieldHint": "Entrez votre mot de passe",
+  "loginPage_passwordFieldLabel": "Mot de passe"
 }

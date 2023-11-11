@@ -1,4 +1,8 @@
+import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/extension/extension_export.dart';
+import 'package:ben_app/core/theme/data/colors.dart';
+import 'package:ben_app/localization/l10n.dart';
+import 'package:ben_app/localization/string_to_arb.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
 import 'package:ben_app/presentation/widgets/button.dart';
 import 'package:ben_app/presentation/widgets/form_text_field.dart';
@@ -14,9 +18,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return MainScaffold(
-      appBar: const MainAppBar(
-        title: 'Connection',
+      withDrawer: false,
+      appBar: MainAppBar(
+        title: l10n.loginPage_AppBarTitle,
         hasLogout: false,
         hasLeading: false,
       ),
@@ -35,19 +41,52 @@ class LoginPage extends StatelessWidget {
                   children: [
                     const Gap(16),
                     Text(
-                      'Connectez-vous',
+                      l10n.loginPage_pageTitle,
                       style: context.textTheme.displayLarge,
                     ),
                     const Gap(32),
                     const EmailFormField(),
-                    const Gap(16),
+                    const Gap(8),
                     const PasswordFormField(),
-                    const Gap(16),
+                    const Gap(32),
                     CustomButton.filled(
-                      onPressed: () async {},
-                      value: 'Connection'.toUpperCase(),
-                      textStyle: context.textTheme.bodyMedium!
-                          .copyWith(color: Colors.white),
+                      onPressed: () {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                Failure.connectivity.localized(context),
+                              ),
+                              backgroundColor: CustomColors.errorSnack,
+                            ),
+                          );
+                      },
+                      value: l10n.loginPage_loginButton.toUpperCase(),
+                      textStyle: context.theme.primaryTextTheme.bodyMedium,
+                    ),
+                    const Gap(32),
+                    CustomButton.filled(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                Failure.connectivity.localized(context),
+                              ),
+                              backgroundColor: CustomColors.errorSnack,
+                            ),
+                          );
+                      },
+                      primaryColor: context.theme.colorScheme.secondary,
+                      value: l10n.loginPage_microsoftLogin.toUpperCase(),
+                      startIcon: const Icon(
+                        size: 16,
+                        Icons.window,
+                        color: Colors.white,
+                      ),
+                      textStyle: context.theme.primaryTextTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -80,6 +119,7 @@ class EmailFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,8 +133,8 @@ class EmailFormField extends StatelessWidget {
           onChanged: (value) => {},
           onSaved: (value) => {},
           onInputActionPressed: () => FocusScope.of(context).nextFocus(),
-          label: 'Email',
-          hintText: 'Entrez votre email',
+          label: l10n.loginPage_emailFieldLabel,
+          hintText: l10n.loginPage_emailFieldHint,
         ),
       ],
     );
@@ -111,6 +151,7 @@ class PasswordFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,8 +166,8 @@ class PasswordFormField extends StatelessWidget {
           onChanged: (value) => {},
           onSaved: (value) => {},
           onInputActionPressed: () => FocusScope.of(context).nextFocus(),
-          label: 'Mot de passe',
-          hintText: 'Entrez votre mot de passe',
+          label: l10n.loginPage_passwordFieldLabel,
+          hintText: l10n.loginPage_passwordFieldHint,
           sufixIcon: IconButton(
             icon: const Icon(
               Icons.visibility,
