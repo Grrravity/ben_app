@@ -1,6 +1,6 @@
 flutter_launcher_icons:
   android: true
-  ios: true
+  ios: false
   web:
     generate: true
     image_path: "assets/launcher_icons/recette.jpeg"

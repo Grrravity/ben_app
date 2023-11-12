@@ -40,7 +40,7 @@
           "program": "${workspaceFolder:App}/lib/main_prod.dart",
           "args": [
               "--flavor",
-              "production",
+              "prod",
               "--target",
               "lib/main_prod.dart"
           ],
@@ -76,7 +76,7 @@
           "program": "${workspaceFolder:App}/lib/main_prod.dart",
           "args": [
               "--flavor",
-              "production",
+              "prod",
               "--web-port",
               "8888",
               "--target",
