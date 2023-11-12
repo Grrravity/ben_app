@@ -13,7 +13,7 @@ Future<FlavorType> getFlavor() async {
     const flavor = String.fromEnvironment('flavor', defaultValue: 'inte');
 
     switch (flavor) {
-      case 'production':
+      case 'prod':
         return FlavorType.prod;
       case 'inte':
         return FlavorType.inte;
