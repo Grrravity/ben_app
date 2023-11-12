@@ -1,4 +1,6 @@
 import 'package:ben_app/core/extension/extension_export.dart';
+import 'package:ben_app/core/injection/dependency_injection.dart';
+import 'package:ben_app/domain/usecase/session_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -77,11 +79,11 @@ class MainAppBar extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => getIt<SessionUsecase>().logOut(),
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     child: Icon(
-                      Icons.create,
+                      Icons.logout,
                       size: 28,
                       color: context.theme.colorScheme.tertiaryContainer,
                     ),

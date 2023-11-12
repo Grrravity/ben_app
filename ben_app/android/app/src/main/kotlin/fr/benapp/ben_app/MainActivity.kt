@@ -1,4 +1,4 @@
-package fr.benapp.ben_app
+package fr.app.ben.benapp
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -81,14 +81,15 @@ class SessionApiSourceImpl implements SessionApiSource {
 
   @override
   Future<UserDto> signInWithMicrosoft() async {
+    final microsoftProvider = MicrosoftAuthProvider()
+      ..addScope('openid')
+      ..addScope('email');
     try {
       UserCredential credential;
       if (kIsWeb) {
-        credential =
-            await firebaseAuth.signInWithProvider(MicrosoftAuthProvider());
+        credential = await firebaseAuth.signInWithPopup(microsoftProvider);
       } else {
-        credential =
-            await firebaseAuth.signInWithPopup(MicrosoftAuthProvider());
+        credential = await firebaseAuth.signInWithProvider(microsoftProvider);
       }
 
       if (credential.user == null) {
@@ -97,6 +98,9 @@ class SessionApiSourceImpl implements SessionApiSource {
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
     } catch (error) {
+      if (error is FirebaseAuthException) {
+        Logger('Microsoft Auth').error(error.message.toString());
+      }
       throw Exception('Sign in failed: $error');
     }
   }

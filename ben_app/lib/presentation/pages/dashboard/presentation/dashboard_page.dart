@@ -1,3 +1,5 @@
+import 'package:ben_app/presentation/widgets/app_bar.dart';
+import 'package:ben_app/presentation/widgets/layout/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -7,7 +9,12 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return const MainScaffold(
+      appBar: MainAppBar(
+        title: 'Accueil',
+        hasLogout: true,
+        hasLeading: true,
+      ),
       body: Center(
         child: Text('dashboard'),
       ),

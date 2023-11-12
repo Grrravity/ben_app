@@ -26,7 +26,6 @@ class LoginPage extends StatelessWidget {
       withDrawer: false,
       appBar: MainAppBar(
         title: context.l10n.loginPage_AppBarTitle,
-        hasLogout: false,
         hasLeading: false,
       ),
       body: BlocProvider(

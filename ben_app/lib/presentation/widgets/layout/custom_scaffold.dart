@@ -1,6 +1,7 @@
 import 'package:ben_app/core/extension/extension_export.dart';
 import 'package:ben_app/localization/l10n.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
@@ -26,45 +27,55 @@ class MainScaffold extends StatelessWidget {
       appBar: appBar != null
           ? PreferredSize(
               preferredSize: const Size(double.maxFinite, 60),
-              child: appBar!,
+              child: kIsWeb
+                  ? appBar!
+                  : Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).viewPadding.top,
+                      ),
+                      child: appBar,
+                    ),
             )
           : null,
-      body: Stack(
-        children: [
-          Padding(
-            padding: ResponsiveBreakpoints.of(context).smallerThan(TABLET)
-                ? const EdgeInsets.only(left: 10)
-                : const EdgeInsets.only(left: 110),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
+      body: SafeArea(
+        top: appBar == null,
+        child: Stack(
+          children: [
+            Padding(
+              padding: ResponsiveBreakpoints.of(context).smallerThan(TABLET)
+                  ? const EdgeInsets.only(left: 10)
+                  : const EdgeInsets.only(left: 110),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                  ),
+                  color: context.theme.scaffoldBackgroundColor,
                 ),
-                color: context.theme.scaffoldBackgroundColor,
-              ),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: body,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: body,
+                ),
               ),
             ),
-          ),
-          if (withDrawer)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _CustomDrawer(index: menuSelectedIndex),
-                SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CustomPaint(
-                    painter: _CornerPainter(
-                      color: context.theme.colorScheme.onTertiaryContainer,
+            if (withDrawer)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _CustomDrawer(index: menuSelectedIndex),
+                  SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CustomPaint(
+                      painter: _CornerPainter(
+                        color: context.theme.colorScheme.onTertiaryContainer,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-        ],
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -218,19 +229,34 @@ class _AnimatedDrawer extends StatelessWidget {
     final menuElements = MenuElement.getMenuElements(context: context);
     return Container(
       width: drawerWidth.value,
-      color: Theme.of(context).colorScheme.onTertiaryContainer,
+      color: context.theme.colorScheme.onTertiaryContainer,
       alignment: Alignment.bottomCenter,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (opacityShrinked.value != 0)
-            Opacity(
-              opacity: opacityShrinked.value,
-              child: _ShrinkedMenuColumn(
-                index: index,
-                menuElements: menuElements,
+          Stack(
+            children: [
+              if (opacityShrinked.value != 0)
+                Opacity(
+                  opacity: opacityShrinked.value,
+                  child: _ShrinkedMenuColumn(
+                    index: index,
+                    menuElements: menuElements,
+                  ),
+                ),
+              Opacity(
+                opacity: opacityExpanded.value,
+                child: SizedOverflowBox(
+                  alignment: Alignment.topCenter,
+                  size: Size(260, MediaQuery.of(context).size.height - 150),
+                  child: _ExpandedMenuColumn(
+                    index: index,
+                    menuElements: menuElements,
+                  ),
+                ),
               ),
-            ),
+            ],
+          ),
         ],
       ),
     );
@@ -285,7 +311,7 @@ class _ShrinkedMenuElement extends StatelessWidget {
     return Container(
       height: 56,
       color: isSelected
-          ? context.theme.primaryColor
+          ? context.theme.primaryColor.withOpacity(0.5)
           : context.theme.colorScheme.onTertiaryContainer,
       child: InkWell(
         onTap: element.onTap,
@@ -301,9 +327,8 @@ class _ShrinkedMenuElement extends StatelessWidget {
               children: [
                 Icon(
                   element.icon,
-                  color: isSelected
-                      ? context.theme.primaryColor
-                      : Theme.of(context).colorScheme.onPrimary,
+                  color: //isSelected ? context.theme.primaryColor:
+                      context.theme.colorScheme.onPrimary,
                   size: 30,
                 ),
               ],
@@ -317,12 +342,10 @@ class _ShrinkedMenuElement extends StatelessWidget {
 
 class _ExpandedMenuColumn extends StatelessWidget {
   const _ExpandedMenuColumn({
-    required this.isNBB,
     required this.index,
     required this.menuElements,
   });
 
-  final bool isNBB;
   final int index;
   final List<MenuElement> menuElements;
 
@@ -356,11 +379,11 @@ class _ExpandedMenuElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 56,
-      color: Theme.of(context).colorScheme.onTertiaryContainer,
+      color: context.theme.colorScheme.onTertiaryContainer,
       child: Material(
         color: isSelected
-            ? context.theme.primaryColor
-            : Theme.of(context).colorScheme.onTertiaryContainer,
+            ? context.theme.primaryColor.withOpacity(0.5)
+            : context.theme.colorScheme.onTertiaryContainer,
         child: InkWell(
           splashColor: context.theme.primaryColor.withOpacity(0.5),
           hoverColor:
@@ -379,9 +402,8 @@ class _ExpandedMenuElement extends StatelessWidget {
                 children: [
                   Icon(
                     element.icon,
-                    color: isSelected
-                        ? context.theme.primaryColor
-                        : Theme.of(context).colorScheme.onPrimary,
+                    color: //isSelected ? context.theme.primaryColor :
+                        context.theme.colorScheme.onPrimary,
                     size: 30,
                   ),
                   const SizedBox(width: 12),
@@ -390,14 +412,11 @@ class _ExpandedMenuElement extends StatelessWidget {
                     child: Text(
                       element.label,
                       style: isSelected
-                          ? Theme.of(context)
-                              .primaryTextTheme
-                              .bodyMedium!
-                              .copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(context).primaryColor,
-                              )
-                          : Theme.of(context).primaryTextTheme.bodyMedium,
+                          ? context.theme.primaryTextTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w600,
+                              //color: context.theme.primaryColor,
+                            )
+                          : context.theme.primaryTextTheme.bodyMedium,
                     ),
                   ),
                 ],

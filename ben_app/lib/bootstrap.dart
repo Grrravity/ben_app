@@ -15,11 +15,18 @@ class AppBlocObserver extends BlocObserver {
 
   static Logger logger = Logger('MainObserver');
 
+  String abstractString(dynamic value) {
+    if (value.toString().length >= 200) {
+      return '${value.toString().substring(0, 200)}\x1B[35m...\x1B[0m';
+    }
+    return value.toString();
+  }
+
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     logger.process('''
 Bloc changes
-From ${change.currentState} to ${change.nextState}
+From \x1B[0m${abstractString(change.currentState)}\x1B[35m to \x1B[0m${abstractString(change.nextState)}\x1B[35m
 Type : ${bloc.runtimeType}
 ''');
     super.onChange(bloc, change);
