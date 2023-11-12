@@ -62,11 +62,13 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     );
   }
 
-  Future<bool> login() async {
+  Future<Failure?> login() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) return Failure.other;
 
     final data = lState.data;
+    if (data.email.failure != null) return Failure.emailNotValid;
+    if (data.password.failure != null) return Failure.passwordInvalid;
 
     emit(lState.toSubmitting);
 
@@ -80,15 +82,25 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     return _emitSubmissionStatus(okOrFailure);
   }
 
-  Future<bool> register() async {
+  Future<Failure?> loginWithMicrosoft() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) return Failure.other;
+    emit(lState.toSubmitting);
+
+    final okOrFailure = await sessionUsecase.signInWithMicrosoft();
+
+    return _emitSubmissionStatus(okOrFailure);
+  }
+
+  Future<Failure?> register() async {
+    final lState = state.asLoaded;
+    if (lState == null) return Failure.other;
 
     final data = lState.data;
 
     if (!data.passwordsAreIdenticals) {
       emit(lState.copyWith(failure: Failure.passwordsNotIdenticals));
-      return false;
+      return Failure.passwordsNotIdenticals;
     }
 
     emit(lState.toSubmitting);
@@ -103,9 +115,9 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     return _emitSubmissionStatus(sessionOrFailure);
   }
 
-  Future<bool> requestNewPassword() async {
+  Future<Failure?> requestNewPassword() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) return Failure.other;
 
     final data = lState.data;
 
@@ -121,28 +133,22 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     return _emitSubmissionStatus(sessionOrFailure);
   }
 
-  bool _emitSubmissionStatus(
+  Failure? _emitSubmissionStatus(
     Either<Failure, dynamic> successOrFailure,
   ) {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) return Failure.other;
 
     return successOrFailure.fold(
       (l) {
-        if (l == Failure.ssoModalClosed) {
-          emit(
-            lState.copyWithNoFailure(),
-          );
-          return false;
-        }
         emit(
           lState.toSubmissionFailed(l),
         );
-        return false;
+        return l;
       },
       (r) {
         emit(lState.toSubmitted);
-        return true;
+        return null;
       },
     );
   }

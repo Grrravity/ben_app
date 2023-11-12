@@ -6,12 +6,14 @@ import 'package:ben_app/data/datasource/local/session_local_source.dart';
 import 'package:ben_app/data/model/user_dto.dart';
 import 'package:ben_app/domain/entities/credentials.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class SessionApiSource {
   Stream<UserDto?> get sessionStateStream;
 
   Future<UserDto> signInWithEmailPassword(Credentials credentials);
   Future<UserDto> signupWithEmailPassword(Credentials credentials);
+  Future<UserDto> signInWithMicrosoft();
 
   Future<bool> requestNewPassword(String email);
 
@@ -73,6 +75,32 @@ class SessionApiSourceImpl implements SessionApiSource {
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
     } catch (error) {
+      throw Exception('Sign in failed: $error');
+    }
+  }
+
+  @override
+  Future<UserDto> signInWithMicrosoft() async {
+    final microsoftProvider = MicrosoftAuthProvider()
+      ..addScope('openid')
+      ..addScope('email');
+    try {
+      UserCredential credential;
+      if (kIsWeb) {
+        credential = await firebaseAuth.signInWithPopup(microsoftProvider);
+      } else {
+        credential = await firebaseAuth.signInWithProvider(microsoftProvider);
+      }
+
+      if (credential.user == null) {
+        throw Exception('Sign in failed: The user is null after sign in.');
+      }
+
+      return UserDto.fromFirebaseAuthUser(credential.user!);
+    } catch (error) {
+      if (error is FirebaseAuthException) {
+        Logger('Microsoft Auth').error(error.message.toString());
+      }
       throw Exception('Sign in failed: $error');
     }
   }

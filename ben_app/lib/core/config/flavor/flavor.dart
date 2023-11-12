@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -8,6 +9,18 @@ enum EnvType { prod, inte, dev }
 enum FlavorType { prod, inte }
 
 Future<FlavorType> getFlavor() async {
+  if (kIsWeb) {
+    const flavor = String.fromEnvironment('flavor', defaultValue: 'inte');
+
+    switch (flavor) {
+      case 'production':
+        return FlavorType.prod;
+      case 'inte':
+        return FlavorType.inte;
+      default:
+        return FlavorType.inte;
+    }
+  }
   final packageInfo = await PackageInfo.fromPlatform();
   switch (packageInfo.packageName) {
     case 'fr.app.ben.benapp':

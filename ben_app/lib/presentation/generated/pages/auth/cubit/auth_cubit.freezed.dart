@@ -21,8 +21,8 @@ AuthFormData _$AuthFormDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AuthFormData {
   EmailInput get email => throw _privateConstructorUsedError;
-  StringInput get password => throw _privateConstructorUsedError;
-  StringInput get confirmPassword => throw _privateConstructorUsedError;
+  PasswordInput get password => throw _privateConstructorUsedError;
+  PasswordInput get confirmPassword => throw _privateConstructorUsedError;
   bool get hidden => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,8 +39,8 @@ abstract class $AuthFormDataCopyWith<$Res> {
   @useResult
   $Res call(
       {EmailInput email,
-      StringInput password,
-      StringInput confirmPassword,
+      PasswordInput password,
+      PasswordInput confirmPassword,
       bool hidden});
 }
 
@@ -70,11 +70,11 @@ class _$AuthFormDataCopyWithImpl<$Res, $Val extends AuthFormData>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as StringInput,
+              as PasswordInput,
       confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as StringInput,
+              as PasswordInput,
       hidden: null == hidden
           ? _value.hidden
           : hidden // ignore: cast_nullable_to_non_nullable
@@ -93,8 +93,8 @@ abstract class _$$AuthFormDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {EmailInput email,
-      StringInput password,
-      StringInput confirmPassword,
+      PasswordInput password,
+      PasswordInput confirmPassword,
       bool hidden});
 }
 
@@ -122,11 +122,11 @@ class __$$AuthFormDataImplCopyWithImpl<$Res>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as StringInput,
+              as PasswordInput,
       confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as StringInput,
+              as PasswordInput,
       hidden: null == hidden
           ? _value.hidden
           : hidden // ignore: cast_nullable_to_non_nullable
@@ -151,9 +151,9 @@ class _$AuthFormDataImpl extends _AuthFormData {
   @override
   final EmailInput email;
   @override
-  final StringInput password;
+  final PasswordInput password;
   @override
-  final StringInput confirmPassword;
+  final PasswordInput confirmPassword;
   @override
   final bool hidden;
 
@@ -197,8 +197,8 @@ class _$AuthFormDataImpl extends _AuthFormData {
 abstract class _AuthFormData extends AuthFormData {
   const factory _AuthFormData(
       {required final EmailInput email,
-      required final StringInput password,
-      required final StringInput confirmPassword,
+      required final PasswordInput password,
+      required final PasswordInput confirmPassword,
       required final bool hidden}) = _$AuthFormDataImpl;
   const _AuthFormData._() : super._();
 
@@ -208,9 +208,9 @@ abstract class _AuthFormData extends AuthFormData {
   @override
   EmailInput get email;
   @override
-  StringInput get password;
+  PasswordInput get password;
   @override
-  StringInput get confirmPassword;
+  PasswordInput get confirmPassword;
   @override
   bool get hidden;
   @override

@@ -94,6 +94,18 @@ class SessionRepositoryImpl implements SessionRepository {
   }
 
   @override
+  Future<Either<Failure, User>> signInWithMicrosoft() async {
+    final tokensOrFailure = await Failure.guard(() async {
+      final tokenSession = await sessionDataSource.signInWithMicrosoft();
+      return tokenSession;
+    });
+
+    return tokensOrFailure.map(
+      (tokenDTO) => tokenDTO.toEntity,
+    );
+  }
+
+  @override
   Future<Either<Failure, bool>> requestNewPassword(
     String email,
   ) async =>

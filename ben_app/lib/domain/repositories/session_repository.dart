@@ -15,6 +15,7 @@ abstract class SessionRepository {
   Future<Either<Failure, User>> signupWithEmailPassword(
     Credentials credentials,
   );
+  Future<Either<Failure, User>> signInWithMicrosoft();
   Future<Either<Failure, bool>> requestNewPassword(String email);
   Future<Either<Failure, bool>> updatePassword({
     required String userId,

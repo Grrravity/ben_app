@@ -54,7 +54,7 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
       if (location == Paths.login) {
         final res = sessionState.mapOrNull(
           authenticated: (authenticated) =>
-              !authenticated.hasProfile ? Paths.dashboard : Paths.login,
+              authenticated.hasProfile ? Paths.dashboard : Paths.login,
         );
         if (res != null) return res;
       }

@@ -268,17 +268,26 @@ class MultiSelectObject<T, F> with EquatableMixin {
       ];
 }
 
+typedef ValueObjectValidator<T, F> = F? Function(
+  T? value,
+);
+
 /// A single item value.
 /// Essentially used to represent text fields value.
 class ValueObject<T, F> with EquatableMixin {
-  const ValueObject({
+  ValueObject({
     this.value,
-    this.failure,
+    this.validator,
     required this.isEditable,
-  });
+  }) {
+    if (validator != null) {
+      failure = validator!(value);
+    }
+  }
 
   final T? value;
-  final F? failure;
+  final ValueObjectValidator<T, F>? validator;
+  late final F? failure;
   final bool isEditable;
 
   bool get hasValue => value != null;
@@ -286,12 +295,11 @@ class ValueObject<T, F> with EquatableMixin {
 
   ValueObject<T, F> copyWith({
     T? value,
-    F? failure,
     bool? isEditable,
   }) =>
       ValueObject<T, F>(
         value: value ?? this.value,
-        failure: failure ?? this.failure,
+        validator: this.validator,
         isEditable: isEditable ?? this.isEditable,
       );
 

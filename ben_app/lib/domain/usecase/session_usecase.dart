@@ -24,6 +24,9 @@ class SessionUsecase {
   ) async =>
       sessionRepository.signupWithEmailPassword(credentials);
 
+  Future<Either<Failure, User>> signInWithMicrosoft() async =>
+      sessionRepository.signInWithMicrosoft();
+
   Future<Either<Failure, bool>> requestNewPassword(
     String email,
   ) async =>
