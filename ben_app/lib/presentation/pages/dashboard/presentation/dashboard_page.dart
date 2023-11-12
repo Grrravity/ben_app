@@ -12,8 +12,6 @@ class DashboardPage extends StatelessWidget {
     return const MainScaffold(
       appBar: MainAppBar(
         title: 'Accueil',
-        hasLogout: true,
-        hasLeading: true,
       ),
       body: Center(
         child: Text('dashboard'),

@@ -163,25 +163,40 @@ class _CustomDrawerState extends State<_CustomDrawer>
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      child: _AnimatedDrawer(
-        controller: _controller,
-        index: widget.index,
-      ),
-      onEnter: (a) {
-        _forward();
-      },
-      onExit: (a) {
-        _reverse();
-      },
-    );
+    final shouldHover = ResponsiveBreakpoints.of(context).smallerThan(DESKTOP);
+    final isSmallLayout = ResponsiveBreakpoints.of(context).smallerThan(TABLET);
+    return shouldHover
+        ? GestureDetector(
+            onTap: () => _controller.isCompleted ? _reverse() : _forward(),
+            child: _AnimatedDrawer(
+              controller: _controller,
+              index: widget.index,
+              isSmallLayout: isSmallLayout,
+            ),
+          )
+        : MouseRegion(
+            child: _AnimatedDrawer(
+              controller: _controller,
+              index: widget.index,
+              isSmallLayout: isSmallLayout,
+            ),
+            onEnter: (a) {
+              _forward();
+            },
+            onExit: (a) {
+              _reverse();
+            },
+          );
   }
 }
 
 class _AnimatedDrawer extends StatelessWidget {
-  _AnimatedDrawer({required this.controller, required this.index})
-      : drawerWidth = Tween<double>(
-          begin: 110,
+  _AnimatedDrawer({
+    required this.controller,
+    required this.index,
+    required this.isSmallLayout,
+  })  : drawerWidth = Tween<double>(
+          begin: isSmallLayout ? 40 : 110,
           end: 260,
         ).animate(
           CurvedAnimation(
@@ -224,6 +239,7 @@ class _AnimatedDrawer extends StatelessWidget {
   final Animation<double> opacityExpanded;
   final Animation<double> opacityShrinked;
   final int index;
+  final bool isSmallLayout;
 
   Widget _buildAnimation(BuildContext context, Widget? child, int index) {
     final menuElements = MenuElement.getMenuElements(context: context);
@@ -308,6 +324,7 @@ class _ShrinkedMenuElement extends StatelessWidget {
   final MenuElement element;
   @override
   Widget build(BuildContext context) {
+    final isSmallLayout = ResponsiveBreakpoints.of(context).smallerThan(TABLET);
     return Container(
       height: 56,
       color: isSelected
@@ -319,17 +336,22 @@ class _ShrinkedMenuElement extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 2),
           child: Container(
             width: double.maxFinite,
-            padding: const EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: 40,
-            ),
+            padding: isSmallLayout
+                ? const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 6,
+                  )
+                : const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 40,
+                  ),
             child: Row(
               children: [
                 Icon(
                   element.icon,
                   color: //isSelected ? context.theme.primaryColor:
                       context.theme.colorScheme.onPrimary,
-                  size: 30,
+                  size: isSmallLayout ? 24 : 30,
                 ),
               ],
             ),
