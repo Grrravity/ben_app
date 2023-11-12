@@ -10,15 +10,15 @@ class MainAppBar extends StatelessWidget {
     super.key,
     this.isNavigation = false,
     this.hasLogout = true,
-    this.hasLeading = true,
     required this.title,
   });
 
-  final bool isNavigation, hasLogout, hasLeading;
+  final bool isNavigation, hasLogout;
   final String title;
 
   @override
   Widget build(BuildContext context) {
+    final isSmallLayout = ResponsiveBreakpoints.of(context).smallerThan(TABLET);
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -30,63 +30,43 @@ class MainAppBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          if (hasLeading)
-            if (isNavigation)
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40),
-                    child: InkWell(
-                      onTap: () => context.pop(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: context.theme.colorScheme.tertiaryContainer,
-                          size: 28,
-                        ),
+          if (isNavigation)
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 40),
+                  child: InkWell(
+                    onTap: () => context.pop(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: context.theme.colorScheme.tertiaryContainer,
+                        size: 28,
                       ),
                     ),
                   ),
-                ],
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Icon(
-                      Icons.menu,
-                      size: 28,
-                      color: context.theme.colorScheme.tertiaryContainer,
-                    ),
-                  ),
                 ),
-              ),
-          const SizedBox(
-            width: 40,
+              ],
+            ),
+          SizedBox(
+            width: isSmallLayout ? 25 : 95,
           ),
           Text(title, style: context.theme.primaryTextTheme.titleLarge),
           const Spacer(),
           if (hasLogout)
-            ResponsiveVisibility(
-              visible: false,
-              visibleConditions: [
-                Condition.equals(value: null, name: DESKTOP),
-              ],
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: InkWell(
-                  onTap: () => getIt<SessionUsecase>().logOut(),
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    child: Icon(
-                      Icons.logout,
-                      size: 28,
-                      color: context.theme.colorScheme.tertiaryContainer,
-                    ),
+            Padding(
+              padding: isSmallLayout
+                  ? EdgeInsets.zero
+                  : const EdgeInsets.only(right: 20),
+              child: InkWell(
+                onTap: () => getIt<SessionUsecase>().logOut(),
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  child: Icon(
+                    Icons.logout,
+                    size: 28,
+                    color: context.theme.colorScheme.tertiaryContainer,
                   ),
                 ),
               ),

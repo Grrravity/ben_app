@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
       withDrawer: false,
       appBar: MainAppBar(
         title: context.l10n.loginPage_AppBarTitle,
-        hasLeading: false,
+        hasLogout: false,
       ),
       body: BlocProvider(
         create: (context) => AuthCubit(sessionUsecase: getIt<SessionUsecase>()),
