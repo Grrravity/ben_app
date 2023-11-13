@@ -2,7 +2,7 @@ name: ben_app
 description: Aide à la saisie sur terrain et au reporting
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=3.1.2 <4.0.0"
