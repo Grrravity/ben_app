@@ -105,6 +105,9 @@ android {
                 checkReleaseBuilds false
                 abortOnError false
             }
+            ndk {
+                abiFilters 'armeabi-v7a','arm64-v8a','x86_64'
+            }
 
             signingConfig signingConfigs.release
             minifyEnabled true

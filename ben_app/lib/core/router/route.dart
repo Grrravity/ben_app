@@ -5,6 +5,8 @@ import 'package:ben_app/core/router/path.dart';
 import 'package:ben_app/presentation/pages/auth/login/presentation/login_page.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
 import 'package:ben_app/presentation/pages/events/presentation/events_page.dart';
+import 'package:ben_app/presentation/pages/legal/cgu_page.dart';
+import 'package:ben_app/presentation/pages/legal/privacy_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +36,18 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         parentNavigatorKey: _parentKey,
         builder: (context, state) => const EventsPage(),
       ),
+      GoRoute(
+        path: Paths.privacy,
+        name: PrivacyPage.routeName,
+        parentNavigatorKey: _parentKey,
+        builder: (context, state) => const PrivacyPage(),
+      ),
+      GoRoute(
+        path: Paths.cgu,
+        name: CGUPage.routeName,
+        parentNavigatorKey: _parentKey,
+        builder: (context, state) => const CGUPage(),
+      ),
     ],
     refreshListenable: StreamChangeNotifier(
       context.read<SessionCubit>().sessionUpdate,
@@ -41,6 +55,14 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
     redirect: (context, state) {
       final location = state.uri.path;
       final sessionState = context.read<SessionCubit>().state;
+
+      if (location.contains('privacy')) {
+        return Paths.privacy;
+      }
+
+      if (location.contains('cgu')) {
+        return Paths.cgu;
+      }
 
       /// Redirect to the login page if the user is not authenticated and is
       /// outside of an auth page

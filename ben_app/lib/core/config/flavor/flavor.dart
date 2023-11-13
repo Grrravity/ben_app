@@ -102,6 +102,16 @@ extension OnEnvType on EnvType {
     }
   }
 
+  String get website {
+    switch (this) {
+      case EnvType.inte:
+      case EnvType.dev:
+        return 'benapp-dev.web.app';
+      case EnvType.prod:
+        return 'bureaudetudebenapp.web.app';
+    }
+  }
+
   Map<String, dynamic> get toJson {
     return {'env': string};
   }

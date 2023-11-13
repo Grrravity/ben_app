@@ -58,6 +58,7 @@ class _AppState extends State<_App> with AppThemeMixin, RouterMixin {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Ben App',
+      debugShowCheckedModeBanner: false,
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
