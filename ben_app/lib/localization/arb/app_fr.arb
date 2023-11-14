@@ -1,5 +1,7 @@
 {
   "@@locale": "fr",
+  "button_backHome": "Retourner à l'accueil",
+  "button_reset": "Réinitialiser",
   "counterAppBarTitle": "Compteur",
   "@counterAppBarTitle": {
     "description": "Text affiché dans l'appbar de l'application de compteur"
@@ -12,6 +14,7 @@
   "failureElementNotFound": "Élement introuvable",
   "failureEmailNotValid": "L'email n'est pas valide",
   "failureExpiredSession": "Session expirée",
+  "failureFormIsInvalid": "Formulaire invalide",
   "failureInvalidCommand": "Commande invalide",
   "failureNotVerified": "L'email doit être vérifié",
   "failureOther": "Une erreur inattendu est survenue",
@@ -20,6 +23,9 @@
   "failureTextIsEmpty": "Le champs est vide",
   "failureUnauthorized": "Accès refusé",
   "failureWidgetTreeError": "Impossible d'afficher la page",
+  "forgetPasswordPage_AppBarTitle": "Mot de passe oublié",
+  "forgetPasswordPage_pageTitle": "Retrouver votre mot de passe",
+  "forgetPasswordPage_successSnack": "Demande de réinitialisation effectuée\\r\nVeuillez vérifier vos emails.",
   "inputFailureDateInvalid": "La date n'est pas valide",
   "inputFailureEmailRequired": "Email requis",
   "inputFailureFieldForbiddenCharacter": "Un caractère n'est pas valide",
@@ -36,9 +42,17 @@
   "loginPage_AppBarTitle": "Connection",
   "loginPage_emailFieldHint": "Entrez votre email",
   "loginPage_emailFieldLabel": "Email",
+  "loginPage_forgetPasswordText": "Mot de passe oublié ?",
   "loginPage_loginButton": "Connection",
   "loginPage_microsoftLogin": "Utiliser Microsoft",
   "loginPage_pageTitle": "Connectez-vous",
   "loginPage_passwordFieldHint": "Entrez votre mot de passe",
-  "loginPage_passwordFieldLabel": "Mot de passe"
+  "loginPage_passwordFieldLabel": "Mot de passe",
+  "loginPage_registerButton": "Créer un compte",
+  "registerPage_appbarTitle": "S'inscrire",
+  "registerPage_pageTitle": "Créer un compte",
+  "registerPage_registerButton": "S'inscrire",
+  "resetPassword_confirmPasswordLabel": "Confirmez votre mot de passe",
+  "resetPasswordPage_AppBarTitle": "Réinitialisation",
+  "resetPasswordPage_pageTitle": "Réinitialiser votre mot de passe"
 }

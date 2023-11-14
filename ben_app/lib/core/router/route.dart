@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:ben_app/core/controller/session/session_cubit.dart';
 import 'package:ben_app/core/router/path.dart';
-import 'package:ben_app/presentation/pages/auth/login/presentation/login_page.dart';
+import 'package:ben_app/presentation/pages/auth/presentation/pages/forget_password_page.dart';
+import 'package:ben_app/presentation/pages/auth/presentation/pages/login_page.dart';
+import 'package:ben_app/presentation/pages/auth/presentation/pages/register_page.dart';
+import 'package:ben_app/presentation/pages/auth/presentation/pages/reset_password_page.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
 import 'package:ben_app/presentation/pages/events/presentation/events_page.dart';
 import 'package:ben_app/presentation/pages/legal/cgu_page.dart';
@@ -23,6 +26,28 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         name: LoginPage.routeName,
         parentNavigatorKey: _parentKey,
         builder: (context, state) => const LoginPage(),
+        routes: [
+          GoRoute(
+            path: Paths.forgetPassword,
+            name: ForgetPasswordPage.routeName,
+            parentNavigatorKey: _parentKey,
+            builder: (context, state) => const ForgetPasswordPage(),
+          ),
+          GoRoute(
+            path: Paths.resetPassword,
+            name: ResetPasswordPage.routeName,
+            parentNavigatorKey: _parentKey,
+            builder: (context, state) => ResetPasswordPage(
+              code: state.pathParameters[ResetPasswordPage.idPathParam]!,
+            ),
+          ),
+          GoRoute(
+            path: Paths.register,
+            name: RegisterPage.routeName,
+            parentNavigatorKey: _parentKey,
+            builder: (context, state) => const RegisterPage(),
+          ),
+        ],
       ),
       GoRoute(
         path: Paths.dashboard,
@@ -56,12 +81,8 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
       final location = state.uri.path;
       final sessionState = context.read<SessionCubit>().state;
 
-      if (location.contains('privacy')) {
-        return Paths.privacy;
-      }
-
-      if (location.contains('cgu')) {
-        return Paths.cgu;
+      if (location.endsWith('privacy') || location.endsWith('cgu')) {
+        return null;
       }
 
       /// Redirect to the login page if the user is not authenticated and is
@@ -73,7 +94,7 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         if (res != null) return res;
       }
 
-      if (location == Paths.login) {
+      if (location == Paths.login || location.endsWith(Paths.register)) {
         final res = sessionState.mapOrNull(
           authenticated: (authenticated) =>
               authenticated.hasProfile ? Paths.dashboard : Paths.login,

@@ -6,6 +6,7 @@ import 'package:ben_app/core/router/route.dart';
 import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/localization/l10n.dart';
 import 'package:ben_app/presentation/widgets/layout/error_layout.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -78,6 +79,19 @@ class _AppState extends State<_App> with AppThemeMixin, RouterMixin {
           Breakpoint(start: 801, end: double.infinity, name: DESKTOP),
         ],
       ),
+      scrollBehavior: MouseClickScrollBehavior(),
     );
   }
+}
+
+class MouseClickScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.invertedStylus,
+      };
 }

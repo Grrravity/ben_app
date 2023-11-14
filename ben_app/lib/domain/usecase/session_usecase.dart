@@ -33,13 +33,12 @@ class SessionUsecase {
       sessionRepository.requestNewPassword(email);
 
   Future<Either<Failure, bool>> updatePassword({
-    required String userId,
+    required String code,
     required String password,
   }) async =>
       sessionRepository.updatePassword(
-        userId: userId,
+        code: code,
         password: password,
       );
-
   Future<void> logOut() async => sessionRepository.logOut();
 }

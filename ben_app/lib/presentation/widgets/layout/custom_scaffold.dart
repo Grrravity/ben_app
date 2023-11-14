@@ -1,6 +1,6 @@
 import 'package:ben_app/core/extension/extension_export.dart';
-import 'package:ben_app/localization/l10n.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
+import 'package:ben_app/presentation/widgets/utils/unfocus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -54,7 +54,7 @@ class MainScaffold extends StatelessWidget {
                 ),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height,
-                  child: body,
+                  child: Unfocus(child: body),
                 ),
               ),
             ),

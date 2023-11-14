@@ -34,7 +34,9 @@ class MainAppBar extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 40),
+                  padding: isSmallLayout
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.only(left: 40),
                   child: InkWell(
                     onTap: () => context.pop(),
                     child: Padding(
@@ -50,7 +52,13 @@ class MainAppBar extends StatelessWidget {
               ],
             ),
           SizedBox(
-            width: isSmallLayout ? 25 : 95,
+            width: isNavigation
+                ? isSmallLayout
+                    ? 5
+                    : 20
+                : isSmallLayout
+                    ? 25
+                    : 95,
           ),
           Text(title, style: context.theme.primaryTextTheme.titleLarge),
           const Spacer(),

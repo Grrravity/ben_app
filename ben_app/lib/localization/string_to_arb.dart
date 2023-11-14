@@ -59,6 +59,8 @@ extension ArbFailureX on Failure {
         return l10n.failureEmailNotValid;
       case Failure.textIsEmpty:
         return l10n.failureTextIsEmpty;
+      case Failure.formIsInvalid:
+        return l10n.failureFormIsInvalid;
       case Failure.notVerified:
         return l10n.failureNotVerified;
       case Failure.expiredSession:
