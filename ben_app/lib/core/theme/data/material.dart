@@ -275,6 +275,8 @@ mixin MaterialThemeMixin on AppTheme {
         ),
       ),
       textTheme: textTheme,
+      primaryTextTheme:
+          textTheme.apply(bodyColor: Colors.white, displayColor: Colors.white),
       useMaterial3: true,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );

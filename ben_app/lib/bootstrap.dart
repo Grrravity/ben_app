@@ -23,32 +23,24 @@ class AppBlocObserver extends BlocObserver {
   }
 
   @override
-  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-    logger.process('''
-Bloc changes
-From \x1B[0m${abstractString(change.currentState)}\x1B[35m to \x1B[0m${abstractString(change.nextState)}\x1B[35m
-Type : ${bloc.runtimeType}
-''');
-    super.onChange(bloc, change);
-  }
-
-  @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     logger.process('''
 Bloc Error
 Error : $error
 Type : ${bloc.runtimeType}
-Stacktrace : $stackTrace
-''');
+Stacktrace : $stackTrace''');
     super.onError(bloc, error, stackTrace);
   }
 
   @override
+  void onCreate(BlocBase<dynamic> bloc) {
+    logger.process('Bloc Created : ${bloc.runtimeType}');
+    super.onCreate(bloc);
+  }
+
+  @override
   void onClose(BlocBase<dynamic> bloc) {
-    logger.process('''
-Bloc Closed
-Type : ${bloc.runtimeType}
-''');
+    logger.process('Bloc Closed : ${bloc.runtimeType}');
     super.onClose(bloc);
   }
 }

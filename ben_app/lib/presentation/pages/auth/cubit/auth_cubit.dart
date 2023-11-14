@@ -42,14 +42,10 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
   }
 
   void toggleObscure(bool obscure) {
-    final loadedState = state.asLoaded!;
-
-    emit(
-      loadedState.copyWithData(
-        loadedState.data.copyWith(
-          hidden: !loadedState.data.hidden,
-        ),
-      ),
+    _emitDataUpdate(
+      (data, builder) {
+        return builder..hidden = !obscure;
+      },
     );
   }
 
@@ -64,11 +60,14 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
 
   Future<Failure?> login() async {
     final lState = state.asLoaded;
-    if (lState == null) return Failure.other;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.other));
+    }
 
     final data = lState.data;
-    if (data.email.failure != null) return Failure.emailNotValid;
-    if (data.password.failure != null) return Failure.passwordInvalid;
+    if (!lState.data.canLogin) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
+    }
 
     emit(lState.toSubmitting);
 
@@ -84,7 +83,9 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
 
   Future<Failure?> loginWithMicrosoft() async {
     final lState = state.asLoaded;
-    if (lState == null) return Failure.other;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.other));
+    }
     emit(lState.toSubmitting);
 
     final okOrFailure = await sessionUsecase.signInWithMicrosoft();
@@ -97,10 +98,11 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     if (lState == null) return Failure.other;
 
     final data = lState.data;
-
-    if (!data.passwordsAreIdenticals) {
-      emit(lState.copyWith(failure: Failure.passwordsNotIdenticals));
-      return Failure.passwordsNotIdenticals;
+    if (!lState.data.passwordsAreIdenticals) {
+      return _emitSubmissionStatus(left(Failure.passwordsNotIdenticals));
+    }
+    if (!lState.data.canRegister) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
     }
 
     emit(lState.toSubmitting);
@@ -112,19 +114,59 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
       ),
     );
 
+    setPassword('');
+    setConfirmPassword('');
+
     return _emitSubmissionStatus(sessionOrFailure);
   }
 
   Future<Failure?> requestNewPassword() async {
     final lState = state.asLoaded;
-    if (lState == null) return Failure.other;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.other));
+    }
 
     final data = lState.data;
+    if (!lState.data.canRequestPassword) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
+    }
 
     emit(lState.toSubmitting);
 
     final sessionOrFailure = await sessionUsecase.requestNewPassword(
       data.email.value!,
+    );
+
+    return sessionOrFailure.fold(
+      (l) {
+        emit(
+          lState.toSubmissionFailed(l),
+        );
+        return l;
+      },
+      (r) {
+        emit(lState.toSubmitted);
+        return null;
+      },
+    );
+  }
+
+  Future<Failure?> resetPassword(String code) async {
+    final lState = state.asLoaded;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.other));
+    }
+
+    final data = lState.data;
+    if (!lState.data.canResetPassword) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
+    }
+
+    emit(lState.toSubmitting);
+
+    final sessionOrFailure = await sessionUsecase.updatePassword(
+      code: code,
+      password: data.password.value!,
     );
 
     setPassword('');

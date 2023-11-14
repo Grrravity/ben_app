@@ -115,12 +115,12 @@ class SessionRepositoryImpl implements SessionRepository {
 
   @override
   Future<Either<Failure, bool>> updatePassword({
-    required String userId,
+    required String code,
     required String password,
   }) async =>
       Failure.guard(
         () => sessionDataSource.updatePassword(
-          code: userId,
+          code: code,
           password: password,
         ),
       );

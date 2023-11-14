@@ -1,11 +1,9 @@
 import 'package:ben_app/core/extension/extension_export.dart';
-import 'package:ben_app/core/injection/dependency_injection.dart';
-import 'package:ben_app/core/theme/data/colors.dart';
+import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/core/utils/input_object.dart';
-import 'package:ben_app/domain/usecase/session_usecase.dart';
-import 'package:ben_app/localization/l10n.dart';
 import 'package:ben_app/localization/string_to_arb.dart';
 import 'package:ben_app/presentation/pages/auth/cubit/auth_cubit.dart';
+import 'package:ben_app/presentation/pages/auth/presentation/auth_layout.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
 import 'package:ben_app/presentation/widgets/button.dart';
 import 'package:ben_app/presentation/widgets/form_text_field.dart';
@@ -15,29 +13,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
-  static const String routeName = 'login';
+  static const String routeName = 'register';
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(
-      withDrawer: false,
-      appBar: MainAppBar(
-        title: context.l10n.loginPage_AppBarTitle,
-        hasLogout: false,
-      ),
-      body: BlocProvider(
-        create: (context) => AuthCubit(sessionUsecase: getIt<SessionUsecase>()),
-        child: const LoginLayout(),
+    return AuthLayout(
+      child: MainScaffold(
+        withDrawer: false,
+        appBar: MainAppBar(
+          title: context.l10n.registerPage_appbarTitle,
+          hasLogout: false,
+          isNavigation: true,
+        ),
+        body: const RegisterLayout(),
       ),
     );
   }
 }
 
-class LoginLayout extends StatelessWidget {
-  const LoginLayout({
+class RegisterLayout extends StatelessWidget {
+  const RegisterLayout({
     super.key,
   });
 
@@ -51,26 +49,28 @@ class LoginLayout extends StatelessWidget {
       children: [
         ResponsiveRowColumnItem(
           child: Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Gap(16),
-                  Text(
-                    l10n.loginPage_pageTitle,
-                    style: context.textTheme.displayLarge,
-                  ),
-                  const Gap(32),
-                  const _EmailFormField(),
-                  const Gap(8),
-                  const _PasswordFormField(),
-                  const Gap(32),
-                  const _LoginButton(),
-                  const Gap(32),
-                  const _LoginWithMicrosoftButton(),
-                ],
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Gap(context.spacing.regular),
+                    Text(
+                      l10n.registerPage_pageTitle,
+                      style: context.textTheme.displayLarge,
+                    ),
+                    Gap(context.spacing.wide),
+                    const _EmailFormField(),
+                    Gap(context.spacing.small),
+                    const _PasswordFormField(),
+                    Gap(context.spacing.small),
+                    const _ConfirmPasswordFormField(),
+                    Gap(context.spacing.wide),
+                    const _RegisterButton(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -93,65 +93,37 @@ class LoginLayout extends StatelessWidget {
   }
 }
 
-class _LoginWithMicrosoftButton extends StatelessWidget {
-  const _LoginWithMicrosoftButton();
+class _RegisterButton extends StatelessWidget {
+  const _RegisterButton();
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return CustomButton.filled(
-      onPressed: () {
-        context.read<AuthCubit>().loginWithMicrosoft().then((failure) {
-          if (failure != null) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(
-                    failure.localized(context),
-                  ),
-                  backgroundColor: CustomColors.errorSnack,
-                ),
-              );
-          }
-        });
-      },
-      primaryColor: context.theme.colorScheme.secondary,
-      value: l10n.loginPage_microsoftLogin.toUpperCase(),
-      startIcon: const Icon(
-        size: 16,
-        Icons.window,
-        color: Colors.white,
-      ),
-      textStyle: context.theme.primaryTextTheme.bodyMedium,
+    final isProcessing = context.select<AuthCubit, bool>(
+      (cubit) => cubit.state.asLoaded?.isSubmitting ?? false,
     );
-  }
-}
-
-class _LoginButton extends StatelessWidget {
-  const _LoginButton();
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return CustomButton.filled(
+      isProcessing: isProcessing,
       onPressed: () {
-        context.read<AuthCubit>().login().then((failure) {
-          if (failure != null) {
+        FocusManager.instance.primaryFocus?.unfocus();
+        context.read<AuthCubit>().register().then((value) {
+          if (value != null) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
                 SnackBar(
                   content: Text(
-                    failure.localized(context),
+                    'Compte créé',
+                    style: context.textTheme.text1660024
+                        .copyWith(color: Colors.white),
                   ),
-                  backgroundColor: CustomColors.errorSnack,
+                  backgroundColor: Colors.green,
                 ),
               );
           }
         });
       },
-      value: l10n.loginPage_loginButton.toUpperCase(),
+      value: l10n.registerPage_registerButton.toUpperCase(),
       textStyle: context.theme.primaryTextTheme.bodyMedium,
     );
   }
@@ -216,6 +188,53 @@ class _PasswordFormField extends StatelessWidget {
           onInputActionPressed: () => FocusScope.of(context).nextFocus(),
           validator: (value) => password?.failure?.localized(context),
           label: l10n.loginPage_passwordFieldLabel,
+          hintText: l10n.loginPage_passwordFieldHint,
+          sufixIcon: IconButton(
+            icon: Icon(
+              (obscure ?? true) ? Icons.visibility_off : Icons.visibility,
+            ),
+            onPressed: () {
+              context.read<AuthCubit>().toggleObscure(
+                    obscure ?? true,
+                  );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ConfirmPasswordFormField extends StatelessWidget {
+  const _ConfirmPasswordFormField();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final password = context.select<AuthCubit, PasswordInput?>(
+      (cubit) => cubit.state.asLoaded?.data.confirmPassword,
+    );
+    final obscure = context.select<AuthCubit, bool?>(
+      (cubit) => cubit.state.asLoaded?.data.hidden,
+    );
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomTextFormField.hiddenOptional(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          key: const Key('PasswordFormField'),
+          initialValue: password?.value ?? '',
+          obscureText: obscure ?? true,
+          keyboardType: TextInputType.visiblePassword,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          onChanged: (value) =>
+              context.read<AuthCubit>().setConfirmPassword(value),
+          onSaved: (value) =>
+              context.read<AuthCubit>().setConfirmPassword(value),
+          onInputActionPressed: () => FocusScope.of(context).nextFocus(),
+          validator: (value) => password?.failure?.localized(context),
+          label: l10n.resetPassword_confirmPasswordLabel,
           hintText: l10n.loginPage_passwordFieldHint,
           sufixIcon: IconButton(
             icon: Icon(

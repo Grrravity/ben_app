@@ -25,7 +25,11 @@ class AuthFormData with _$AuthFormData {
 
   AuthFormDataBuilder get builder => AuthFormDataBuilder(this);
 
-  bool get canLogin => email.isValid && password.isValid;
+  bool get canLogin =>
+      email.isValid &&
+      email.value != '' &&
+      password.isValid &&
+      password.value != '';
 
   bool get canRegister =>
       email.isValid &&
@@ -38,8 +42,6 @@ class AuthFormData with _$AuthFormData {
   bool get canRequestPassword => email.isValid;
 
   bool get canResetPassword => password.isValid && confirmPassword.isValid;
-
-  static bool get okkk => true;
 }
 
 class AuthFormDataBuilder {
