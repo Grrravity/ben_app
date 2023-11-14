@@ -88,9 +88,9 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     }
     emit(lState.toSubmitting);
 
-    final okOrFailure = await sessionUsecase.signInWithMicrosoft();
+    final sessionOrFailure = await sessionUsecase.signInWithMicrosoft();
 
-    return _emitSubmissionStatus(okOrFailure);
+    return _emitSubmissionStatus(sessionOrFailure);
   }
 
   Future<Failure?> register() async {
@@ -114,10 +114,18 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
       ),
     );
 
-    setPassword('');
-    setConfirmPassword('');
-
-    return _emitSubmissionStatus(sessionOrFailure);
+    return sessionOrFailure.fold(
+      (l) {
+        emit(
+          lState.toSubmissionFailed(l),
+        );
+        return l;
+      },
+      (r) {
+        emit(lState.toSubmitted);
+        return null;
+      },
+    );
   }
 
   Future<Failure?> requestNewPassword() async {
@@ -169,10 +177,18 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
       password: data.password.value!,
     );
 
-    setPassword('');
-    setConfirmPassword('');
-
-    return _emitSubmissionStatus(sessionOrFailure);
+    return sessionOrFailure.fold(
+      (l) {
+        emit(
+          lState.toSubmissionFailed(l),
+        );
+        return l;
+      },
+      (r) {
+        emit(lState.toSubmitted);
+        return null;
+      },
+    );
   }
 
   Failure? _emitSubmissionStatus(

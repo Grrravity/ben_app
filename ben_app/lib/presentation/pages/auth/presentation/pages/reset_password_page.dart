@@ -18,7 +18,7 @@ class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({super.key, required this.code});
 
   static const String routeName = 'reset-password';
-  static const String idPathParam = 'id';
+  static const String idPathParam = 'oobCode';
   final String code;
 
   @override
@@ -129,7 +129,10 @@ class _ResetButton extends StatelessWidget {
       isProcessing: isProcessing,
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        context.read<AuthCubit>().resetPassword(code);
+        context.read<AuthCubit>().resetPassword(code).then(
+              (value) =>
+                  value == null ? context.goNamed(LoginPage.routeName) : null,
+            );
       },
       value: l10n.button_reset.toUpperCase(),
       textStyle: context.theme.primaryTextTheme.bodyMedium,

@@ -3,7 +3,7 @@ abstract class Paths {
   static const String login = '/auth';
   static const String forgetPassword = 'forget-password';
   static const String register = 'register';
-  static const String resetPassword = 'reset-password/:id';
+  static const String resetPassword = 'reset-password';
   static const String dashboard = '/dashboard';
   static const String events = '/event';
   static const String privacy = '/privacy';

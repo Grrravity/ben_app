@@ -25,7 +25,7 @@
   "failureWidgetTreeError": "Impossible d'afficher la page",
   "forgetPasswordPage_AppBarTitle": "Mot de passe oublié",
   "forgetPasswordPage_pageTitle": "Retrouver votre mot de passe",
-  "forgetPasswordPage_successSnack": "Demande de réinitialisation effectuée\\r\nVeuillez vérifier vos emails.",
+  "forgetPasswordPage_successSnack": "Demande de réinitialisation effectuée, Veuillez vérifier vos emails.",
   "inputFailureDateInvalid": "La date n'est pas valide",
   "inputFailureEmailRequired": "Email requis",
   "inputFailureFieldForbiddenCharacter": "Un caractère n'est pas valide",

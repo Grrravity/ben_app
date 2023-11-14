@@ -20,32 +20,49 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
   late final router = GoRouter(
     initialLocation: Paths.login,
     navigatorKey: _parentKey,
+    debugLogDiagnostics: true,
     routes: [
       GoRoute(
         path: Paths.login,
         name: LoginPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => const LoginPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const LoginPage(),
+        ),
         routes: [
           GoRoute(
             path: Paths.forgetPassword,
             name: ForgetPasswordPage.routeName,
             parentNavigatorKey: _parentKey,
-            builder: (context, state) => const ForgetPasswordPage(),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: const ForgetPasswordPage(),
+            ),
           ),
           GoRoute(
             path: Paths.resetPassword,
             name: ResetPasswordPage.routeName,
             parentNavigatorKey: _parentKey,
-            builder: (context, state) => ResetPasswordPage(
-              code: state.pathParameters[ResetPasswordPage.idPathParam]!,
+            pageBuilder: (context, state) => buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: ResetPasswordPage(
+                code: state.uri.queryParameters[ResetPasswordPage.idPathParam]!,
+              ),
             ),
           ),
           GoRoute(
             path: Paths.register,
             name: RegisterPage.routeName,
             parentNavigatorKey: _parentKey,
-            builder: (context, state) => const RegisterPage(),
+            pageBuilder: (context, state) => buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: const RegisterPage(),
+            ),
           ),
         ],
       ),
@@ -53,25 +70,41 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         path: Paths.dashboard,
         name: DashboardPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => const DashboardPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const DashboardPage(),
+        ),
       ),
       GoRoute(
         path: Paths.events,
         name: EventsPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => const EventsPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const EventsPage(),
+        ),
       ),
       GoRoute(
         path: Paths.privacy,
         name: PrivacyPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => const PrivacyPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const PrivacyPage(),
+        ),
       ),
       GoRoute(
         path: Paths.cgu,
         name: CGUPage.routeName,
         parentNavigatorKey: _parentKey,
-        builder: (context, state) => const CGUPage(),
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: const CGUPage(),
+        ),
       ),
     ],
     refreshListenable: StreamChangeNotifier(
@@ -104,6 +137,23 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
 
       return null;
     },
+  );
+}
+
+CustomTransitionPage<void> buildPageWithDefaultTransition({
+  required BuildContext context,
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage<void>(
+    key: state.pageKey,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 150),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+        FadeTransition(
+      opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+      child: child,
+    ),
   );
 }
 

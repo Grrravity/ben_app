@@ -1,4 +1,5 @@
 import 'package:ben_app/core/extension/extension_export.dart';
+import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/core/utils/input_object.dart';
 import 'package:ben_app/localization/string_to_arb.dart';
 import 'package:ben_app/presentation/pages/auth/cubit/auth_cubit.dart';
@@ -102,7 +103,22 @@ class _ForgetPasswordButton extends StatelessWidget {
       isProcessing: isProcessing,
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        context.read<AuthCubit>().requestNewPassword();
+        context.read<AuthCubit>().requestNewPassword().then((value) {
+          if (value == null) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(
+                    l10n.forgetPasswordPage_successSnack,
+                    style: context.textTheme.text1660024
+                        .copyWith(color: Colors.white),
+                  ),
+                  backgroundColor: Colors.green,
+                ),
+              );
+          }
+        });
       },
       value: l10n.button_reset.toUpperCase(),
       textStyle: context.theme.primaryTextTheme.bodyMedium,
