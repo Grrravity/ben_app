@@ -1,7 +1,7 @@
 import 'package:ben_app/core/error/input_failure.dart';
 import 'package:ben_app/core/helpers/field_helper.dart';
 import 'package:ben_app/core/utils/value_object.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../generated/utils/input_object.g.dart';
 
@@ -152,4 +152,31 @@ class DateInput extends ValueObject<DateTime, InputFailure> {
   DateInput copyValue(DateTime? value) => DateInput(value: value ?? this.value);
 
   Map<String, dynamic> toJson() => _$DateInputToJson(this);
+}
+
+@JsonSerializable()
+class MapIntInput extends ValueObject<Map<String, int>, InputFailure> {
+  factory MapIntInput({
+    Map<String, int>? value,
+  }) =>
+      MapIntInput._(
+        value: value,
+        validator: (_) => null,
+        isEditable: true,
+      );
+
+  factory MapIntInput.fromJson(Map<String, dynamic> json) =>
+      _$MapIntInputFromJson(json);
+
+  MapIntInput._({
+    super.value,
+    super.validator,
+    required super.isEditable,
+  });
+
+  MapIntInput copyValue(Map<String, int>? value) => MapIntInput(
+        value: value ?? this.value,
+      );
+
+  Map<String, dynamic> toJson() => _$MapIntInputToJson(this);
 }

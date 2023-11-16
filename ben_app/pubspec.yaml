@@ -10,13 +10,16 @@ environment:
 dependencies:
   cached_network_image: ^3.3.0
   camerawesome: ^1.4.0
+  cloud_firestore: ^4.13.1
   collection: ^1.17.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^5.3.3
   equatable: ^2.0.5
+  file_picker: ^6.1.1
   firebase_auth: ^4.12.1
   firebase_core: ^2.21.0
+  firebase_storage: ^11.5.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3

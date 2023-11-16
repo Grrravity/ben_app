@@ -70,3 +70,15 @@ Map<String, dynamic> _$DateInputToJson(DateInput instance) => <String, dynamic>{
       'value': instance.value?.toIso8601String(),
       'failure': _$InputFailureEnumMap[instance.failure],
     };
+
+MapIntInput _$MapIntInputFromJson(Map<String, dynamic> json) => MapIntInput(
+      value: (json['value'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as int),
+      ),
+    )..failure = $enumDecodeNullable(_$InputFailureEnumMap, json['failure']);
+
+Map<String, dynamic> _$MapIntInputToJson(MapIntInput instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'failure': _$InputFailureEnumMap[instance.failure],
+    };

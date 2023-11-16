@@ -35,4 +35,21 @@ enum Failure implements Exception {
       return left(Failure.other);
     }
   }
+
+  static Either<Failure, T> guardSync<T>(
+    T Function() call,
+  ) {
+    try {
+      final result = call();
+      return right(result);
+    } on Failure catch (e) {
+      return left(e);
+    } on Exception catch (e, s) {
+      Logger.e(e, error: e, stackTrace: s);
+      return left(Failure.other);
+    } catch (e, s) {
+      Logger.e(e, error: e, stackTrace: s);
+      return left(Failure.other);
+    }
+  }
 }
