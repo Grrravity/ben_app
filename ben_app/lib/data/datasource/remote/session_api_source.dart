@@ -81,9 +81,7 @@ class SessionApiSourceImpl implements SessionApiSource {
 
   @override
   Future<UserDto> signInWithMicrosoft() async {
-    final microsoftProvider = MicrosoftAuthProvider()
-      ..addScope('openid')
-      ..addScope('email');
+    final microsoftProvider = MicrosoftAuthProvider();
     try {
       UserCredential credential;
       if (kIsWeb) {
