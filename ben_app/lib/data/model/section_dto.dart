@@ -12,6 +12,7 @@ class SectionDTO with _$SectionDTO {
   const factory SectionDTO({
     required String name,
     required String picture,
+    int? index,
   }) = _SectionDTO;
 
   factory SectionDTO.fromJson(Map<String, dynamic> json) =>
@@ -22,6 +23,7 @@ extension OnSection on Section {
   SectionDTO get toDto => SectionDTO(
         name: name,
         picture: picture,
+        index: index,
       );
 }
 
@@ -33,6 +35,7 @@ extension OnSectionDTO on SectionDTO {
   Section get toEntity => Section(
         name: name,
         picture: picture,
+        index: index,
       );
 }
 

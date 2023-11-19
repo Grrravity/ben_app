@@ -22,6 +22,7 @@ SectionDTO _$SectionDTOFromJson(Map<String, dynamic> json) {
 mixin _$SectionDTO {
   String get name => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $SectionDTOCopyWith<$Res> {
           SectionDTO value, $Res Function(SectionDTO) then) =
       _$SectionDTOCopyWithImpl<$Res, SectionDTO>;
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$SectionDTOCopyWithImpl<$Res, $Val extends SectionDTO>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -63,6 +65,10 @@ class _$SectionDTOCopyWithImpl<$Res, $Val extends SectionDTO>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$SectionDTOImplCopyWith<$Res>
       __$$SectionDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$SectionDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_$SectionDTOImpl(
       name: null == name
@@ -101,6 +108,10 @@ class __$$SectionDTOImplCopyWithImpl<$Res>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -108,7 +119,8 @@ class __$$SectionDTOImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SectionDTOImpl implements _SectionDTO {
-  const _$SectionDTOImpl({required this.name, required this.picture});
+  const _$SectionDTOImpl(
+      {required this.name, required this.picture, this.index});
 
   factory _$SectionDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$SectionDTOImplFromJson(json);
@@ -117,10 +129,12 @@ class _$SectionDTOImpl implements _SectionDTO {
   final String name;
   @override
   final String picture;
+  @override
+  final int? index;
 
   @override
   String toString() {
-    return 'SectionDTO(name: $name, picture: $picture)';
+    return 'SectionDTO(name: $name, picture: $picture, index: $index)';
   }
 
   @override
@@ -129,12 +143,13 @@ class _$SectionDTOImpl implements _SectionDTO {
         (other.runtimeType == runtimeType &&
             other is _$SectionDTOImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.picture, picture) || other.picture == picture));
+            (identical(other.picture, picture) || other.picture == picture) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, picture);
+  int get hashCode => Object.hash(runtimeType, name, picture, index);
 
   @JsonKey(ignore: true)
   @override
@@ -153,7 +168,8 @@ class _$SectionDTOImpl implements _SectionDTO {
 abstract class _SectionDTO implements SectionDTO {
   const factory _SectionDTO(
       {required final String name,
-      required final String picture}) = _$SectionDTOImpl;
+      required final String picture,
+      final int? index}) = _$SectionDTOImpl;
 
   factory _SectionDTO.fromJson(Map<String, dynamic> json) =
       _$SectionDTOImpl.fromJson;
@@ -162,6 +178,8 @@ abstract class _SectionDTO implements SectionDTO {
   String get name;
   @override
   String get picture;
+  @override
+  int? get index;
   @override
   @JsonKey(ignore: true)
   _$$SectionDTOImplCopyWith<_$SectionDTOImpl> get copyWith =>

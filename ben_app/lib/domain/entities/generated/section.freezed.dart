@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Section {
   String get name => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SectionCopyWith<Section> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ abstract class $SectionCopyWith<$Res> {
   factory $SectionCopyWith(Section value, $Res Function(Section) then) =
       _$SectionCopyWithImpl<$Res, Section>;
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -46,6 +47,7 @@ class _$SectionCopyWithImpl<$Res, $Val extends Section>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -56,6 +58,10 @@ class _$SectionCopyWithImpl<$Res, $Val extends Section>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -67,7 +73,7 @@ abstract class _$$SectionImplCopyWith<$Res> implements $SectionCopyWith<$Res> {
       __$$SectionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -83,6 +89,7 @@ class __$$SectionImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_$SectionImpl(
       name: null == name
@@ -93,6 +100,10 @@ class __$$SectionImplCopyWithImpl<$Res>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -100,16 +111,18 @@ class __$$SectionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SectionImpl implements _Section {
-  const _$SectionImpl({required this.name, required this.picture});
+  const _$SectionImpl({required this.name, required this.picture, this.index});
 
   @override
   final String name;
   @override
   final String picture;
+  @override
+  final int? index;
 
   @override
   String toString() {
-    return 'Section(name: $name, picture: $picture)';
+    return 'Section(name: $name, picture: $picture, index: $index)';
   }
 
   @override
@@ -118,11 +131,12 @@ class _$SectionImpl implements _Section {
         (other.runtimeType == runtimeType &&
             other is _$SectionImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.picture, picture) || other.picture == picture));
+            (identical(other.picture, picture) || other.picture == picture) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, picture);
+  int get hashCode => Object.hash(runtimeType, name, picture, index);
 
   @JsonKey(ignore: true)
   @override
@@ -134,12 +148,15 @@ class _$SectionImpl implements _Section {
 abstract class _Section implements Section {
   const factory _Section(
       {required final String name,
-      required final String picture}) = _$SectionImpl;
+      required final String picture,
+      final int? index}) = _$SectionImpl;
 
   @override
   String get name;
   @override
   String get picture;
+  @override
+  int? get index;
   @override
   @JsonKey(ignore: true)
   _$$SectionImplCopyWith<_$SectionImpl> get copyWith =>

@@ -12,6 +12,7 @@ class IntersectionDTO with _$IntersectionDTO {
   const factory IntersectionDTO({
     required String name,
     required String picture,
+    int? index,
   }) = _IntersectionDTO;
 
   factory IntersectionDTO.fromJson(Map<String, dynamic> json) =>
@@ -22,6 +23,7 @@ extension OnIntersection on Intersection {
   IntersectionDTO get toDto => IntersectionDTO(
         name: name,
         picture: picture,
+        index: index,
       );
 }
 
@@ -33,6 +35,7 @@ extension OnIntersectionDTO on IntersectionDTO {
   Intersection get toEntity => Intersection(
         name: name,
         picture: picture,
+        index: index,
       );
 }
 

@@ -20,6 +20,6 @@ _$ParcoursDTOImpl _$$ParcoursDTOImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ParcoursDTOImplToJson(_$ParcoursDTOImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'sections': instance.sections,
-      'intersections': instance.intersections,
+      'sections': instance.sections.map((e) => e.toJson()).toList(),
+      'intersections': instance.intersections.map((e) => e.toJson()).toList(),
     };

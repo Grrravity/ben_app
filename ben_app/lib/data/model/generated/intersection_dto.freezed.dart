@@ -22,6 +22,7 @@ IntersectionDTO _$IntersectionDTOFromJson(Map<String, dynamic> json) {
 mixin _$IntersectionDTO {
   String get name => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $IntersectionDTOCopyWith<$Res> {
           IntersectionDTO value, $Res Function(IntersectionDTO) then) =
       _$IntersectionDTOCopyWithImpl<$Res, IntersectionDTO>;
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$IntersectionDTOCopyWithImpl<$Res, $Val extends IntersectionDTO>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -63,6 +65,10 @@ class _$IntersectionDTOCopyWithImpl<$Res, $Val extends IntersectionDTO>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$IntersectionDTOImplCopyWith<$Res>
       __$$IntersectionDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$IntersectionDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_$IntersectionDTOImpl(
       name: null == name
@@ -101,6 +108,10 @@ class __$$IntersectionDTOImplCopyWithImpl<$Res>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -108,7 +119,8 @@ class __$$IntersectionDTOImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IntersectionDTOImpl implements _IntersectionDTO {
-  const _$IntersectionDTOImpl({required this.name, required this.picture});
+  const _$IntersectionDTOImpl(
+      {required this.name, required this.picture, this.index});
 
   factory _$IntersectionDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$IntersectionDTOImplFromJson(json);
@@ -117,10 +129,12 @@ class _$IntersectionDTOImpl implements _IntersectionDTO {
   final String name;
   @override
   final String picture;
+  @override
+  final int? index;
 
   @override
   String toString() {
-    return 'IntersectionDTO(name: $name, picture: $picture)';
+    return 'IntersectionDTO(name: $name, picture: $picture, index: $index)';
   }
 
   @override
@@ -129,12 +143,13 @@ class _$IntersectionDTOImpl implements _IntersectionDTO {
         (other.runtimeType == runtimeType &&
             other is _$IntersectionDTOImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.picture, picture) || other.picture == picture));
+            (identical(other.picture, picture) || other.picture == picture) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, picture);
+  int get hashCode => Object.hash(runtimeType, name, picture, index);
 
   @JsonKey(ignore: true)
   @override
@@ -154,7 +169,8 @@ class _$IntersectionDTOImpl implements _IntersectionDTO {
 abstract class _IntersectionDTO implements IntersectionDTO {
   const factory _IntersectionDTO(
       {required final String name,
-      required final String picture}) = _$IntersectionDTOImpl;
+      required final String picture,
+      final int? index}) = _$IntersectionDTOImpl;
 
   factory _IntersectionDTO.fromJson(Map<String, dynamic> json) =
       _$IntersectionDTOImpl.fromJson;
@@ -163,6 +179,8 @@ abstract class _IntersectionDTO implements IntersectionDTO {
   String get name;
   @override
   String get picture;
+  @override
+  int? get index;
   @override
   @JsonKey(ignore: true)
   _$$IntersectionDTOImplCopyWith<_$IntersectionDTOImpl> get copyWith =>

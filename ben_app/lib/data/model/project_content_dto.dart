@@ -7,6 +7,7 @@ part 'generated/project_content_dto.g.dart';
 
 @freezed
 class ProjectContentDTO with _$ProjectContentDTO {
+  @JsonSerializable(explicitToJson: true)
   const factory ProjectContentDTO({
     required String name,
     required List<ParcoursDTO> parcours,

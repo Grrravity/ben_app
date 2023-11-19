@@ -11,6 +11,7 @@ _$IntersectionDTOImpl _$$IntersectionDTOImplFromJson(
     _$IntersectionDTOImpl(
       name: json['name'] as String,
       picture: json['picture'] as String,
+      index: json['index'] as int?,
     );
 
 Map<String, dynamic> _$$IntersectionDTOImplToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$IntersectionDTOImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'picture': instance.picture,
+      'index': instance.index,
     };

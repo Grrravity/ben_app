@@ -19,6 +19,7 @@ mixin _$DashboardState {
   List<Project> get projects => throw _privateConstructorUsedError;
   StringInput get projectName => throw _privateConstructorUsedError;
   MapIntInput get pictureSectionParams => throw _privateConstructorUsedError;
+  List<PlatformFile>? get files => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DashboardStateCopyWith<DashboardState> get copyWith =>
@@ -34,7 +35,8 @@ abstract class $DashboardStateCopyWith<$Res> {
   $Res call(
       {List<Project> projects,
       StringInput projectName,
-      MapIntInput pictureSectionParams});
+      MapIntInput pictureSectionParams,
+      List<PlatformFile>? files});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
     Object? projects = null,
     Object? projectName = null,
     Object? pictureSectionParams = null,
+    Object? files = freezed,
   }) {
     return _then(_value.copyWith(
       projects: null == projects
@@ -67,6 +70,10 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
           ? _value.pictureSectionParams
           : pictureSectionParams // ignore: cast_nullable_to_non_nullable
               as MapIntInput,
+      files: freezed == files
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>?,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$DashboardStateImplCopyWith<$Res>
   $Res call(
       {List<Project> projects,
       StringInput projectName,
-      MapIntInput pictureSectionParams});
+      MapIntInput pictureSectionParams,
+      List<PlatformFile>? files});
 }
 
 /// @nodoc
@@ -99,6 +107,7 @@ class __$$DashboardStateImplCopyWithImpl<$Res>
     Object? projects = null,
     Object? projectName = null,
     Object? pictureSectionParams = null,
+    Object? files = freezed,
   }) {
     return _then(_$DashboardStateImpl(
       projects: null == projects
@@ -113,6 +122,10 @@ class __$$DashboardStateImplCopyWithImpl<$Res>
           ? _value.pictureSectionParams
           : pictureSectionParams // ignore: cast_nullable_to_non_nullable
               as MapIntInput,
+      files: freezed == files
+          ? _value._files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>?,
     ));
   }
 }
@@ -123,8 +136,10 @@ class _$DashboardStateImpl extends _DashboardState {
   const _$DashboardStateImpl(
       {required final List<Project> projects,
       required this.projectName,
-      required this.pictureSectionParams})
+      required this.pictureSectionParams,
+      final List<PlatformFile>? files})
       : _projects = projects,
+        _files = files,
         super._();
 
   final List<Project> _projects;
@@ -139,10 +154,19 @@ class _$DashboardStateImpl extends _DashboardState {
   final StringInput projectName;
   @override
   final MapIntInput pictureSectionParams;
+  final List<PlatformFile>? _files;
+  @override
+  List<PlatformFile>? get files {
+    final value = _files;
+    if (value == null) return null;
+    if (_files is EqualUnmodifiableListView) return _files;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'DashboardState(projects: $projects, projectName: $projectName, pictureSectionParams: $pictureSectionParams)';
+    return 'DashboardState(projects: $projects, projectName: $projectName, pictureSectionParams: $pictureSectionParams, files: $files)';
   }
 
   @override
@@ -154,7 +178,8 @@ class _$DashboardStateImpl extends _DashboardState {
             (identical(other.projectName, projectName) ||
                 other.projectName == projectName) &&
             (identical(other.pictureSectionParams, pictureSectionParams) ||
-                other.pictureSectionParams == pictureSectionParams));
+                other.pictureSectionParams == pictureSectionParams) &&
+            const DeepCollectionEquality().equals(other._files, _files));
   }
 
   @override
@@ -162,7 +187,8 @@ class _$DashboardStateImpl extends _DashboardState {
       runtimeType,
       const DeepCollectionEquality().hash(_projects),
       projectName,
-      pictureSectionParams);
+      pictureSectionParams,
+      const DeepCollectionEquality().hash(_files));
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +202,8 @@ abstract class _DashboardState extends DashboardState {
   const factory _DashboardState(
       {required final List<Project> projects,
       required final StringInput projectName,
-      required final MapIntInput pictureSectionParams}) = _$DashboardStateImpl;
+      required final MapIntInput pictureSectionParams,
+      final List<PlatformFile>? files}) = _$DashboardStateImpl;
   const _DashboardState._() : super._();
 
   @override
@@ -185,6 +212,8 @@ abstract class _DashboardState extends DashboardState {
   StringInput get projectName;
   @override
   MapIntInput get pictureSectionParams;
+  @override
+  List<PlatformFile>? get files;
   @override
   @JsonKey(ignore: true)
   _$$DashboardStateImplCopyWith<_$DashboardStateImpl> get copyWith =>

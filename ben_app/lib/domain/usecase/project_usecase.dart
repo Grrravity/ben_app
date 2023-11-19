@@ -18,7 +18,10 @@ class ProjectUsecase {
   final ProjectRepository projectRepository;
   final FilesRepository filesRepository;
 
-  Future<Either<Failure, Project>> createProject(Project project) =>
+  Future<Either<Failure, List<Project>>> getProjects() =>
+      projectRepository.getProjects();
+
+  Future<Either<Failure, Project>> createProject(CreateProjectCmd project) =>
       projectRepository.createProject(project);
 
   Future<Either<Failure, List<UploadFileResult>>> uploadFiles({

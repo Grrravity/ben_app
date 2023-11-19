@@ -1,4 +1,3 @@
-import 'package:ben_app/data/model/parcours_dto.dart';
 import 'package:ben_app/data/model/project_content_dto.dart';
 import 'package:ben_app/data/model/project_settings_dto.dart';
 import 'package:ben_app/domain/entities/project.dart';
@@ -9,7 +8,9 @@ part 'generated/project_dto.g.dart';
 
 @freezed
 class ProjectDTO with _$ProjectDTO {
+  @JsonSerializable(explicitToJson: true)
   const factory ProjectDTO({
+    required String id,
     required ProjectContentDTO content,
     required ProjectSettingsDTO settings,
   }) = _ProjectDTO;
@@ -20,6 +21,7 @@ class ProjectDTO with _$ProjectDTO {
 
 extension OnProject on Project {
   ProjectDTO get toDto => ProjectDTO(
+        id: id,
         content: content.toDto,
         settings: settings.toDto,
       );
@@ -31,6 +33,7 @@ extension OnProjectList on List<Project> {
 
 extension OnProjectDTO on ProjectDTO {
   Project get toEntity => Project(
+        id: id,
         content: content.toEntity,
         settings: settings.toEntity,
       );

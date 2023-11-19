@@ -123,7 +123,8 @@ class __$$ParcoursDTOImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ParcoursDTOImpl implements _ParcoursDTO {
   const _$ParcoursDTOImpl(
       {required this.name,

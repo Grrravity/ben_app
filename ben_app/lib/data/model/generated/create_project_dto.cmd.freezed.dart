@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../project_dto.dart';
+part of '../create_project_dto.cmd.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,39 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ProjectDTO _$ProjectDTOFromJson(Map<String, dynamic> json) {
-  return _ProjectDTO.fromJson(json);
+CreateProjectCmdDTO _$CreateProjectCmdDTOFromJson(Map<String, dynamic> json) {
+  return _CreateProjectCmdDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ProjectDTO {
-  String get id => throw _privateConstructorUsedError;
+mixin _$CreateProjectCmdDTO {
   ProjectContentDTO get content => throw _privateConstructorUsedError;
   ProjectSettingsDTO get settings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ProjectDTOCopyWith<ProjectDTO> get copyWith =>
+  $CreateProjectCmdDTOCopyWith<CreateProjectCmdDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProjectDTOCopyWith<$Res> {
-  factory $ProjectDTOCopyWith(
-          ProjectDTO value, $Res Function(ProjectDTO) then) =
-      _$ProjectDTOCopyWithImpl<$Res, ProjectDTO>;
+abstract class $CreateProjectCmdDTOCopyWith<$Res> {
+  factory $CreateProjectCmdDTOCopyWith(
+          CreateProjectCmdDTO value, $Res Function(CreateProjectCmdDTO) then) =
+      _$CreateProjectCmdDTOCopyWithImpl<$Res, CreateProjectCmdDTO>;
   @useResult
-  $Res call(
-      {String id, ProjectContentDTO content, ProjectSettingsDTO settings});
+  $Res call({ProjectContentDTO content, ProjectSettingsDTO settings});
 
   $ProjectContentDTOCopyWith<$Res> get content;
   $ProjectSettingsDTOCopyWith<$Res> get settings;
 }
 
 /// @nodoc
-class _$ProjectDTOCopyWithImpl<$Res, $Val extends ProjectDTO>
-    implements $ProjectDTOCopyWith<$Res> {
-  _$ProjectDTOCopyWithImpl(this._value, this._then);
+class _$CreateProjectCmdDTOCopyWithImpl<$Res, $Val extends CreateProjectCmdDTO>
+    implements $CreateProjectCmdDTOCopyWith<$Res> {
+  _$CreateProjectCmdDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -56,15 +54,10 @@ class _$ProjectDTOCopyWithImpl<$Res, $Val extends ProjectDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? content = null,
     Object? settings = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -94,15 +87,14 @@ class _$ProjectDTOCopyWithImpl<$Res, $Val extends ProjectDTO>
 }
 
 /// @nodoc
-abstract class _$$ProjectDTOImplCopyWith<$Res>
-    implements $ProjectDTOCopyWith<$Res> {
-  factory _$$ProjectDTOImplCopyWith(
-          _$ProjectDTOImpl value, $Res Function(_$ProjectDTOImpl) then) =
-      __$$ProjectDTOImplCopyWithImpl<$Res>;
+abstract class _$$CreateProjectCmdDTOImplCopyWith<$Res>
+    implements $CreateProjectCmdDTOCopyWith<$Res> {
+  factory _$$CreateProjectCmdDTOImplCopyWith(_$CreateProjectCmdDTOImpl value,
+          $Res Function(_$CreateProjectCmdDTOImpl) then) =
+      __$$CreateProjectCmdDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id, ProjectContentDTO content, ProjectSettingsDTO settings});
+  $Res call({ProjectContentDTO content, ProjectSettingsDTO settings});
 
   @override
   $ProjectContentDTOCopyWith<$Res> get content;
@@ -111,25 +103,20 @@ abstract class _$$ProjectDTOImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ProjectDTOImplCopyWithImpl<$Res>
-    extends _$ProjectDTOCopyWithImpl<$Res, _$ProjectDTOImpl>
-    implements _$$ProjectDTOImplCopyWith<$Res> {
-  __$$ProjectDTOImplCopyWithImpl(
-      _$ProjectDTOImpl _value, $Res Function(_$ProjectDTOImpl) _then)
+class __$$CreateProjectCmdDTOImplCopyWithImpl<$Res>
+    extends _$CreateProjectCmdDTOCopyWithImpl<$Res, _$CreateProjectCmdDTOImpl>
+    implements _$$CreateProjectCmdDTOImplCopyWith<$Res> {
+  __$$CreateProjectCmdDTOImplCopyWithImpl(_$CreateProjectCmdDTOImpl _value,
+      $Res Function(_$CreateProjectCmdDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? content = null,
     Object? settings = null,
   }) {
-    return _then(_$ProjectDTOImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$CreateProjectCmdDTOImpl(
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -145,15 +132,13 @@ class __$$ProjectDTOImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$ProjectDTOImpl implements _ProjectDTO {
-  const _$ProjectDTOImpl(
-      {required this.id, required this.content, required this.settings});
+class _$CreateProjectCmdDTOImpl implements _CreateProjectCmdDTO {
+  const _$CreateProjectCmdDTOImpl(
+      {required this.content, required this.settings});
 
-  factory _$ProjectDTOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProjectDTOImplFromJson(json);
+  factory _$CreateProjectCmdDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateProjectCmdDTOImplFromJson(json);
 
-  @override
-  final String id;
   @override
   final ProjectContentDTO content;
   @override
@@ -161,15 +146,14 @@ class _$ProjectDTOImpl implements _ProjectDTO {
 
   @override
   String toString() {
-    return 'ProjectDTO(id: $id, content: $content, settings: $settings)';
+    return 'CreateProjectCmdDTO(content: $content, settings: $settings)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProjectDTOImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$CreateProjectCmdDTOImpl &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.settings, settings) ||
                 other.settings == settings));
@@ -177,39 +161,37 @@ class _$ProjectDTOImpl implements _ProjectDTO {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, content, settings);
+  int get hashCode => Object.hash(runtimeType, content, settings);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProjectDTOImplCopyWith<_$ProjectDTOImpl> get copyWith =>
-      __$$ProjectDTOImplCopyWithImpl<_$ProjectDTOImpl>(this, _$identity);
+  _$$CreateProjectCmdDTOImplCopyWith<_$CreateProjectCmdDTOImpl> get copyWith =>
+      __$$CreateProjectCmdDTOImplCopyWithImpl<_$CreateProjectCmdDTOImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProjectDTOImplToJson(
+    return _$$CreateProjectCmdDTOImplToJson(
       this,
     );
   }
 }
 
-abstract class _ProjectDTO implements ProjectDTO {
-  const factory _ProjectDTO(
-      {required final String id,
-      required final ProjectContentDTO content,
-      required final ProjectSettingsDTO settings}) = _$ProjectDTOImpl;
+abstract class _CreateProjectCmdDTO implements CreateProjectCmdDTO {
+  const factory _CreateProjectCmdDTO(
+      {required final ProjectContentDTO content,
+      required final ProjectSettingsDTO settings}) = _$CreateProjectCmdDTOImpl;
 
-  factory _ProjectDTO.fromJson(Map<String, dynamic> json) =
-      _$ProjectDTOImpl.fromJson;
+  factory _CreateProjectCmdDTO.fromJson(Map<String, dynamic> json) =
+      _$CreateProjectCmdDTOImpl.fromJson;
 
-  @override
-  String get id;
   @override
   ProjectContentDTO get content;
   @override
   ProjectSettingsDTO get settings;
   @override
   @JsonKey(ignore: true)
-  _$$ProjectDTOImplCopyWith<_$ProjectDTOImpl> get copyWith =>
+  _$$CreateProjectCmdDTOImplCopyWith<_$CreateProjectCmdDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

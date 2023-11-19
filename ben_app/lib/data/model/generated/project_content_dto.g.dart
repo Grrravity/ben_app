@@ -19,5 +19,5 @@ Map<String, dynamic> _$$ProjectContentDTOImplToJson(
         _$ProjectContentDTOImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'parcours': instance.parcours,
+      'parcours': instance.parcours.map((e) => e.toJson()).toList(),
     };

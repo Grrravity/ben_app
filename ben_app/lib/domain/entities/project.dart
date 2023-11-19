@@ -7,7 +7,16 @@ part 'generated/project.freezed.dart';
 @freezed
 class Project with _$Project {
   const factory Project({
+    required String id,
     required ProjectContent content,
     required ProjectSettings settings,
   }) = _Project;
+}
+
+@freezed
+class CreateProjectCmd with _$CreateProjectCmd {
+  const factory CreateProjectCmd({
+    required ProjectContent content,
+    required ProjectSettings settings,
+  }) = _CreateProjectCmd;
 }

@@ -106,7 +106,8 @@ class __$$ProjectContentDTOImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ProjectContentDTOImpl implements _ProjectContentDTO {
   const _$ProjectContentDTOImpl(
       {required this.name, required final List<ParcoursDTO> parcours})

@@ -19,6 +19,7 @@ mixin _$ProjectPictureMetadata {
   String get parcoursName => throw _privateConstructorUsedError;
   String get sectionName => throw _privateConstructorUsedError;
   bool get isSection => throw _privateConstructorUsedError;
+  int get sectionNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProjectPictureMetadataCopyWith<ProjectPictureMetadata> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $ProjectPictureMetadataCopyWith<$Res> {
           $Res Function(ProjectPictureMetadata) then) =
       _$ProjectPictureMetadataCopyWithImpl<$Res, ProjectPictureMetadata>;
   @useResult
-  $Res call({String parcoursName, String sectionName, bool isSection});
+  $Res call(
+      {String parcoursName,
+      String sectionName,
+      bool isSection,
+      int sectionNumber});
 }
 
 /// @nodoc
@@ -51,6 +56,7 @@ class _$ProjectPictureMetadataCopyWithImpl<$Res,
     Object? parcoursName = null,
     Object? sectionName = null,
     Object? isSection = null,
+    Object? sectionNumber = null,
   }) {
     return _then(_value.copyWith(
       parcoursName: null == parcoursName
@@ -65,6 +71,10 @@ class _$ProjectPictureMetadataCopyWithImpl<$Res,
           ? _value.isSection
           : isSection // ignore: cast_nullable_to_non_nullable
               as bool,
+      sectionNumber: null == sectionNumber
+          ? _value.sectionNumber
+          : sectionNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -78,7 +88,11 @@ abstract class _$$ProjectPictureMetadataImplCopyWith<$Res>
       __$$ProjectPictureMetadataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String parcoursName, String sectionName, bool isSection});
+  $Res call(
+      {String parcoursName,
+      String sectionName,
+      bool isSection,
+      int sectionNumber});
 }
 
 /// @nodoc
@@ -97,6 +111,7 @@ class __$$ProjectPictureMetadataImplCopyWithImpl<$Res>
     Object? parcoursName = null,
     Object? sectionName = null,
     Object? isSection = null,
+    Object? sectionNumber = null,
   }) {
     return _then(_$ProjectPictureMetadataImpl(
       parcoursName: null == parcoursName
@@ -111,6 +126,10 @@ class __$$ProjectPictureMetadataImplCopyWithImpl<$Res>
           ? _value.isSection
           : isSection // ignore: cast_nullable_to_non_nullable
               as bool,
+      sectionNumber: null == sectionNumber
+          ? _value.sectionNumber
+          : sectionNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -121,7 +140,8 @@ class _$ProjectPictureMetadataImpl implements _ProjectPictureMetadata {
   const _$ProjectPictureMetadataImpl(
       {required this.parcoursName,
       required this.sectionName,
-      required this.isSection});
+      required this.isSection,
+      required this.sectionNumber});
 
   @override
   final String parcoursName;
@@ -129,10 +149,12 @@ class _$ProjectPictureMetadataImpl implements _ProjectPictureMetadata {
   final String sectionName;
   @override
   final bool isSection;
+  @override
+  final int sectionNumber;
 
   @override
   String toString() {
-    return 'ProjectPictureMetadata(parcoursName: $parcoursName, sectionName: $sectionName, isSection: $isSection)';
+    return 'ProjectPictureMetadata(parcoursName: $parcoursName, sectionName: $sectionName, isSection: $isSection, sectionNumber: $sectionNumber)';
   }
 
   @override
@@ -145,12 +167,14 @@ class _$ProjectPictureMetadataImpl implements _ProjectPictureMetadata {
             (identical(other.sectionName, sectionName) ||
                 other.sectionName == sectionName) &&
             (identical(other.isSection, isSection) ||
-                other.isSection == isSection));
+                other.isSection == isSection) &&
+            (identical(other.sectionNumber, sectionNumber) ||
+                other.sectionNumber == sectionNumber));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, parcoursName, sectionName, isSection);
+  int get hashCode => Object.hash(
+      runtimeType, parcoursName, sectionName, isSection, sectionNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -164,7 +188,8 @@ abstract class _ProjectPictureMetadata implements ProjectPictureMetadata {
   const factory _ProjectPictureMetadata(
       {required final String parcoursName,
       required final String sectionName,
-      required final bool isSection}) = _$ProjectPictureMetadataImpl;
+      required final bool isSection,
+      required final int sectionNumber}) = _$ProjectPictureMetadataImpl;
 
   @override
   String get parcoursName;
@@ -172,6 +197,8 @@ abstract class _ProjectPictureMetadata implements ProjectPictureMetadata {
   String get sectionName;
   @override
   bool get isSection;
+  @override
+  int get sectionNumber;
   @override
   @JsonKey(ignore: true)
   _$$ProjectPictureMetadataImplCopyWith<_$ProjectPictureMetadataImpl>

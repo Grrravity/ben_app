@@ -9,6 +9,7 @@ class ProjectPictureMetadata with _$ProjectPictureMetadata {
     required String parcoursName,
     required String sectionName,
     required bool isSection,
+    required int sectionNumber,
   }) = _ProjectPictureMetadata;
 }
 
@@ -18,7 +19,8 @@ extension OnPlatformFile on PlatformFile {
     return ProjectPictureMetadata(
       parcoursName: baseName.split('_')[0],
       sectionName: baseName.split('_')[2],
-      isSection: baseName.split('_')[1] == 's',
+      isSection: baseName.split('_')[1].startsWith('s'),
+      sectionNumber: int.tryParse(baseName.split('_')[1].substring(1)) ?? 0,
     );
   }
 }

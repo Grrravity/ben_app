@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Intersection {
   String get name => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IntersectionCopyWith<Intersection> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $IntersectionCopyWith<$Res> {
           Intersection value, $Res Function(Intersection) then) =
       _$IntersectionCopyWithImpl<$Res, Intersection>;
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$IntersectionCopyWithImpl<$Res, $Val extends Intersection>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -58,6 +60,10 @@ class _$IntersectionCopyWithImpl<$Res, $Val extends Intersection>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$IntersectionImplCopyWith<$Res>
       __$$IntersectionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String picture});
+  $Res call({String name, String picture, int? index});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$IntersectionImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? picture = null,
+    Object? index = freezed,
   }) {
     return _then(_$IntersectionImpl(
       name: null == name
@@ -96,6 +103,10 @@ class __$$IntersectionImplCopyWithImpl<$Res>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      index: freezed == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$IntersectionImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$IntersectionImpl implements _Intersection {
-  const _$IntersectionImpl({required this.name, required this.picture});
+  const _$IntersectionImpl(
+      {required this.name, required this.picture, this.index});
 
   @override
   final String name;
   @override
   final String picture;
+  @override
+  final int? index;
 
   @override
   String toString() {
-    return 'Intersection(name: $name, picture: $picture)';
+    return 'Intersection(name: $name, picture: $picture, index: $index)';
   }
 
   @override
@@ -121,11 +135,12 @@ class _$IntersectionImpl implements _Intersection {
         (other.runtimeType == runtimeType &&
             other is _$IntersectionImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.picture, picture) || other.picture == picture));
+            (identical(other.picture, picture) || other.picture == picture) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, picture);
+  int get hashCode => Object.hash(runtimeType, name, picture, index);
 
   @JsonKey(ignore: true)
   @override
@@ -137,12 +152,15 @@ class _$IntersectionImpl implements _Intersection {
 abstract class _Intersection implements Intersection {
   const factory _Intersection(
       {required final String name,
-      required final String picture}) = _$IntersectionImpl;
+      required final String picture,
+      final int? index}) = _$IntersectionImpl;
 
   @override
   String get name;
   @override
   String get picture;
+  @override
+  int? get index;
   @override
   @JsonKey(ignore: true)
   _$$IntersectionImplCopyWith<_$IntersectionImpl> get copyWith =>

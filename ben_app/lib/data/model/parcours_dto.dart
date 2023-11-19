@@ -8,6 +8,7 @@ part 'generated/parcours_dto.g.dart';
 
 @freezed
 class ParcoursDTO with _$ParcoursDTO {
+  @JsonSerializable(explicitToJson: true)
   const factory ParcoursDTO({
     required String name,
     required List<SectionDTO> sections,

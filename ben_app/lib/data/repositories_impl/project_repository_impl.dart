@@ -1,5 +1,6 @@
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/data/datasource/remote/project_api_source.dart';
+import 'package:ben_app/data/model/create_project_dto.cmd.dart';
 import 'package:ben_app/data/model/project_dto.dart';
 import 'package:ben_app/domain/entities/project.dart';
 import 'package:ben_app/domain/repositories/project_repository.dart';
@@ -13,7 +14,16 @@ class ProjectRepositoryImpl implements ProjectRepository {
   final ProjectApiSource projectApiSource;
 
   @override
-  Future<Either<Failure, Project>> createProject(Project project) async =>
+  Future<Either<Failure, List<Project>>> getProjects() async =>
+      Failure.guard<List<Project>>(() async {
+        final res = await projectApiSource.getProjects();
+        return res.toEntity;
+      });
+
+  @override
+  Future<Either<Failure, Project>> createProject(
+    CreateProjectCmd project,
+  ) async =>
       Failure.guard<Project>(() async {
         final res = await projectApiSource.createProject(project.toDto);
         return res.toEntity;

@@ -6,6 +6,7 @@ class DashboardState with _$DashboardState {
     required List<Project> projects,
     required StringInput projectName,
     required MapIntInput pictureSectionParams,
+    List<PlatformFile>? files,
   }) = _DashboardState;
 
   const DashboardState._();

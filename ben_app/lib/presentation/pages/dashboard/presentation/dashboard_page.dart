@@ -1,3 +1,5 @@
+import 'package:ben_app/core/injection/dependency_injection.dart';
+import 'package:ben_app/domain/usecase/project_usecase.dart';
 import 'package:ben_app/presentation/pages/dashboard/cubit/dashboard_cubit.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
 import 'package:ben_app/presentation/widgets/button.dart';
@@ -17,18 +19,39 @@ class DashboardPage extends StatelessWidget {
       appBar: const MainAppBar(
         title: 'Accueil',
       ),
-      body: Center(
-        child: CustomButton.filled(
-          value: 'Importer',
-          onPressed: () async {
-            await FilePicker.platform
-                .pickFiles(allowMultiple: true, type: FileType.image)
-                .then((result) {
-              if (result?.files != null) {
-                context.read<DashboardCubit>().createProject(result!.files);
-              }
-            });
-          },
+      body: BlocProvider(
+        create: (context) => DashboardCubit(
+          projectUsecase: getIt<ProjectUsecase>(),
+        )..init(),
+        child: Center(
+          child: Column(
+            children: [
+              Builder(
+                builder: (context) {
+                  final count = context.select<DashboardCubit, int>(
+                    (cubit) => cubit.state.asLoaded?.data.projects.length ?? 0,
+                  );
+                  return Text('count : $count');
+                },
+              ),
+              Builder(
+                builder: (context) {
+                  final cubit = context.read<DashboardCubit>();
+                  return CustomButton.filled(
+                    value: 'Importer',
+                    onPressed: () async {
+                      final result = await FilePicker.platform
+                          .pickFiles(allowMultiple: true, type: FileType.image);
+                      if (result?.files != null) {
+                        cubit.setFiles(result!.files);
+                        await cubit.createProject();
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
