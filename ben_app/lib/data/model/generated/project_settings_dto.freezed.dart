@@ -20,7 +20,10 @@ ProjectSettingsDTO _$ProjectSettingsDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProjectSettingsDTO {
-  Map<String, int> get pictureSections => throw _privateConstructorUsedError;
+  SectionSettingsDTO get sectionPictureSetting =>
+      throw _privateConstructorUsedError;
+  SectionSettingsDTO get intersectionPictureSetting =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +37,12 @@ abstract class $ProjectSettingsDTOCopyWith<$Res> {
           ProjectSettingsDTO value, $Res Function(ProjectSettingsDTO) then) =
       _$ProjectSettingsDTOCopyWithImpl<$Res, ProjectSettingsDTO>;
   @useResult
-  $Res call({Map<String, int> pictureSections});
+  $Res call(
+      {SectionSettingsDTO sectionPictureSetting,
+      SectionSettingsDTO intersectionPictureSetting});
+
+  $SectionSettingsDTOCopyWith<$Res> get sectionPictureSetting;
+  $SectionSettingsDTOCopyWith<$Res> get intersectionPictureSetting;
 }
 
 /// @nodoc
@@ -50,14 +58,37 @@ class _$ProjectSettingsDTOCopyWithImpl<$Res, $Val extends ProjectSettingsDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pictureSections = null,
+    Object? sectionPictureSetting = null,
+    Object? intersectionPictureSetting = null,
   }) {
     return _then(_value.copyWith(
-      pictureSections: null == pictureSections
-          ? _value.pictureSections
-          : pictureSections // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
+      sectionPictureSetting: null == sectionPictureSetting
+          ? _value.sectionPictureSetting
+          : sectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettingsDTO,
+      intersectionPictureSetting: null == intersectionPictureSetting
+          ? _value.intersectionPictureSetting
+          : intersectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettingsDTO,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SectionSettingsDTOCopyWith<$Res> get sectionPictureSetting {
+    return $SectionSettingsDTOCopyWith<$Res>(_value.sectionPictureSetting,
+        (value) {
+      return _then(_value.copyWith(sectionPictureSetting: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SectionSettingsDTOCopyWith<$Res> get intersectionPictureSetting {
+    return $SectionSettingsDTOCopyWith<$Res>(_value.intersectionPictureSetting,
+        (value) {
+      return _then(_value.copyWith(intersectionPictureSetting: value) as $Val);
+    });
   }
 }
 
@@ -69,7 +100,14 @@ abstract class _$$ProjectSettingsDTOImplCopyWith<$Res>
       __$$ProjectSettingsDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, int> pictureSections});
+  $Res call(
+      {SectionSettingsDTO sectionPictureSetting,
+      SectionSettingsDTO intersectionPictureSetting});
+
+  @override
+  $SectionSettingsDTOCopyWith<$Res> get sectionPictureSetting;
+  @override
+  $SectionSettingsDTOCopyWith<$Res> get intersectionPictureSetting;
 }
 
 /// @nodoc
@@ -83,38 +121,41 @@ class __$$ProjectSettingsDTOImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pictureSections = null,
+    Object? sectionPictureSetting = null,
+    Object? intersectionPictureSetting = null,
   }) {
     return _then(_$ProjectSettingsDTOImpl(
-      pictureSections: null == pictureSections
-          ? _value._pictureSections
-          : pictureSections // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
+      sectionPictureSetting: null == sectionPictureSetting
+          ? _value.sectionPictureSetting
+          : sectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettingsDTO,
+      intersectionPictureSetting: null == intersectionPictureSetting
+          ? _value.intersectionPictureSetting
+          : intersectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettingsDTO,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ProjectSettingsDTOImpl implements _ProjectSettingsDTO {
   const _$ProjectSettingsDTOImpl(
-      {required final Map<String, int> pictureSections})
-      : _pictureSections = pictureSections;
+      {required this.sectionPictureSetting,
+      required this.intersectionPictureSetting});
 
   factory _$ProjectSettingsDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectSettingsDTOImplFromJson(json);
 
-  final Map<String, int> _pictureSections;
   @override
-  Map<String, int> get pictureSections {
-    if (_pictureSections is EqualUnmodifiableMapView) return _pictureSections;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_pictureSections);
-  }
+  final SectionSettingsDTO sectionPictureSetting;
+  @override
+  final SectionSettingsDTO intersectionPictureSetting;
 
   @override
   String toString() {
-    return 'ProjectSettingsDTO(pictureSections: $pictureSections)';
+    return 'ProjectSettingsDTO(sectionPictureSetting: $sectionPictureSetting, intersectionPictureSetting: $intersectionPictureSetting)';
   }
 
   @override
@@ -122,14 +163,18 @@ class _$ProjectSettingsDTOImpl implements _ProjectSettingsDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProjectSettingsDTOImpl &&
-            const DeepCollectionEquality()
-                .equals(other._pictureSections, _pictureSections));
+            (identical(other.sectionPictureSetting, sectionPictureSetting) ||
+                other.sectionPictureSetting == sectionPictureSetting) &&
+            (identical(other.intersectionPictureSetting,
+                    intersectionPictureSetting) ||
+                other.intersectionPictureSetting ==
+                    intersectionPictureSetting));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_pictureSections));
+      runtimeType, sectionPictureSetting, intersectionPictureSetting);
 
   @JsonKey(ignore: true)
   @override
@@ -148,14 +193,17 @@ class _$ProjectSettingsDTOImpl implements _ProjectSettingsDTO {
 
 abstract class _ProjectSettingsDTO implements ProjectSettingsDTO {
   const factory _ProjectSettingsDTO(
-          {required final Map<String, int> pictureSections}) =
+          {required final SectionSettingsDTO sectionPictureSetting,
+          required final SectionSettingsDTO intersectionPictureSetting}) =
       _$ProjectSettingsDTOImpl;
 
   factory _ProjectSettingsDTO.fromJson(Map<String, dynamic> json) =
       _$ProjectSettingsDTOImpl.fromJson;
 
   @override
-  Map<String, int> get pictureSections;
+  SectionSettingsDTO get sectionPictureSetting;
+  @override
+  SectionSettingsDTO get intersectionPictureSetting;
   @override
   @JsonKey(ignore: true)
   _$$ProjectSettingsDTOImplCopyWith<_$ProjectSettingsDTOImpl> get copyWith =>

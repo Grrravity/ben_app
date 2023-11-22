@@ -9,11 +9,16 @@ part of '../project_settings_dto.dart';
 _$ProjectSettingsDTOImpl _$$ProjectSettingsDTOImplFromJson(
         Map<String, dynamic> json) =>
     _$ProjectSettingsDTOImpl(
-      pictureSections: Map<String, int>.from(json['pictureSections'] as Map),
+      sectionPictureSetting: SectionSettingsDTO.fromJson(
+          json['sectionPictureSetting'] as Map<String, dynamic>),
+      intersectionPictureSetting: SectionSettingsDTO.fromJson(
+          json['intersectionPictureSetting'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ProjectSettingsDTOImplToJson(
         _$ProjectSettingsDTOImpl instance) =>
     <String, dynamic>{
-      'pictureSections': instance.pictureSections,
+      'sectionPictureSetting': instance.sectionPictureSetting.toJson(),
+      'intersectionPictureSetting':
+          instance.intersectionPictureSetting.toJson(),
     };

@@ -43,7 +43,7 @@ class MainScaffold extends StatelessWidget {
           children: [
             Padding(
               padding: ResponsiveBreakpoints.of(context).smallerThan(TABLET)
-                  ? const EdgeInsets.only(left: 10)
+                  ? const EdgeInsets.only(left: 30)
                   : const EdgeInsets.only(left: 110),
               child: DecoratedBox(
                 decoration: BoxDecoration(

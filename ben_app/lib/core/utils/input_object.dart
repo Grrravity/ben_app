@@ -161,7 +161,21 @@ class MapIntInput extends ValueObject<Map<String, int>, InputFailure> {
   }) =>
       MapIntInput._(
         value: value,
-        validator: (_) => null,
+        validator: (value) {
+          if (value == null) {
+            return InputFailure.fieldRequired;
+          }
+          if (value.keys.any((element) => element == '')) {
+            return InputFailure.fieldRequired;
+          }
+          if (value.values.any((element) => element == 0)) {
+            return InputFailure.fieldRequired;
+          }
+          if (value.keys.toList().length != value.keys.toSet().length) {
+            return InputFailure.other;
+          }
+          return null;
+        },
         isEditable: true,
       );
 

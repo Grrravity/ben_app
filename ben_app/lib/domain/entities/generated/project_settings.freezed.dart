@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProjectSettings {
-  Map<String, int> get pictureSections => throw _privateConstructorUsedError;
+  SectionSettings get sectionPictureSetting =>
+      throw _privateConstructorUsedError;
+  SectionSettings get intersectionPictureSetting =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProjectSettingsCopyWith<ProjectSettings> get copyWith =>
@@ -29,7 +32,12 @@ abstract class $ProjectSettingsCopyWith<$Res> {
           ProjectSettings value, $Res Function(ProjectSettings) then) =
       _$ProjectSettingsCopyWithImpl<$Res, ProjectSettings>;
   @useResult
-  $Res call({Map<String, int> pictureSections});
+  $Res call(
+      {SectionSettings sectionPictureSetting,
+      SectionSettings intersectionPictureSetting});
+
+  $SectionSettingsCopyWith<$Res> get sectionPictureSetting;
+  $SectionSettingsCopyWith<$Res> get intersectionPictureSetting;
 }
 
 /// @nodoc
@@ -45,14 +53,37 @@ class _$ProjectSettingsCopyWithImpl<$Res, $Val extends ProjectSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pictureSections = null,
+    Object? sectionPictureSetting = null,
+    Object? intersectionPictureSetting = null,
   }) {
     return _then(_value.copyWith(
-      pictureSections: null == pictureSections
-          ? _value.pictureSections
-          : pictureSections // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
+      sectionPictureSetting: null == sectionPictureSetting
+          ? _value.sectionPictureSetting
+          : sectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettings,
+      intersectionPictureSetting: null == intersectionPictureSetting
+          ? _value.intersectionPictureSetting
+          : intersectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettings,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SectionSettingsCopyWith<$Res> get sectionPictureSetting {
+    return $SectionSettingsCopyWith<$Res>(_value.sectionPictureSetting,
+        (value) {
+      return _then(_value.copyWith(sectionPictureSetting: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SectionSettingsCopyWith<$Res> get intersectionPictureSetting {
+    return $SectionSettingsCopyWith<$Res>(_value.intersectionPictureSetting,
+        (value) {
+      return _then(_value.copyWith(intersectionPictureSetting: value) as $Val);
+    });
   }
 }
 
@@ -64,7 +95,14 @@ abstract class _$$ProjectSettingsImplCopyWith<$Res>
       __$$ProjectSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, int> pictureSections});
+  $Res call(
+      {SectionSettings sectionPictureSetting,
+      SectionSettings intersectionPictureSetting});
+
+  @override
+  $SectionSettingsCopyWith<$Res> get sectionPictureSetting;
+  @override
+  $SectionSettingsCopyWith<$Res> get intersectionPictureSetting;
 }
 
 /// @nodoc
@@ -78,13 +116,18 @@ class __$$ProjectSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pictureSections = null,
+    Object? sectionPictureSetting = null,
+    Object? intersectionPictureSetting = null,
   }) {
     return _then(_$ProjectSettingsImpl(
-      pictureSections: null == pictureSections
-          ? _value._pictureSections
-          : pictureSections // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
+      sectionPictureSetting: null == sectionPictureSetting
+          ? _value.sectionPictureSetting
+          : sectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettings,
+      intersectionPictureSetting: null == intersectionPictureSetting
+          ? _value.intersectionPictureSetting
+          : intersectionPictureSetting // ignore: cast_nullable_to_non_nullable
+              as SectionSettings,
     ));
   }
 }
@@ -92,20 +135,18 @@ class __$$ProjectSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProjectSettingsImpl implements _ProjectSettings {
-  const _$ProjectSettingsImpl({required final Map<String, int> pictureSections})
-      : _pictureSections = pictureSections;
+  const _$ProjectSettingsImpl(
+      {required this.sectionPictureSetting,
+      required this.intersectionPictureSetting});
 
-  final Map<String, int> _pictureSections;
   @override
-  Map<String, int> get pictureSections {
-    if (_pictureSections is EqualUnmodifiableMapView) return _pictureSections;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_pictureSections);
-  }
+  final SectionSettings sectionPictureSetting;
+  @override
+  final SectionSettings intersectionPictureSetting;
 
   @override
   String toString() {
-    return 'ProjectSettings(pictureSections: $pictureSections)';
+    return 'ProjectSettings(sectionPictureSetting: $sectionPictureSetting, intersectionPictureSetting: $intersectionPictureSetting)';
   }
 
   @override
@@ -113,13 +154,17 @@ class _$ProjectSettingsImpl implements _ProjectSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProjectSettingsImpl &&
-            const DeepCollectionEquality()
-                .equals(other._pictureSections, _pictureSections));
+            (identical(other.sectionPictureSetting, sectionPictureSetting) ||
+                other.sectionPictureSetting == sectionPictureSetting) &&
+            (identical(other.intersectionPictureSetting,
+                    intersectionPictureSetting) ||
+                other.intersectionPictureSetting ==
+                    intersectionPictureSetting));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_pictureSections));
+      runtimeType, sectionPictureSetting, intersectionPictureSetting);
 
   @JsonKey(ignore: true)
   @override
@@ -131,11 +176,14 @@ class _$ProjectSettingsImpl implements _ProjectSettings {
 
 abstract class _ProjectSettings implements ProjectSettings {
   const factory _ProjectSettings(
-          {required final Map<String, int> pictureSections}) =
+          {required final SectionSettings sectionPictureSetting,
+          required final SectionSettings intersectionPictureSetting}) =
       _$ProjectSettingsImpl;
 
   @override
-  Map<String, int> get pictureSections;
+  SectionSettings get sectionPictureSetting;
+  @override
+  SectionSettings get intersectionPictureSetting;
   @override
   @JsonKey(ignore: true)
   _$$ProjectSettingsImplCopyWith<_$ProjectSettingsImpl> get copyWith =>

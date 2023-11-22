@@ -1,3 +1,4 @@
+import 'package:ben_app/data/model/section_settings_dto.dart';
 import 'package:ben_app/domain/entities/project_settings.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -6,8 +7,10 @@ part 'generated/project_settings_dto.g.dart';
 
 @freezed
 class ProjectSettingsDTO with _$ProjectSettingsDTO {
+  @JsonSerializable(explicitToJson: true)
   const factory ProjectSettingsDTO({
-    required Map<String, int> pictureSections,
+    required SectionSettingsDTO sectionPictureSetting,
+    required SectionSettingsDTO intersectionPictureSetting,
   }) = _ProjectSettingsDTO;
 
   factory ProjectSettingsDTO.fromJson(Map<String, dynamic> json) =>
@@ -16,7 +19,8 @@ class ProjectSettingsDTO with _$ProjectSettingsDTO {
 
 extension OnProjectSettings on ProjectSettings {
   ProjectSettingsDTO get toDto => ProjectSettingsDTO(
-        pictureSections: pictureSections,
+        sectionPictureSetting: sectionPictureSetting.toDto,
+        intersectionPictureSetting: intersectionPictureSetting.toDto,
       );
 }
 
@@ -26,7 +30,8 @@ extension ProjectSettingsList on List<ProjectSettings> {
 
 extension OnProjectSettingsDTO on ProjectSettingsDTO {
   ProjectSettings get toEntity => ProjectSettings(
-        pictureSections: pictureSections,
+        sectionPictureSetting: sectionPictureSetting.toEntity,
+        intersectionPictureSetting: intersectionPictureSetting.toEntity,
       );
 }
 
