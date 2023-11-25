@@ -2,14 +2,16 @@ import 'package:ben_app/core/error/input_failure.dart';
 import 'package:ben_app/core/extension/either.dart';
 import 'package:ben_app/core/utils/form_state.dart';
 import 'package:ben_app/core/utils/input_object.dart';
-import 'package:ben_app/domain/entities/intersection.dart';
-import 'package:ben_app/domain/entities/parcours.dart';
-import 'package:ben_app/domain/entities/project.dart';
-import 'package:ben_app/domain/entities/project_content.dart';
+import 'package:ben_app/domain/entities/project/caracteristics/bikable_caracteristics.dart';
+import 'package:ben_app/domain/entities/project/caracteristics/global_intersection_caracteristics.dart';
+import 'package:ben_app/domain/entities/project/caracteristics/global_section_caracteristics.dart';
+import 'package:ben_app/domain/entities/project/intersection/intersection.dart';
+import 'package:ben_app/domain/entities/project/parcours.dart';
+import 'package:ben_app/domain/entities/project/pictures_settings.dart';
+import 'package:ben_app/domain/entities/project/project.dart';
+import 'package:ben_app/domain/entities/project/project_settings.dart';
+import 'package:ben_app/domain/entities/project/section/section.dart';
 import 'package:ben_app/domain/entities/project_picture_metadata.dart';
-import 'package:ben_app/domain/entities/project_settings.dart';
-import 'package:ben_app/domain/entities/section.dart';
-import 'package:ben_app/domain/entities/section_settings.dart';
 import 'package:ben_app/domain/entities/upload_file.dart';
 import 'package:ben_app/domain/entities/upload_file_result.dart';
 import 'package:ben_app/domain/usecase/project_usecase.dart';
@@ -26,8 +28,10 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
           FormBlocState.loaded(
             data: ProjectCreateState(
               projectName: StringInput(),
-              sectionPictureSetting: MapIntInput(value: {'Photos': 2}),
-              intersectionPictureSetting: MapIntInput(value: {'Photos': 4}),
+              sectionPictureSetting:
+                  MapIntInput(value: {'Photos et descriptions': 2}),
+              intersectionPictureSetting:
+                  MapIntInput(value: {'Photos et descriptions': 4}),
             ),
             canBeSubmitted: false,
           ),
@@ -49,7 +53,8 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
 
   void removeSectionPictureSetting(String key) {
     final currentMap = {
-      ...(state.asLoaded!.data.sectionPictureSetting.value ?? {'Photos': 2}),
+      ...(state.asLoaded!.data.sectionPictureSetting.value ??
+          {'Photos et descriptions': 2}),
     }..removeWhere(
         (mapKey, _) => mapKey == key,
       );
@@ -70,8 +75,8 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
   }
 
   void addSectionPictureSetting() {
-    final currentMap =
-        state.asLoaded!.data.sectionPictureSetting.value ?? {'Photos': 2};
+    final currentMap = state.asLoaded!.data.sectionPictureSetting.value ??
+        {'Photos et descriptions': 2};
     emit(
       state.asLoaded!.copyWithData(
         state.asLoaded!.data.copyWith(
@@ -127,8 +132,9 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     emit(
       state.asLoaded!.copyWithData(
         state.asLoaded!.data.copyWith(
-          intersectionPictureSetting:
-              input.value == null ? MapIntInput(value: {'Photos': 2}) : input,
+          intersectionPictureSetting: input.value == null
+              ? MapIntInput(value: {'Photos et descriptions': 2})
+              : input,
         ),
       ),
     );
@@ -161,8 +167,8 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
   }
 
   void addIntersectionPictureSetting() {
-    final currentMap =
-        state.asLoaded!.data.intersectionPictureSetting.value ?? {'Photos': 2};
+    final currentMap = state.asLoaded!.data.intersectionPictureSetting.value ??
+        {'Photos et descriptions': 2};
     emit(
       state.asLoaded!.copyWithData(
         state.asLoaded!.data.copyWith(
@@ -219,8 +225,9 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     emit(
       state.asLoaded!.copyWithData(
         state.asLoaded!.data.copyWith(
-          intersectionPictureSetting:
-              input.value == null ? MapIntInput(value: {'Photos': 4}) : input,
+          intersectionPictureSetting: input.value == null
+              ? MapIntInput(value: {'Photos et descriptions': 4})
+              : input,
         ),
       ),
     );
@@ -251,26 +258,28 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
 
     if (filesData.isEmpty) return;
 
+    final settings = ProjectSettings(
+      sectionPictureSetting: data.sectionPictureSetting.value?.entries
+              .map((e) => PicturesSettings(name: e.key, pictureCount: e.value))
+              .toList() ??
+          [],
+      intersectionPictureSetting: data.intersectionPictureSetting.value?.entries
+              .map((e) => PicturesSettings(name: e.key, pictureCount: e.value))
+              .toList() ??
+          [],
+    );
+
     final parcours = _generateParcours(
       files: files,
       filesData: filesData,
-    );
-    final content = ProjectContent(
-      name: data.projectName.value ?? 'test',
-      parcours: parcours,
-    );
-    final settings = ProjectSettings(
-      sectionPictureSetting: SectionSettings(
-        name: data.intersectionPictureSetting.value?.keys.first ?? '',
-        pictureCount: data.intersectionPictureSetting.value?.values.first ?? 2,
-      ),
-      intersectionPictureSetting: SectionSettings(
-        name: data.intersectionPictureSetting.value?.keys.first ?? '',
-        pictureCount: data.intersectionPictureSetting.value?.values.first ?? 4,
-      ),
+      settings: settings,
     );
     await projectUsecase.createProject(
-      CreateProjectCmd(content: content, settings: settings),
+      CreateProjectCmd(
+        name: data.projectName.value ?? '',
+        parcours: parcours,
+        settings: settings,
+      ),
     );
   }
 
@@ -295,6 +304,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
   List<Parcours> _generateParcours({
     required List<PlatformFile> files,
     required List<UploadFileResult> filesData,
+    required ProjectSettings settings,
   }) {
     final parcoursNames = <String>[];
     for (final file in files) {
@@ -315,15 +325,30 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
       parcours.add(
         Parcours(
           name: parcour,
+          ways: [],
+          municipalities: [],
           sections: matchingFiles
               .where((element) => element.toProjectPictureMetadata.isSection)
               .map(
                 (e) => Section(
                   name: e.toProjectPictureMetadata.sectionName,
-                  picture: filesData
+                  ways: [],
+                  municipalities: [],
+                  illustration: filesData
                       .firstWhere((element) => element.name == e.name)
                       .name,
                   index: e.toProjectPictureMetadata.sectionNumber,
+                  globalCaracteristics: GlobalSectionCaracteristics.asEmpty(),
+                  bikableCaracteristics: BikabledCaracteristics.asEmpty(),
+                  content: settings.sectionPictureSetting
+                      .map(
+                        (e) => SectionContent(
+                          sectionName: e.name,
+                          pictureQuantity: e.pictureCount,
+                          pictures: [],
+                        ),
+                      )
+                      .toList(),
                 ),
               )
               .toList(),
@@ -332,10 +357,24 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
               .map(
                 (e) => Intersection(
                   name: e.toProjectPictureMetadata.sectionName,
-                  picture: filesData
+                  ways: [],
+                  municipalities: [],
+                  illustration: filesData
                       .firstWhere((element) => element.name == e.name)
                       .name,
                   index: e.toProjectPictureMetadata.sectionNumber,
+                  globalCaracteristics:
+                      GlobalIntersectionCaracteristics.asEmpty(),
+                  bikableCaracteristics: BikabledCaracteristics.asEmpty(),
+                  content: settings.intersectionPictureSetting
+                      .map(
+                        (e) => IntersectionContent(
+                          sectionName: e.name,
+                          pictureQuantity: e.pictureCount,
+                          pictures: [],
+                        ),
+                      )
+                      .toList(),
                 ),
               )
               .toList(),

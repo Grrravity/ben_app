@@ -1,6 +1,6 @@
 import 'package:ben_app/core/utils/logger.dart';
-import 'package:ben_app/data/model/create_project_dto.cmd.dart';
-import 'package:ben_app/data/model/project_dto.dart';
+import 'package:ben_app/data/model/project/create_project_dto.cmd.dart';
+import 'package:ben_app/data/model/project/project_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: one_member_abstracts
@@ -43,10 +43,9 @@ class ProjectApiSourceImpl implements ProjectApiSource {
             .add(json)
             .then((value) => value);
 
-        return ProjectDTO(
-          id: result.id,
-          content: project.content,
-          settings: project.settings,
+        return ProjectDTO.fromCreateProjectCmd(
+          project,
+          result.id,
         );
       },
       'createProject',

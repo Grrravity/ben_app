@@ -1,7 +1,7 @@
 import 'package:ben_app/core/extension/extension_export.dart';
 import 'package:ben_app/core/injection/dependency_injection.dart';
 import 'package:ben_app/core/utils/async_value.dart';
-import 'package:ben_app/domain/entities/project.dart';
+import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:ben_app/domain/usecase/project_usecase.dart';
 import 'package:ben_app/presentation/pages/dashboard/cubit/dashboard_cubit.dart';
 import 'package:ben_app/presentation/pages/project/create/presentation/project_create_page.dart';
@@ -66,7 +66,7 @@ class DashboardPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      project.content.name,
+                                      project.name,
                                       style: context.textTheme.titleLarge,
                                     ),
                                     Container(
@@ -81,10 +81,9 @@ class DashboardPage extends StatelessWidget {
                                 expandedAlignment: Alignment.topLeft,
                                 shape: const Border(),
                                 childrenPadding: const EdgeInsets.all(12),
-                                children: List.generate(
-                                    project.content.parcours.length, (index) {
-                                  final parcours =
-                                      project.content.parcours[index];
+                                children: List.generate(project.parcours.length,
+                                    (index) {
+                                  final parcours = project.parcours[index];
                                   return Padding(
                                     padding: const EdgeInsets.only(left: 12),
                                     child: Column(

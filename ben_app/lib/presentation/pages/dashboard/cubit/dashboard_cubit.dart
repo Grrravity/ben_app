@@ -1,6 +1,6 @@
 import 'package:ben_app/core/extension/either.dart';
 import 'package:ben_app/core/utils/async_value.dart';
-import 'package:ben_app/domain/entities/project.dart';
+import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:ben_app/domain/usecase/project_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

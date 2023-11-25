@@ -54,7 +54,7 @@ extension OnUserDto on User {
 }
 
 extension OnListCurrentUserDtoJson on List<Map<String, dynamic>> {
-  List<UserDto> get toDTOList {
+  List<UserDto> get toDTO {
     return map(UserDto.fromJson).toList();
   }
 }

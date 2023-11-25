@@ -2,7 +2,7 @@ import 'dart:isolate';
 
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/extension/either.dart';
-import 'package:ben_app/domain/entities/project.dart';
+import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:ben_app/domain/entities/upload_file.dart';
 import 'package:ben_app/domain/entities/upload_file_result.dart';
 import 'package:ben_app/domain/repositories/files_repository.dart';

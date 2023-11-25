@@ -1,8 +1,8 @@
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/data/datasource/remote/project_api_source.dart';
-import 'package:ben_app/data/model/create_project_dto.cmd.dart';
-import 'package:ben_app/data/model/project_dto.dart';
-import 'package:ben_app/domain/entities/project.dart';
+import 'package:ben_app/data/model/project/create_project_dto.cmd.dart';
+import 'package:ben_app/data/model/project/project_dto.dart';
+import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:ben_app/domain/repositories/project_repository.dart';
 import 'package:dartz/dartz.dart';
 

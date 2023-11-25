@@ -1,5 +1,5 @@
 import 'package:ben_app/core/error/failure.dart';
-import 'package:ben_app/domain/entities/project.dart';
+import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:dartz/dartz.dart';
 
 // ignore: one_member_abstracts
