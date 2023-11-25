@@ -1,4 +1,6 @@
 import 'package:ben_app/core/extension/extension_export.dart';
+import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
+import 'package:ben_app/presentation/pages/project/create/presentation/project_create_page.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
 import 'package:ben_app/presentation/widgets/utils/unfocus.dart';
 import 'package:flutter/foundation.dart';
@@ -99,12 +101,12 @@ class MenuElement {
       MenuElement(
         icon: Icons.folder,
         label: l10n.drawerItem_Project,
-        onTap: () => context.goNamed('Routes.dashboard'),
+        onTap: () => context.goNamed(DashboardPage.routeName),
       ),
       MenuElement(
         icon: Icons.upload,
         label: l10n.drawerItem_Import,
-        onTap: () => context.goNamed('Routes.import'),
+        onTap: () => context.goNamed(ProjectCreatePage.routeName),
       ),
       MenuElement(
         icon: Icons.download,

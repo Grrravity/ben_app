@@ -7,7 +7,7 @@
     "description": "Text affiché dans l'appbar de l'application de compteur"
   },
   "drawerItem_Export": "Export",
-  "drawerItem_Import": "Import",
+  "drawerItem_Import": "Créer un projet",
   "drawerItem_Project": "Projets",
   "failureAuthentication": "Email ou mot de passe incorrect",
   "failureConnectivity": "Merci de vérifier votre connection internet",

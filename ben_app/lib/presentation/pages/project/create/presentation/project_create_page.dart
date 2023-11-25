@@ -24,6 +24,7 @@ class ProjectCreatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
+      menuSelectedIndex: 1,
       appBar: const MainAppBar(
         title: 'Créer un projet',
       ),
