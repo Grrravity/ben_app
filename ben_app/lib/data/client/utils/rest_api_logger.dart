@@ -26,12 +26,13 @@ class DioApiLogger {
         );
     }
 
-    logger.request('''
-REQUEST [${request.method}] - CLIENT [${_yellow(clientName)}]
-BASE URL: ${_yellow(request.baseUrl)} - PATH: ${_yellow(request.path)}
-HEADERS: ${_yellow(requestHeader)}
-QUERY-PARAMETERS: ${_yellow(request.queryParameters)}
-''');
+    logger
+      ..request('REQUEST [${request.method}] - CLIENT [${_yellow(clientName)}]')
+      ..request(
+        'BASE URL: ${_yellow(request.baseUrl)} - PATH: ${_yellow(request.path)}',
+      )
+      ..request('HEADERS: ${_yellow(requestHeader)}')
+      ..request('QUERY-PARAMETERS: ${_yellow(request.queryParameters)}');
 
     return request;
   }
@@ -43,25 +44,27 @@ QUERY-PARAMETERS: ${_yellow(request.queryParameters)}
             ? '${response.data.toString().substring(0, 100)}...'
             : response.data.toString();
 
-    logger.request(
-      '''
-RESPONSE[${_green(response.statusCode)}] - CLIENT [${_yellow(clientName)}]
-PATH: ${_yellow(response.requestOptions.path)}
-DATA: ${_yellow(data)}
-''',
-    );
+    logger
+      ..success(
+        'RESPONSE[${_green(response.statusCode)}] - CLIENT [${_yellow(clientName)}]',
+      )
+      ..success('PATH: ${_yellow(response.requestOptions.path)}')
+      ..success('DATA: ${_yellow(data)}');
     return response;
   }
 
   DioException onErrorLogger(DioException err) {
-    logger.error(
-      '''
-ERROR[${err.response?.statusCode ?? '---'}] - CLIENT [${_yellowErr(clientName)}]
-PATH: ${_yellowErr(err.requestOptions.path)}
-MESSAGE: ${_yellowErr(err.response?.statusMessage ?? 'empty')}
-DATA: ${_yellowErr(err.response?.data ?? 'empty')}
-''',
-    );
+    logger
+      ..error(
+        'ERROR[${err.response?.statusCode ?? '---'}] - CLIENT [${_yellowErr(clientName)}]',
+      )
+      ..error('PATH: ${_yellowErr(err.requestOptions.path)}')
+      ..error(
+        'MESSAGE: ${_yellowErr(err.response?.statusMessage ?? 'empty')}',
+      )
+      ..error(
+        'DATA: ${_yellowErr(err.response?.data ?? 'empty')}',
+      );
     return err;
   }
 

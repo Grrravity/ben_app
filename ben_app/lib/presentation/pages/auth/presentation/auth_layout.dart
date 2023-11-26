@@ -1,12 +1,11 @@
-import 'package:ben_app/core/extension/extension_export.dart';
 import 'package:ben_app/core/injection/dependency_injection.dart';
-import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/core/utils/form_state.dart';
 import 'package:ben_app/domain/usecase/session_usecase.dart';
 import 'package:ben_app/localization/string_to_arb.dart';
 import 'package:ben_app/presentation/pages/auth/cubit/auth_cubit.dart';
 import 'package:ben_app/presentation/widgets/layout/error_layout.dart';
 import 'package:ben_app/presentation/widgets/layout/loading_layout.dart';
+import 'package:ben_app/presentation/widgets/toastbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,18 +34,9 @@ class _AuthLayoutState extends State<AuthLayout> {
             loaded: (lState) {
               final failure = lState.failure;
               if (failure != null) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        failure.localized(context),
-                        style: context.textTheme.text1660024
-                            .copyWith(color: Colors.white),
-                      ),
-                      backgroundColor: context.colorScheme.primary,
-                    ),
-                  );
+                ShowSnackBar.showError(
+                  title: failure.localized(context),
+                );
               }
 
               if (lState.isSubmitted) {}

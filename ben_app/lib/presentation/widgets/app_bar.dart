@@ -10,11 +10,13 @@ class MainAppBar extends StatelessWidget {
     super.key,
     this.isNavigation = false,
     this.hasLogout = true,
+    this.actions,
     required this.title,
   });
 
   final bool isNavigation, hasLogout;
   final String title;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -62,22 +64,28 @@ class MainAppBar extends StatelessWidget {
           ),
           Text(title, style: context.theme.primaryTextTheme.titleLarge),
           const Spacer(),
-          if (hasLogout)
-            Padding(
-              padding: isSmallLayout
-                  ? EdgeInsets.zero
-                  : const EdgeInsets.only(right: 20),
-              child: InkWell(
-                onTap: () => getIt<SessionUsecase>().logOut(),
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  child: Icon(
-                    Icons.logout,
-                    size: 28,
-                    color: context.theme.colorScheme.tertiaryContainer,
+          if (actions != null || hasLogout)
+            Row(
+              children: [
+                if (actions != null) ...actions!,
+                if (hasLogout)
+                  Padding(
+                    padding: isSmallLayout
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.only(right: 20),
+                    child: InkWell(
+                      onTap: () => getIt<SessionUsecase>().logOut(),
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        child: Icon(
+                          Icons.logout,
+                          size: 28,
+                          color: context.theme.colorScheme.tertiaryContainer,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
+              ],
             ),
         ],
       ),

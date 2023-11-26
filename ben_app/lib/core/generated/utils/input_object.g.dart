@@ -19,12 +19,19 @@ Map<String, dynamic> _$PasswordInputToJson(PasswordInput instance) =>
 
 const _$InputFailureEnumMap = {
   InputFailure.emailRequired: 'emailRequired',
+  InputFailure.emailInvalid: 'emailInvalid',
   InputFailure.strongPasswordRequired: 'strongPasswordRequired',
   InputFailure.strongPasswordLength: 'strongPasswordLength',
   InputFailure.fieldRequired: 'fieldRequired',
+  InputFailure.stringInvalidContent: 'stringInvalidContent',
+  InputFailure.stringSeemsAlreadyUsedContent: 'stringSeemsAlreadyUsedContent',
+  InputFailure.intInvalidContent: 'intInvalidContent',
+  InputFailure.boolRequired: 'boolRequired',
+  InputFailure.listRequired: 'listRequired',
   InputFailure.fieldLength: 'fieldLength',
   InputFailure.fieldForbiddenCharacter: 'fieldForbiddenCharacter',
   InputFailure.dateInvalid: 'dateInvalid',
+  InputFailure.dateShouldBeBefore: 'dateShouldBeBefore',
   InputFailure.listNotFound: 'listNotFound',
   InputFailure.passwordDontMatch: 'passwordDontMatch',
   InputFailure.other: 'other',
@@ -68,5 +75,17 @@ DateInput _$DateInputFromJson(Map<String, dynamic> json) => DateInput(
 
 Map<String, dynamic> _$DateInputToJson(DateInput instance) => <String, dynamic>{
       'value': instance.value?.toIso8601String(),
+      'failure': _$InputFailureEnumMap[instance.failure],
+    };
+
+MapIntInput _$MapIntInputFromJson(Map<String, dynamic> json) => MapIntInput(
+      value: (json['value'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as int),
+      ),
+    )..failure = $enumDecodeNullable(_$InputFailureEnumMap, json['failure']);
+
+Map<String, dynamic> _$MapIntInputToJson(MapIntInput instance) =>
+    <String, dynamic>{
+      'value': instance.value,
       'failure': _$InputFailureEnumMap[instance.failure],
     };

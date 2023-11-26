@@ -11,7 +11,7 @@ class InputValidationHelper {
     if (value == null || value.isEmpty) {
       return InputFailure.emailRequired;
     } else if (!isValidEmail(value)) {
-      return InputFailure.emailRequired;
+      return InputFailure.emailInvalid;
     }
     return null;
   }
@@ -20,14 +20,14 @@ class InputValidationHelper {
     if (value == null || value.isEmpty) {
       return null;
     } else if (!isValidEmail(value)) {
-      return InputFailure.emailRequired;
+      return InputFailure.emailInvalid;
     }
     return null;
   }
 
   static InputFailure? strongPasswordCheck(String? value) {
     if (value == null || value.isEmpty) {
-      return InputFailure.strongPasswordLength;
+      return InputFailure.strongPasswordRequired;
     }
     if (value.length < 6) {
       return InputFailure.strongPasswordLength;
@@ -65,7 +65,7 @@ class InputValidationHelper {
 
   static InputFailure? requiredListValidation(List<dynamic>? value) {
     if (value == null || value.isEmpty) {
-      return InputFailure.fieldRequired;
+      return InputFailure.listRequired;
     }
     return null;
   }
@@ -79,7 +79,7 @@ class InputValidationHelper {
 
   static InputFailure? requiredBoolValidation(bool? value) {
     if (value == null) {
-      return InputFailure.fieldRequired;
+      return InputFailure.boolRequired;
     }
     return null;
   }
@@ -96,7 +96,7 @@ class InputValidationHelper {
       return InputFailure.fieldRequired;
     }
     if (value.isAfter(DateTime.now())) {
-      return InputFailure.dateInvalid;
+      return InputFailure.dateShouldBeBefore;
     }
     return null;
   }

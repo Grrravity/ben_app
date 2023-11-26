@@ -5,7 +5,7 @@ abstract class Paths {
   static const String register = 'register';
   static const String resetPassword = 'reset-password';
   static const String dashboard = '/dashboard';
-  static const String events = '/event';
+  static const String projectCreate = '/projectCreate';
   static const String privacy = '/privacy';
   static const String cgu = '/cgu';
 }

@@ -7,7 +7,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'generated/user_dto.freezed.dart';
 part 'generated/user_dto.g.dart';
 
-/// Currently connected User profile
 @freezed
 class UserDto with _$UserDto {
   const factory UserDto({
@@ -55,7 +54,7 @@ extension OnUserDto on User {
 }
 
 extension OnListCurrentUserDtoJson on List<Map<String, dynamic>> {
-  List<UserDto> get toDTOList {
+  List<UserDto> get toDTO {
     return map(UserDto.fromJson).toList();
   }
 }

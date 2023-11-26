@@ -15,15 +15,9 @@ class ErrorLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Text(failure.localized(context)),
-          ],
-        ),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Text(failure.localized(context)),
     );
   }
 }

@@ -1,17 +1,17 @@
 import 'dart:async';
 
 import 'package:ben_app/core/controller/session/session_cubit.dart';
+import 'package:ben_app/core/injection/dependency_injection.dart';
 import 'package:ben_app/core/router/path.dart';
 import 'package:ben_app/presentation/pages/auth/presentation/pages/forget_password_page.dart';
 import 'package:ben_app/presentation/pages/auth/presentation/pages/login_page.dart';
 import 'package:ben_app/presentation/pages/auth/presentation/pages/register_page.dart';
 import 'package:ben_app/presentation/pages/auth/presentation/pages/reset_password_page.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
-import 'package:ben_app/presentation/pages/events/presentation/events_page.dart';
 import 'package:ben_app/presentation/pages/legal/cgu_page.dart';
 import 'package:ben_app/presentation/pages/legal/privacy_page.dart';
+import 'package:ben_app/presentation/pages/project/create/presentation/project_create_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 mixin RouterMixin<T extends StatefulWidget> on State<T> {
@@ -77,13 +77,13 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
         ),
       ),
       GoRoute(
-        path: Paths.events,
-        name: EventsPage.routeName,
+        path: Paths.projectCreate,
+        name: ProjectCreatePage.routeName,
         parentNavigatorKey: _parentKey,
         pageBuilder: (context, state) => buildPageWithDefaultTransition(
           context: context,
           state: state,
-          child: const EventsPage(),
+          child: const ProjectCreatePage(),
         ),
       ),
       GoRoute(
@@ -108,11 +108,11 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
       ),
     ],
     refreshListenable: StreamChangeNotifier(
-      context.read<SessionCubit>().sessionUpdate,
+      getIt<SessionCubit>().sessionUpdate.distinct(),
     ),
     redirect: (context, state) {
       final location = state.uri.path;
-      final sessionState = context.read<SessionCubit>().state;
+      final sessionState = getIt<SessionCubit>().state;
 
       if (location.endsWith('privacy') || location.endsWith('cgu')) {
         return null;

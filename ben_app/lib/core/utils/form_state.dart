@@ -58,6 +58,20 @@ class FormBlocState<DataT> with _$FormBlocState<DataT> {
 }
 
 extension LoadedFormStateX<DataT> on LoadedForm<DataT> {
+  LoadedForm<DataT> copyWithNullableFailure({
+    DataT? data,
+    Failure? Function()? failure,
+    bool resetCanBeSubmitted = false,
+  }) {
+    return copyWith(
+      data: data ?? this.data,
+      failure: failure != null ? failure() : this.failure,
+      canBeSubmitted: resetCanBeSubmitted
+          ? (failure != null ? failure() == null : this.failure == null)
+          : canBeSubmitted,
+    );
+  }
+
   LoadedForm<DataT> copyWithData(DataT data, {bool? canBeSubmitted}) =>
       copyWith(
         isSubmitting: false,

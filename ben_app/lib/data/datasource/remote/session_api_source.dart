@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/utils/async_task.dart';
 import 'package:ben_app/core/utils/logger.dart';
 import 'package:ben_app/data/datasource/local/session_local_source.dart';
@@ -74,16 +75,29 @@ class SessionApiSourceImpl implements SessionApiSource {
       }
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
+    } on FirebaseAuthException catch (error) {
+      Logger('Firebase login').error(error.message.toString());
+      switch (error.code) {
+        case 'user-disabled':
+          throw Failure.userNotFound;
+        case 'user-not-found':
+          throw Failure.userNotFound;
+        case 'wrong-password':
+          throw Failure.passwordInvalid;
+        case 'invalid-email':
+          throw Failure.emailNotValid;
+        default:
+          throw Failure.authentication;
+      }
     } catch (error) {
-      throw Exception('Sign in failed: $error');
+      Logger('Firebase login').error(error.toString());
+      throw Failure.authentication;
     }
   }
 
   @override
   Future<UserDto> signInWithMicrosoft() async {
-    final microsoftProvider = MicrosoftAuthProvider()
-      ..addScope('openid')
-      ..addScope('email');
+    final microsoftProvider = MicrosoftAuthProvider();
     try {
       UserCredential credential;
       if (kIsWeb) {
@@ -93,15 +107,31 @@ class SessionApiSourceImpl implements SessionApiSource {
       }
 
       if (credential.user == null) {
-        throw Exception('Sign in failed: The user is null after sign in.');
+        throw Failure.authentication;
       }
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
-    } catch (error) {
-      if (error is FirebaseAuthException) {
-        Logger('Microsoft Auth').error(error.message.toString());
+    } on FirebaseAuthException catch (error) {
+      Logger('Microsoft Auth').error(error.message.toString());
+      switch (error.code) {
+        case 'user-disabled':
+          throw Failure.userNotFound;
+        case 'weak-password':
+          throw Failure.weakPassword;
+        case 'email-already-in-use':
+          throw Failure.emailAlreadyInUse;
+        case 'user-not-found':
+          throw Failure.userNotFound;
+        case 'wrong-password':
+          throw Failure.passwordInvalid;
+        case 'invalid-email':
+          throw Failure.emailNotValid;
+        default:
+          throw Failure.authentication;
       }
-      throw Exception('Sign in failed: $error');
+    } catch (error) {
+      Logger('Microsoft Auth').error(error.toString());
+      throw Failure.authentication;
     }
   }
 
@@ -110,7 +140,13 @@ class SessionApiSourceImpl implements SessionApiSource {
     try {
       await firebaseAuth.signOut();
     } catch (error) {
-      throw Exception('Sign out failed: $error');
+      Logger('Firebase logout').error(
+        error is FirebaseAuthException
+            ? error.message.toString()
+            : error.toString(),
+      );
+
+      throw Failure.other;
     }
   }
 
@@ -127,8 +163,23 @@ class SessionApiSourceImpl implements SessionApiSource {
       }
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
+    } on FirebaseAuthException catch (error) {
+      Logger('Firebase register').error(error.message.toString());
+      switch (error.code) {
+        case 'weak-password':
+          throw Failure.weakPassword;
+        case 'email-already-in-use':
+          throw Failure.emailAlreadyInUse;
+        case 'invalid-email':
+          throw Failure.emailNotValid;
+        case 'operation-not-allowed':
+          throw Failure.invalidCommand;
+        default:
+          throw Failure.authentication;
+      }
     } catch (error) {
-      throw Exception('Sign up failed: $error');
+      Logger('Firebase register').error(error.toString());
+      throw Failure.authentication;
     }
   }
 
@@ -137,8 +188,19 @@ class SessionApiSourceImpl implements SessionApiSource {
     try {
       await firebaseAuth.sendPasswordResetEmail(email: email);
       return true;
+    } on FirebaseAuthException catch (error) {
+      Logger('Firebase reset').error(error.message.toString());
+      switch (error.code) {
+        case 'invalid-email':
+          throw Failure.emailNotValid;
+        case 'user-not-found':
+          throw Failure.userNotFound;
+        default:
+          throw Failure.authentication;
+      }
     } catch (error) {
-      throw Exception('Sign up failed: $error');
+      Logger('Firebase reset').error(error.toString());
+      throw Failure.authentication;
     }
   }
 
@@ -154,8 +216,25 @@ class SessionApiSourceImpl implements SessionApiSource {
       );
 
       return true;
+    } on FirebaseAuthException catch (error) {
+      Logger('Firebase reset').error(error.message.toString());
+      switch (error.code) {
+        case 'expired-action-code':
+          throw Failure.expiredAuthCode;
+        case 'invalid-action-code':
+          throw Failure.invalidAuthCode;
+        case 'user-disabled':
+          throw Failure.userDisabled;
+        case 'weak-password':
+          throw Failure.weakPassword;
+        case 'user-not-found':
+          throw Failure.userNotFound;
+        default:
+          throw Failure.authentication;
+      }
     } catch (error) {
-      throw Exception('Sign up failed: $error');
+      Logger('Firebase reset').error(error.toString());
+      throw Failure.authentication;
     }
   }
 
