@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "156253621348",
+    "project_id": "bureaudetudebenapp",
+    "storage_bucket": "bureaudetudebenapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156253621348:android:77cbc28374ad7a9094e371",
+        "android_client_info": {
+          "package_name": "fr.app.ben.benapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWa3jjNzJ_zWDjk0mhpt_aCqmW9PEa0QU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

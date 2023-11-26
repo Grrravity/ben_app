@@ -1,0 +1,5 @@
+arb-dir: lib/localization/arb
+template-arb-file: app_fr.arb
+output-localization-file: app_localizations.dart
+nullable-getter: false
+untranslated-messages-file: missing.txt
