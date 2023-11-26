@@ -30,8 +30,8 @@ class FilesApiSourceImpl implements FilesApiSource {
             .ref
             .getDownloadURL();
       },
-      'projects',
-      'putData',
+      'uploadFile',
+      'projects/$projectName',
     );
   }
 

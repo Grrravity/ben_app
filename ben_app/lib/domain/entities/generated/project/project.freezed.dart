@@ -18,8 +18,13 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Project {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<Parcours> get parcours => throw _privateConstructorUsedError;
+  List<DocumentReference<Object>> get parcoursReferences =>
+      throw _privateConstructorUsedError;
   ProjectSettings get settings => throw _privateConstructorUsedError;
+  int get totalSections => throw _privateConstructorUsedError;
+  int get doneSections => throw _privateConstructorUsedError;
+  int get totalIntersections => throw _privateConstructorUsedError;
+  int get doneIntersections => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProjectCopyWith<Project> get copyWith => throw _privateConstructorUsedError;
@@ -33,8 +38,12 @@ abstract class $ProjectCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<Parcours> parcours,
-      ProjectSettings settings});
+      List<DocumentReference<Object>> parcoursReferences,
+      ProjectSettings settings,
+      int totalSections,
+      int doneSections,
+      int totalIntersections,
+      int doneIntersections});
 
   $ProjectSettingsCopyWith<$Res> get settings;
 }
@@ -54,8 +63,12 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? parcours = null,
+    Object? parcoursReferences = null,
     Object? settings = null,
+    Object? totalSections = null,
+    Object? doneSections = null,
+    Object? totalIntersections = null,
+    Object? doneIntersections = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -66,14 +79,30 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      parcours: null == parcours
-          ? _value.parcours
-          : parcours // ignore: cast_nullable_to_non_nullable
-              as List<Parcours>,
+      parcoursReferences: null == parcoursReferences
+          ? _value.parcoursReferences
+          : parcoursReferences // ignore: cast_nullable_to_non_nullable
+              as List<DocumentReference<Object>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as ProjectSettings,
+      totalSections: null == totalSections
+          ? _value.totalSections
+          : totalSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneSections: null == doneSections
+          ? _value.doneSections
+          : doneSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalIntersections: null == totalIntersections
+          ? _value.totalIntersections
+          : totalIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneIntersections: null == doneIntersections
+          ? _value.doneIntersections
+          : doneIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -96,8 +125,12 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<Parcours> parcours,
-      ProjectSettings settings});
+      List<DocumentReference<Object>> parcoursReferences,
+      ProjectSettings settings,
+      int totalSections,
+      int doneSections,
+      int totalIntersections,
+      int doneIntersections});
 
   @override
   $ProjectSettingsCopyWith<$Res> get settings;
@@ -116,8 +149,12 @@ class __$$ProjectImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? parcours = null,
+    Object? parcoursReferences = null,
     Object? settings = null,
+    Object? totalSections = null,
+    Object? doneSections = null,
+    Object? totalIntersections = null,
+    Object? doneIntersections = null,
   }) {
     return _then(_$ProjectImpl(
       id: null == id
@@ -128,14 +165,30 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      parcours: null == parcours
-          ? _value._parcours
-          : parcours // ignore: cast_nullable_to_non_nullable
-              as List<Parcours>,
+      parcoursReferences: null == parcoursReferences
+          ? _value._parcoursReferences
+          : parcoursReferences // ignore: cast_nullable_to_non_nullable
+              as List<DocumentReference<Object>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as ProjectSettings,
+      totalSections: null == totalSections
+          ? _value.totalSections
+          : totalSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneSections: null == doneSections
+          ? _value.doneSections
+          : doneSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalIntersections: null == totalIntersections
+          ? _value.totalIntersections
+          : totalIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneIntersections: null == doneIntersections
+          ? _value.doneIntersections
+          : doneIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -146,28 +199,41 @@ class _$ProjectImpl implements _Project {
   const _$ProjectImpl(
       {required this.id,
       required this.name,
-      required final List<Parcours> parcours,
-      required this.settings})
-      : _parcours = parcours;
+      required final List<DocumentReference<Object>> parcoursReferences,
+      required this.settings,
+      required this.totalSections,
+      required this.doneSections,
+      required this.totalIntersections,
+      required this.doneIntersections})
+      : _parcoursReferences = parcoursReferences;
 
   @override
   final String id;
   @override
   final String name;
-  final List<Parcours> _parcours;
+  final List<DocumentReference<Object>> _parcoursReferences;
   @override
-  List<Parcours> get parcours {
-    if (_parcours is EqualUnmodifiableListView) return _parcours;
+  List<DocumentReference<Object>> get parcoursReferences {
+    if (_parcoursReferences is EqualUnmodifiableListView)
+      return _parcoursReferences;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_parcours);
+    return EqualUnmodifiableListView(_parcoursReferences);
   }
 
   @override
   final ProjectSettings settings;
+  @override
+  final int totalSections;
+  @override
+  final int doneSections;
+  @override
+  final int totalIntersections;
+  @override
+  final int doneIntersections;
 
   @override
   String toString() {
-    return 'Project(id: $id, name: $name, parcours: $parcours, settings: $settings)';
+    return 'Project(id: $id, name: $name, parcoursReferences: $parcoursReferences, settings: $settings, totalSections: $totalSections, doneSections: $doneSections, totalIntersections: $totalIntersections, doneIntersections: $doneIntersections)';
   }
 
   @override
@@ -177,14 +243,31 @@ class _$ProjectImpl implements _Project {
             other is _$ProjectImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._parcours, _parcours) &&
+            const DeepCollectionEquality()
+                .equals(other._parcoursReferences, _parcoursReferences) &&
             (identical(other.settings, settings) ||
-                other.settings == settings));
+                other.settings == settings) &&
+            (identical(other.totalSections, totalSections) ||
+                other.totalSections == totalSections) &&
+            (identical(other.doneSections, doneSections) ||
+                other.doneSections == doneSections) &&
+            (identical(other.totalIntersections, totalIntersections) ||
+                other.totalIntersections == totalIntersections) &&
+            (identical(other.doneIntersections, doneIntersections) ||
+                other.doneIntersections == doneIntersections));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name,
-      const DeepCollectionEquality().hash(_parcours), settings);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_parcoursReferences),
+      settings,
+      totalSections,
+      doneSections,
+      totalIntersections,
+      doneIntersections);
 
   @JsonKey(ignore: true)
   @override
@@ -197,17 +280,29 @@ abstract class _Project implements Project {
   const factory _Project(
       {required final String id,
       required final String name,
-      required final List<Parcours> parcours,
-      required final ProjectSettings settings}) = _$ProjectImpl;
+      required final List<DocumentReference<Object>> parcoursReferences,
+      required final ProjectSettings settings,
+      required final int totalSections,
+      required final int doneSections,
+      required final int totalIntersections,
+      required final int doneIntersections}) = _$ProjectImpl;
 
   @override
   String get id;
   @override
   String get name;
   @override
-  List<Parcours> get parcours;
+  List<DocumentReference<Object>> get parcoursReferences;
   @override
   ProjectSettings get settings;
+  @override
+  int get totalSections;
+  @override
+  int get doneSections;
+  @override
+  int get totalIntersections;
+  @override
+  int get doneIntersections;
   @override
   @JsonKey(ignore: true)
   _$$ProjectImplCopyWith<_$ProjectImpl> get copyWith =>

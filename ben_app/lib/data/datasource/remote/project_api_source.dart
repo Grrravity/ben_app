@@ -14,6 +14,7 @@ class ProjectApiSourceImpl implements ProjectApiSource {
 
   final FirebaseFirestore firestore;
   final String _projectCollection = 'projects';
+  final String _parcoursCollection = 'parcours';
 
   @override
   Future<List<ProjectDTO>> getProjects() async {
@@ -34,18 +35,36 @@ class ProjectApiSourceImpl implements ProjectApiSource {
   }
 
   @override
-  Future<ProjectDTO> createProject(CreateProjectCmdDTO project) async {
+  Future<ProjectDTO> createProject(CreateProjectCmdDTO projectCmd) async {
     return _log(
       () async {
-        final json = project.toJson();
+        final batch = firestore.batch();
+        final refs = <DocumentReference<Map<String, dynamic>>>[];
+        for (final parcours in projectCmd.parcours) {
+          final now = DateTime.now().millisecondsSinceEpoch;
+          final ref = firestore.doc(
+            '$_parcoursCollection/${projectCmd.name}_${parcours.name}_$now',
+          );
+          refs.add(ref);
+          batch.set(ref, projectCmd.toJson());
+        }
+        final project = ProjectDTO.fromCreateProjectCmd(
+          cmd: projectCmd,
+          id: '',
+          parcoursReferences: refs,
+        );
+        await batch.commit();
+
+        final json = project.toJson()..remove('id');
         final result = await firestore
             .collection(_projectCollection)
             .add(json)
             .then((value) => value);
 
         return ProjectDTO.fromCreateProjectCmd(
-          project,
-          result.id,
+          cmd: projectCmd,
+          id: result.id,
+          parcoursReferences: refs,
         );
       },
       'createProject',

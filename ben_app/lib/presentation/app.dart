@@ -6,6 +6,7 @@ import 'package:ben_app/core/router/route.dart';
 import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/localization/l10n.dart';
 import 'package:ben_app/presentation/widgets/layout/error_layout.dart';
+import 'package:ben_app/presentation/widgets/toastbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,6 +60,7 @@ class _AppState extends State<_App> with AppThemeMixin, RouterMixin {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Ben App',
+      scaffoldMessengerKey: snackbarKey,
       debugShowCheckedModeBanner: false,
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,

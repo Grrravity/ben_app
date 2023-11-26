@@ -166,13 +166,13 @@ class MapIntInput extends ValueObject<Map<String, int>, InputFailure> {
             return InputFailure.fieldRequired;
           }
           if (value.keys.any((element) => element == '')) {
-            return InputFailure.fieldRequired;
+            return InputFailure.stringInvalidContent;
           }
           if (value.values.any((element) => element == 0)) {
-            return InputFailure.fieldRequired;
+            return InputFailure.intInvalidContent;
           }
           if (value.keys.toList().length != value.keys.toSet().length) {
-            return InputFailure.other;
+            return InputFailure.stringSeemsAlreadyUsedContent;
           }
           return null;
         },

@@ -32,4 +32,10 @@ class Palette {
 
   /// #383838
   static const Color grey700 = Color(0xFF383838);
+
+  /// #383838
+  static const Color grey800 = Color(0xFF272727);
+
+  /// #383838
+  static const Color grey900 = Color(0xFF161616);
 }

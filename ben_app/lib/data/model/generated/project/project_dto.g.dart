@@ -10,17 +10,28 @@ _$ProjectDTOImpl _$$ProjectDTOImplFromJson(Map<String, dynamic> json) =>
     _$ProjectDTOImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      parcours: (json['parcours'] as List<dynamic>)
-          .map((e) => ParcoursDTO.fromJson(e as Map<String, dynamic>))
+      parcoursReferences: (json['parcoursReferences'] as List<dynamic>)
+          .map((e) => const DocumentSerializer()
+              .fromJson(e as DocumentReference<Object>))
           .toList(),
       settings:
           ProjectSettingsDTO.fromJson(json['settings'] as Map<String, dynamic>),
+      totalSections: json['totalSections'] as int,
+      doneSections: json['doneSections'] as int,
+      totalIntersections: json['totalIntersections'] as int,
+      doneIntersections: json['doneIntersections'] as int,
     );
 
 Map<String, dynamic> _$$ProjectDTOImplToJson(_$ProjectDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'parcours': instance.parcours.map((e) => e.toJson()).toList(),
+      'parcoursReferences': instance.parcoursReferences
+          .map(const DocumentSerializer().toJson)
+          .toList(),
       'settings': instance.settings.toJson(),
+      'totalSections': instance.totalSections,
+      'doneSections': instance.doneSections,
+      'totalIntersections': instance.totalIntersections,
+      'doneIntersections': instance.doneIntersections,
     };

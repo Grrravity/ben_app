@@ -1,5 +1,4 @@
 import 'package:ben_app/core/extension/extension_export.dart';
-import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/core/utils/input_object.dart';
 import 'package:ben_app/localization/string_to_arb.dart';
 import 'package:ben_app/presentation/pages/auth/cubit/auth_cubit.dart';
@@ -8,6 +7,7 @@ import 'package:ben_app/presentation/widgets/app_bar.dart';
 import 'package:ben_app/presentation/widgets/button.dart';
 import 'package:ben_app/presentation/widgets/form_text_field.dart';
 import 'package:ben_app/presentation/widgets/layout/custom_scaffold.dart';
+import 'package:ben_app/presentation/widgets/toastbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -108,18 +108,9 @@ class _RegisterButton extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
         context.read<AuthCubit>().register().then((value) {
           if (value != null) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Compte créé',
-                    style: context.textTheme.text1660024
-                        .copyWith(color: Colors.white),
-                  ),
-                  backgroundColor: Colors.green,
-                ),
-              );
+            ShowSnackBar.showSuccess(
+              title: 'Compte créé',
+            );
           }
         });
       },

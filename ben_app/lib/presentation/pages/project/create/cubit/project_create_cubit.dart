@@ -1,3 +1,4 @@
+import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/error/input_failure.dart';
 import 'package:ben_app/core/extension/either.dart';
 import 'package:ben_app/core/utils/form_state.dart';
@@ -42,9 +43,12 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
   void setProjectName(String? value) {
     if (value == null) return;
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(projectName: StringInput(value: value)),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data
+                .copyWith(projectName: StringInput(value: value)),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -59,15 +63,17 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
         (mapKey, _) => mapKey == key,
       );
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          sectionPictureSetting: MapIntInput(
-            value: {
-              ...currentMap,
-            },
-          ),
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              sectionPictureSetting: MapIntInput(
+                value: {
+                  ...currentMap,
+                },
+              ),
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -78,16 +84,18 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     final currentMap = state.asLoaded!.data.sectionPictureSetting.value ??
         {'Photos et descriptions': 2};
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          sectionPictureSetting: MapIntInput(
-            value: {
-              ...currentMap,
-              ...{'': 0},
-            },
-          ),
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              sectionPictureSetting: MapIntInput(
+                value: {
+                  ...currentMap,
+                  ...{'': 0},
+                },
+              ),
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -103,7 +111,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
 
     if (!isEditingValue &&
         currentMap.keys.any((element) => element == input.key)) {
-      return InputFailure.other;
+      return InputFailure.stringSeemsAlreadyUsedContent;
     }
 
     final newMap = <String, int>{};
@@ -116,11 +124,13 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     }
 
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          sectionPictureSetting: MapIntInput(value: newMap),
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              sectionPictureSetting: MapIntInput(value: newMap),
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -130,13 +140,15 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
 
   void setSectionPictureSetting(MapIntInput input) {
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          intersectionPictureSetting: input.value == null
-              ? MapIntInput(value: {'Photos et descriptions': 2})
-              : input,
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              intersectionPictureSetting: input.value == null
+                  ? MapIntInput(value: {'Photos et descriptions': 2})
+                  : input,
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -151,15 +163,17 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
         (mapKey, _) => mapKey == key,
       );
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          intersectionPictureSetting: MapIntInput(
-            value: {
-              ...currentMap,
-            },
-          ),
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              intersectionPictureSetting: MapIntInput(
+                value: {
+                  ...currentMap,
+                },
+              ),
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -170,16 +184,18 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     final currentMap = state.asLoaded!.data.intersectionPictureSetting.value ??
         {'Photos et descriptions': 2};
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          intersectionPictureSetting: MapIntInput(
-            value: {
-              ...currentMap,
-              ...{'': 0},
-            },
-          ),
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              intersectionPictureSetting: MapIntInput(
+                value: {
+                  ...currentMap,
+                  ...{'': 0},
+                },
+              ),
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -195,7 +211,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
 
     if (!isEditingValue &&
         currentMap.keys.any((element) => element == input.key)) {
-      return InputFailure.other;
+      return InputFailure.stringSeemsAlreadyUsedContent;
     }
 
     final newMap = <String, int>{};
@@ -208,11 +224,13 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     }
 
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          intersectionPictureSetting: MapIntInput(value: newMap),
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              intersectionPictureSetting: MapIntInput(value: newMap),
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
@@ -223,40 +241,59 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
   void setIntersectionPictureSetting(MapIntInput input) {
     if (input.value == null) return;
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(
-          intersectionPictureSetting: input.value == null
-              ? MapIntInput(value: {'Photos et descriptions': 4})
-              : input,
-        ),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(
+              intersectionPictureSetting: input.value == null
+                  ? MapIntInput(value: {'Photos et descriptions': 4})
+                  : input,
+            ),
+          )
+          .copyWithNoFailure(),
     );
     if (state.asLoaded!.data.canBeSubmitted) {
       emit(state.asLoaded!.copyWith(canBeSubmitted: true));
     }
   }
 
-  void setFiles(List<PlatformFile> files) {
+  bool setFiles(List<PlatformFile> files) {
+    emit(state.asLoaded!.copyWithNoFailure());
+    try {
+      for (final file in files) {
+        file.toProjectPictureMetadata;
+      }
+    } catch (e) {
+      emit(state.asLoaded!.copyWith(failure: Failure.fileNameInvalid));
+      return false;
+    }
     emit(
-      state.asLoaded!.copyWithData(
-        state.asLoaded!.data.copyWith(files: files),
-      ),
+      state.asLoaded!
+          .copyWithData(
+            state.asLoaded!.data.copyWith(files: files),
+          )
+          .copyWithNoFailure(),
     );
+    return true;
   }
 
-  Future<void> createProject() async {
-    final lState = state.asLoaded;
-    if (lState == null) return;
+  Future<bool> createProject() async {
+    final lState = state.asLoaded!;
     final data = lState.data;
     final files = lState.data.files;
-    if (files == null) return;
+    if (files == null) {
+      emit(lState.copyWith(failure: Failure.filesInvalid));
+      return false;
+    }
 
     final filesData = await _uploadFiles(
       projectName: data.projectName.value ?? 'test',
       files: files,
     );
 
-    if (filesData.isEmpty) return;
+    if (filesData.isEmpty) {
+      emit(lState.copyWith(failure: Failure.filesInvalid));
+      return false;
+    }
 
     final settings = ProjectSettings(
       sectionPictureSetting: data.sectionPictureSetting.value?.entries
@@ -274,13 +311,18 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
       filesData: filesData,
       settings: settings,
     );
-    await projectUsecase.createProject(
+    final result = await projectUsecase.createProject(
       CreateProjectCmd(
         name: data.projectName.value ?? '',
         parcours: parcours,
         settings: settings,
       ),
     );
+    if (result.isLeft()) {
+      emit(state.asLoaded!.copyWith(failure: result.getLeft()));
+      return false;
+    }
+    return true;
   }
 
   Future<List<UploadFileResult>> _uploadFiles({
@@ -336,7 +378,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
                   municipalities: [],
                   illustration: filesData
                       .firstWhere((element) => element.name == e.name)
-                      .name,
+                      .url,
                   index: e.toProjectPictureMetadata.sectionNumber,
                   globalCaracteristics: GlobalSectionCaracteristics.asEmpty(),
                   bikableCaracteristics: BikabledCaracteristics.asEmpty(),
@@ -361,7 +403,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
                   municipalities: [],
                   illustration: filesData
                       .firstWhere((element) => element.name == e.name)
-                      .name,
+                      .url,
                   index: e.toProjectPictureMetadata.sectionNumber,
                   globalCaracteristics:
                       GlobalIntersectionCaracteristics.asEmpty(),

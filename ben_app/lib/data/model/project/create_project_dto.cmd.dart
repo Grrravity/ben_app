@@ -1,5 +1,4 @@
 import 'package:ben_app/data/model/project/parcours_dto.dart';
-import 'package:ben_app/data/model/project/project_content_dto.dart';
 import 'package:ben_app/data/model/project/project_settings_dto.dart';
 import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

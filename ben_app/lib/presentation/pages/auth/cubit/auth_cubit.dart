@@ -61,7 +61,7 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
   Future<Failure?> login() async {
     final lState = state.asLoaded;
     if (lState == null) {
-      return _emitSubmissionStatus(left(Failure.other));
+      return _emitSubmissionStatus(left(Failure.invalidState));
     }
 
     final data = lState.data;
@@ -84,7 +84,7 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
   Future<Failure?> loginWithMicrosoft() async {
     final lState = state.asLoaded;
     if (lState == null) {
-      return _emitSubmissionStatus(left(Failure.other));
+      return _emitSubmissionStatus(left(Failure.invalidState));
     }
     emit(lState.toSubmitting);
 
@@ -95,7 +95,7 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
 
   Future<Failure?> register() async {
     final lState = state.asLoaded;
-    if (lState == null) return Failure.other;
+    if (lState == null) return Failure.invalidState;
 
     final data = lState.data;
     if (!lState.data.passwordsAreIdenticals) {
@@ -131,7 +131,7 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
   Future<Failure?> requestNewPassword() async {
     final lState = state.asLoaded;
     if (lState == null) {
-      return _emitSubmissionStatus(left(Failure.other));
+      return _emitSubmissionStatus(left(Failure.invalidState));
     }
 
     final data = lState.data;
@@ -162,7 +162,7 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
   Future<Failure?> resetPassword(String code) async {
     final lState = state.asLoaded;
     if (lState == null) {
-      return _emitSubmissionStatus(left(Failure.other));
+      return _emitSubmissionStatus(left(Failure.invalidState));
     }
 
     final data = lState.data;
@@ -195,7 +195,7 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     Either<Failure, dynamic> successOrFailure,
   ) {
     final lState = state.asLoaded;
-    if (lState == null) return Failure.other;
+    if (lState == null) return Failure.invalidState;
 
     return successOrFailure.fold(
       (l) {

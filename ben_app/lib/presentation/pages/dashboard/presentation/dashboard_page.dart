@@ -81,42 +81,101 @@ class DashboardPage extends StatelessWidget {
                                 expandedAlignment: Alignment.topLeft,
                                 shape: const Border(),
                                 childrenPadding: const EdgeInsets.all(12),
-                                children: List.generate(project.parcours.length,
-                                    (index) {
-                                  final parcours = project.parcours[index];
-                                  return Padding(
+                                expandedCrossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: double.maxFinite,
                                     padding: const EdgeInsets.only(left: 12),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Parcours N° ${index + 1}: ${parcours.name}',
-                                          style: context.textTheme.bodyLarge!
-                                              .copyWith(
-                                            fontWeight: FontWeight.w700,
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: 'Sections complétés: ',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    '${project.doneSections}/${project.totalSections}',
+                                                style: context
+                                                    .textTheme.bodyLarge!
+                                                    .copyWith(
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 12),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                        RichText(
+                                          text: TextSpan(
                                             children: [
-                                              Text(
-                                                '${parcours.sections.length} section(s)',
+                                              TextSpan(
+                                                text:
+                                                    'Intersections complétés: ',
+                                                style: context
+                                                    .textTheme.bodyMedium,
                                               ),
-                                              Text(
-                                                '${parcours.intersections.length} intersection(s)',
+                                              TextSpan(
+                                                text:
+                                                    '${project.doneIntersections}/${project.totalIntersections}',
+                                                style: context
+                                                    .textTheme.bodyLarge!
+                                                    .copyWith(
+                                                  fontWeight: FontWeight.w700,
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  );
-                                }),
+                                  ),
+                                  Wrap(
+                                    children: List.generate(
+                                        project.parcoursReferences.length,
+                                        (index) {
+                                      final parcours =
+                                          project.parcoursReferences[index];
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 12),
+                                        child: Wrap(
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        'Parcours N° ${index + 1}: ',
+                                                    style: context
+                                                        .textTheme.bodyMedium,
+                                                  ),
+                                                  TextSpan(
+                                                    text: parcours.path
+                                                        .split('/')
+                                                        .last
+                                                        .split('_')[1],
+                                                    style: context
+                                                        .textTheme.bodyLarge!
+                                                        .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

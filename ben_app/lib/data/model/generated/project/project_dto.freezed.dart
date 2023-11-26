@@ -22,8 +22,14 @@ ProjectDTO _$ProjectDTOFromJson(Map<String, dynamic> json) {
 mixin _$ProjectDTO {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<ParcoursDTO> get parcours => throw _privateConstructorUsedError;
+  @DocumentSerializer()
+  List<DocumentReference<Object>> get parcoursReferences =>
+      throw _privateConstructorUsedError;
   ProjectSettingsDTO get settings => throw _privateConstructorUsedError;
+  int get totalSections => throw _privateConstructorUsedError;
+  int get doneSections => throw _privateConstructorUsedError;
+  int get totalIntersections => throw _privateConstructorUsedError;
+  int get doneIntersections => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,8 +46,12 @@ abstract class $ProjectDTOCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<ParcoursDTO> parcours,
-      ProjectSettingsDTO settings});
+      @DocumentSerializer() List<DocumentReference<Object>> parcoursReferences,
+      ProjectSettingsDTO settings,
+      int totalSections,
+      int doneSections,
+      int totalIntersections,
+      int doneIntersections});
 
   $ProjectSettingsDTOCopyWith<$Res> get settings;
 }
@@ -61,8 +71,12 @@ class _$ProjectDTOCopyWithImpl<$Res, $Val extends ProjectDTO>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? parcours = null,
+    Object? parcoursReferences = null,
     Object? settings = null,
+    Object? totalSections = null,
+    Object? doneSections = null,
+    Object? totalIntersections = null,
+    Object? doneIntersections = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,14 +87,30 @@ class _$ProjectDTOCopyWithImpl<$Res, $Val extends ProjectDTO>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      parcours: null == parcours
-          ? _value.parcours
-          : parcours // ignore: cast_nullable_to_non_nullable
-              as List<ParcoursDTO>,
+      parcoursReferences: null == parcoursReferences
+          ? _value.parcoursReferences
+          : parcoursReferences // ignore: cast_nullable_to_non_nullable
+              as List<DocumentReference<Object>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as ProjectSettingsDTO,
+      totalSections: null == totalSections
+          ? _value.totalSections
+          : totalSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneSections: null == doneSections
+          ? _value.doneSections
+          : doneSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalIntersections: null == totalIntersections
+          ? _value.totalIntersections
+          : totalIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneIntersections: null == doneIntersections
+          ? _value.doneIntersections
+          : doneIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -104,8 +134,12 @@ abstract class _$$ProjectDTOImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      List<ParcoursDTO> parcours,
-      ProjectSettingsDTO settings});
+      @DocumentSerializer() List<DocumentReference<Object>> parcoursReferences,
+      ProjectSettingsDTO settings,
+      int totalSections,
+      int doneSections,
+      int totalIntersections,
+      int doneIntersections});
 
   @override
   $ProjectSettingsDTOCopyWith<$Res> get settings;
@@ -124,8 +158,12 @@ class __$$ProjectDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? parcours = null,
+    Object? parcoursReferences = null,
     Object? settings = null,
+    Object? totalSections = null,
+    Object? doneSections = null,
+    Object? totalIntersections = null,
+    Object? doneIntersections = null,
   }) {
     return _then(_$ProjectDTOImpl(
       id: null == id
@@ -136,14 +174,30 @@ class __$$ProjectDTOImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      parcours: null == parcours
-          ? _value._parcours
-          : parcours // ignore: cast_nullable_to_non_nullable
-              as List<ParcoursDTO>,
+      parcoursReferences: null == parcoursReferences
+          ? _value._parcoursReferences
+          : parcoursReferences // ignore: cast_nullable_to_non_nullable
+              as List<DocumentReference<Object>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as ProjectSettingsDTO,
+      totalSections: null == totalSections
+          ? _value.totalSections
+          : totalSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneSections: null == doneSections
+          ? _value.doneSections
+          : doneSections // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalIntersections: null == totalIntersections
+          ? _value.totalIntersections
+          : totalIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
+      doneIntersections: null == doneIntersections
+          ? _value.doneIntersections
+          : doneIntersections // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -155,9 +209,14 @@ class _$ProjectDTOImpl implements _ProjectDTO {
   const _$ProjectDTOImpl(
       {required this.id,
       required this.name,
-      required final List<ParcoursDTO> parcours,
-      required this.settings})
-      : _parcours = parcours;
+      @DocumentSerializer()
+      required final List<DocumentReference<Object>> parcoursReferences,
+      required this.settings,
+      required this.totalSections,
+      required this.doneSections,
+      required this.totalIntersections,
+      required this.doneIntersections})
+      : _parcoursReferences = parcoursReferences;
 
   factory _$ProjectDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectDTOImplFromJson(json);
@@ -166,20 +225,30 @@ class _$ProjectDTOImpl implements _ProjectDTO {
   final String id;
   @override
   final String name;
-  final List<ParcoursDTO> _parcours;
+  final List<DocumentReference<Object>> _parcoursReferences;
   @override
-  List<ParcoursDTO> get parcours {
-    if (_parcours is EqualUnmodifiableListView) return _parcours;
+  @DocumentSerializer()
+  List<DocumentReference<Object>> get parcoursReferences {
+    if (_parcoursReferences is EqualUnmodifiableListView)
+      return _parcoursReferences;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_parcours);
+    return EqualUnmodifiableListView(_parcoursReferences);
   }
 
   @override
   final ProjectSettingsDTO settings;
+  @override
+  final int totalSections;
+  @override
+  final int doneSections;
+  @override
+  final int totalIntersections;
+  @override
+  final int doneIntersections;
 
   @override
   String toString() {
-    return 'ProjectDTO(id: $id, name: $name, parcours: $parcours, settings: $settings)';
+    return 'ProjectDTO(id: $id, name: $name, parcoursReferences: $parcoursReferences, settings: $settings, totalSections: $totalSections, doneSections: $doneSections, totalIntersections: $totalIntersections, doneIntersections: $doneIntersections)';
   }
 
   @override
@@ -189,15 +258,32 @@ class _$ProjectDTOImpl implements _ProjectDTO {
             other is _$ProjectDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._parcours, _parcours) &&
+            const DeepCollectionEquality()
+                .equals(other._parcoursReferences, _parcoursReferences) &&
             (identical(other.settings, settings) ||
-                other.settings == settings));
+                other.settings == settings) &&
+            (identical(other.totalSections, totalSections) ||
+                other.totalSections == totalSections) &&
+            (identical(other.doneSections, doneSections) ||
+                other.doneSections == doneSections) &&
+            (identical(other.totalIntersections, totalIntersections) ||
+                other.totalIntersections == totalIntersections) &&
+            (identical(other.doneIntersections, doneIntersections) ||
+                other.doneIntersections == doneIntersections));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name,
-      const DeepCollectionEquality().hash(_parcours), settings);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_parcoursReferences),
+      settings,
+      totalSections,
+      doneSections,
+      totalIntersections,
+      doneIntersections);
 
   @JsonKey(ignore: true)
   @override
@@ -217,8 +303,13 @@ abstract class _ProjectDTO implements ProjectDTO {
   const factory _ProjectDTO(
       {required final String id,
       required final String name,
-      required final List<ParcoursDTO> parcours,
-      required final ProjectSettingsDTO settings}) = _$ProjectDTOImpl;
+      @DocumentSerializer()
+      required final List<DocumentReference<Object>> parcoursReferences,
+      required final ProjectSettingsDTO settings,
+      required final int totalSections,
+      required final int doneSections,
+      required final int totalIntersections,
+      required final int doneIntersections}) = _$ProjectDTOImpl;
 
   factory _ProjectDTO.fromJson(Map<String, dynamic> json) =
       _$ProjectDTOImpl.fromJson;
@@ -228,9 +319,18 @@ abstract class _ProjectDTO implements ProjectDTO {
   @override
   String get name;
   @override
-  List<ParcoursDTO> get parcours;
+  @DocumentSerializer()
+  List<DocumentReference<Object>> get parcoursReferences;
   @override
   ProjectSettingsDTO get settings;
+  @override
+  int get totalSections;
+  @override
+  int get doneSections;
+  @override
+  int get totalIntersections;
+  @override
+  int get doneIntersections;
   @override
   @JsonKey(ignore: true)
   _$$ProjectDTOImplCopyWith<_$ProjectDTOImpl> get copyWith =>

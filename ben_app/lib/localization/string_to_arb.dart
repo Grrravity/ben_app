@@ -31,6 +31,20 @@ extension ArbKey on InputFailure? {
         return l10n.inputFailurePasswordDontMatch;
       case InputFailure.intValidation:
         return l10n.inputFailureIntValidation;
+      case InputFailure.emailInvalid:
+        return l10n.inputFailureEmailInvalid;
+      case InputFailure.stringInvalidContent:
+        return l10n.inputFailureStringInvalidContent;
+      case InputFailure.stringSeemsAlreadyUsedContent:
+        return l10n.inputFailureStringSeemsAlreadyUsedContent;
+      case InputFailure.intInvalidContent:
+        return l10n.inputFailureIntInvalidContent;
+      case InputFailure.boolRequired:
+        return l10n.intInputBoolRequired;
+      case InputFailure.listRequired:
+        return l10n.inputFailureListRequired;
+      case InputFailure.dateShouldBeBefore:
+        return l10n.inputFailureDateShouldBeBefore;
     }
   }
 }
@@ -67,6 +81,30 @@ extension ArbFailureX on Failure {
         return l10n.failureExpiredSession;
       case Failure.widgetTreeError:
         return l10n.failureWidgetTreeError;
+      case Failure.fileNameInvalid:
+        return l10n.failureFileNameInvalid;
+      case Failure.weakPassword:
+        return l10n.failureWeakPassword;
+      case Failure.emailAlreadyInUse:
+        return l10n.failureEmailAlreadyInUse;
+      case Failure.userNotFound:
+        return l10n.failureUserNotFound;
+      case Failure.userDisabled:
+        return l10n.failureUserDisabled;
+      case Failure.invalidAuthCode:
+        return l10n.failureInvalidAuthCode;
+      case Failure.expiredAuthCode:
+        return l10n.failureExpiredAuthCode;
+      case Failure.canceled:
+        return l10n.failureActionCanceled;
+      case Failure.quotaExeeded:
+        return l10n.failureQuotaExeeded;
+      case Failure.invalidUrl:
+        return l10n.failureInvalidUrl;
+      case Failure.invalidState:
+        return l10n.failureInvalidState;
+      case Failure.filesInvalid:
+        return l10n.failureFilesInvalid;
     }
   }
 }
