@@ -1,7 +1,0 @@
-{
-  "projects": {
-    "default": "benapp-dev",
-    "dev": "benapp-dev",
-    "prod": "bureaudetudebenapp"
-  }
-}
