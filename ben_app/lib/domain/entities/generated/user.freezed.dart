@@ -16,51 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$User {
-  String get username => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String uuid, String username) current,
-    required TResult Function(String uuid, String username) member,
-    required TResult Function(String username) creation,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String uuid, String username)? current,
-    TResult? Function(String uuid, String username)? member,
-    TResult? Function(String username)? creation,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String uuid, String username)? current,
-    TResult Function(String uuid, String username)? member,
-    TResult Function(String username)? creation,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(CurrentUser value) current,
-    required TResult Function(MemberUser value) member,
-    required TResult Function(CreationUser value) creation,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CurrentUser value)? current,
-    TResult? Function(MemberUser value)? member,
-    TResult? Function(CreationUser value)? creation,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(CurrentUser value)? current,
-    TResult Function(MemberUser value)? member,
-    TResult Function(CreationUser value)? creation,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  String get uuid => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -71,7 +28,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String username});
+  $Res call({String uuid, String email});
 }
 
 /// @nodoc
@@ -87,49 +44,53 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
+    Object? uuid = null,
+    Object? email = null,
   }) {
     return _then(_value.copyWith(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$CurrentUserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$CurrentUserImplCopyWith(
-          _$CurrentUserImpl value, $Res Function(_$CurrentUserImpl) then) =
-      __$$CurrentUserImplCopyWithImpl<$Res>;
+abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String uuid, String username});
+  $Res call({String uuid, String email});
 }
 
 /// @nodoc
-class __$$CurrentUserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$CurrentUserImpl>
-    implements _$$CurrentUserImplCopyWith<$Res> {
-  __$$CurrentUserImplCopyWithImpl(
-      _$CurrentUserImpl _value, $Res Function(_$CurrentUserImpl) _then)
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$UserCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? uuid = null,
-    Object? username = null,
+    Object? email = null,
   }) {
-    return _then(_$CurrentUserImpl(
+    return _then(_$UserImpl(
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -137,416 +98,48 @@ class __$$CurrentUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CurrentUserImpl implements CurrentUser {
-  const _$CurrentUserImpl({required this.uuid, required this.username});
+class _$UserImpl implements _User {
+  const _$UserImpl({required this.uuid, required this.email});
 
   @override
   final String uuid;
   @override
-  final String username;
+  final String email;
 
   @override
   String toString() {
-    return 'User.current(uuid: $uuid, username: $username)';
+    return 'User(uuid: $uuid, email: $email)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CurrentUserImpl &&
+            other is _$UserImpl &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
-            (identical(other.username, username) ||
-                other.username == username));
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, uuid, username);
+  int get hashCode => Object.hash(runtimeType, uuid, email);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CurrentUserImplCopyWith<_$CurrentUserImpl> get copyWith =>
-      __$$CurrentUserImplCopyWithImpl<_$CurrentUserImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String uuid, String username) current,
-    required TResult Function(String uuid, String username) member,
-    required TResult Function(String username) creation,
-  }) {
-    return current(uuid, username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String uuid, String username)? current,
-    TResult? Function(String uuid, String username)? member,
-    TResult? Function(String username)? creation,
-  }) {
-    return current?.call(uuid, username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String uuid, String username)? current,
-    TResult Function(String uuid, String username)? member,
-    TResult Function(String username)? creation,
-    required TResult orElse(),
-  }) {
-    if (current != null) {
-      return current(uuid, username);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(CurrentUser value) current,
-    required TResult Function(MemberUser value) member,
-    required TResult Function(CreationUser value) creation,
-  }) {
-    return current(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CurrentUser value)? current,
-    TResult? Function(MemberUser value)? member,
-    TResult? Function(CreationUser value)? creation,
-  }) {
-    return current?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(CurrentUser value)? current,
-    TResult Function(MemberUser value)? member,
-    TResult Function(CreationUser value)? creation,
-    required TResult orElse(),
-  }) {
-    if (current != null) {
-      return current(this);
-    }
-    return orElse();
-  }
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
 }
 
-abstract class CurrentUser implements User {
-  const factory CurrentUser(
-      {required final String uuid,
-      required final String username}) = _$CurrentUserImpl;
+abstract class _User implements User {
+  const factory _User(
+      {required final String uuid, required final String email}) = _$UserImpl;
 
+  @override
   String get uuid;
   @override
-  String get username;
+  String get email;
   @override
   @JsonKey(ignore: true)
-  _$$CurrentUserImplCopyWith<_$CurrentUserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$MemberUserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$MemberUserImplCopyWith(
-          _$MemberUserImpl value, $Res Function(_$MemberUserImpl) then) =
-      __$$MemberUserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String uuid, String username});
-}
-
-/// @nodoc
-class __$$MemberUserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$MemberUserImpl>
-    implements _$$MemberUserImplCopyWith<$Res> {
-  __$$MemberUserImplCopyWithImpl(
-      _$MemberUserImpl _value, $Res Function(_$MemberUserImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? uuid = null,
-    Object? username = null,
-  }) {
-    return _then(_$MemberUserImpl(
-      uuid: null == uuid
-          ? _value.uuid
-          : uuid // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$MemberUserImpl implements MemberUser {
-  const _$MemberUserImpl({required this.uuid, required this.username});
-
-  @override
-  final String uuid;
-  @override
-  final String username;
-
-  @override
-  String toString() {
-    return 'User.member(uuid: $uuid, username: $username)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MemberUserImpl &&
-            (identical(other.uuid, uuid) || other.uuid == uuid) &&
-            (identical(other.username, username) ||
-                other.username == username));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, uuid, username);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$MemberUserImplCopyWith<_$MemberUserImpl> get copyWith =>
-      __$$MemberUserImplCopyWithImpl<_$MemberUserImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String uuid, String username) current,
-    required TResult Function(String uuid, String username) member,
-    required TResult Function(String username) creation,
-  }) {
-    return member(uuid, username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String uuid, String username)? current,
-    TResult? Function(String uuid, String username)? member,
-    TResult? Function(String username)? creation,
-  }) {
-    return member?.call(uuid, username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String uuid, String username)? current,
-    TResult Function(String uuid, String username)? member,
-    TResult Function(String username)? creation,
-    required TResult orElse(),
-  }) {
-    if (member != null) {
-      return member(uuid, username);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(CurrentUser value) current,
-    required TResult Function(MemberUser value) member,
-    required TResult Function(CreationUser value) creation,
-  }) {
-    return member(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CurrentUser value)? current,
-    TResult? Function(MemberUser value)? member,
-    TResult? Function(CreationUser value)? creation,
-  }) {
-    return member?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(CurrentUser value)? current,
-    TResult Function(MemberUser value)? member,
-    TResult Function(CreationUser value)? creation,
-    required TResult orElse(),
-  }) {
-    if (member != null) {
-      return member(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MemberUser implements User {
-  const factory MemberUser(
-      {required final String uuid,
-      required final String username}) = _$MemberUserImpl;
-
-  String get uuid;
-  @override
-  String get username;
-  @override
-  @JsonKey(ignore: true)
-  _$$MemberUserImplCopyWith<_$MemberUserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CreationUserImplCopyWith<$Res>
-    implements $UserCopyWith<$Res> {
-  factory _$$CreationUserImplCopyWith(
-          _$CreationUserImpl value, $Res Function(_$CreationUserImpl) then) =
-      __$$CreationUserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String username});
-}
-
-/// @nodoc
-class __$$CreationUserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$CreationUserImpl>
-    implements _$$CreationUserImplCopyWith<$Res> {
-  __$$CreationUserImplCopyWithImpl(
-      _$CreationUserImpl _value, $Res Function(_$CreationUserImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? username = null,
-  }) {
-    return _then(_$CreationUserImpl(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$CreationUserImpl implements CreationUser {
-  const _$CreationUserImpl({required this.username});
-
-  @override
-  final String username;
-
-  @override
-  String toString() {
-    return 'User.creation(username: $username)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CreationUserImpl &&
-            (identical(other.username, username) ||
-                other.username == username));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, username);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CreationUserImplCopyWith<_$CreationUserImpl> get copyWith =>
-      __$$CreationUserImplCopyWithImpl<_$CreationUserImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String uuid, String username) current,
-    required TResult Function(String uuid, String username) member,
-    required TResult Function(String username) creation,
-  }) {
-    return creation(username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String uuid, String username)? current,
-    TResult? Function(String uuid, String username)? member,
-    TResult? Function(String username)? creation,
-  }) {
-    return creation?.call(username);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String uuid, String username)? current,
-    TResult Function(String uuid, String username)? member,
-    TResult Function(String username)? creation,
-    required TResult orElse(),
-  }) {
-    if (creation != null) {
-      return creation(username);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(CurrentUser value) current,
-    required TResult Function(MemberUser value) member,
-    required TResult Function(CreationUser value) creation,
-  }) {
-    return creation(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(CurrentUser value)? current,
-    TResult? Function(MemberUser value)? member,
-    TResult? Function(CreationUser value)? creation,
-  }) {
-    return creation?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(CurrentUser value)? current,
-    TResult Function(MemberUser value)? member,
-    TResult Function(CreationUser value)? creation,
-    required TResult orElse(),
-  }) {
-    if (creation != null) {
-      return creation(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CreationUser implements User {
-  const factory CreationUser({required final String username}) =
-      _$CreationUserImpl;
-
-  @override
-  String get username;
-  @override
-  @JsonKey(ignore: true)
-  _$$CreationUserImplCopyWith<_$CreationUserImpl> get copyWith =>
+  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

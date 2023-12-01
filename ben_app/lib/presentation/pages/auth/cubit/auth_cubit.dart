@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ben_app/core/enum/sso_enum.dart';
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/utils/form_state.dart';
 import 'package:ben_app/core/utils/input_object.dart';
@@ -43,14 +42,10 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
   }
 
   void toggleObscure(bool obscure) {
-    final loadedState = state.asLoaded!;
-
-    emit(
-      loadedState.copyWithData(
-        loadedState.data.copyWith(
-          hidden: !loadedState.data.hidden,
-        ),
-      ),
+    _emitDataUpdate(
+      (data, builder) {
+        return builder..hidden = !obscure;
+      },
     );
   }
 
@@ -63,11 +58,16 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     );
   }
 
-  Future<bool> login() async {
+  Future<Failure?> login() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.invalidState));
+    }
 
     final data = lState.data;
+    if (!lState.data.canLogin) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
+    }
 
     emit(lState.toSubmitting);
 
@@ -81,26 +81,28 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
     return _emitSubmissionStatus(okOrFailure);
   }
 
-  Future<bool> signInWithSSO(SsoIdentityProvider idp) async {
+  Future<Failure?> loginWithMicrosoft() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
-
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.invalidState));
+    }
     emit(lState.toSubmitting);
 
-    final sessionOrFailure = await sessionUsecase.signInWithSSO(idp);
+    final sessionOrFailure = await sessionUsecase.signInWithMicrosoft();
 
     return _emitSubmissionStatus(sessionOrFailure);
   }
 
-  Future<bool> register() async {
+  Future<Failure?> register() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) return Failure.invalidState;
 
     final data = lState.data;
-
-    if (!data.passwordsAreIdenticals) {
-      emit(lState.copyWith(failure: Failure.passwordsNotIdenticals));
-      return false;
+    if (!lState.data.passwordsAreIdenticals) {
+      return _emitSubmissionStatus(left(Failure.passwordsNotIdenticals));
+    }
+    if (!lState.data.canRegister) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
     }
 
     emit(lState.toSubmitting);
@@ -112,14 +114,30 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
       ),
     );
 
-    return _emitSubmissionStatus(sessionOrFailure);
+    return sessionOrFailure.fold(
+      (l) {
+        emit(
+          lState.toSubmissionFailed(l),
+        );
+        return l;
+      },
+      (r) {
+        emit(lState.toSubmitted);
+        return null;
+      },
+    );
   }
 
-  Future<bool> requestNewPassword() async {
+  Future<Failure?> requestNewPassword() async {
     final lState = state.asLoaded;
-    if (lState == null) return false;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.invalidState));
+    }
 
     final data = lState.data;
+    if (!lState.data.canRequestPassword) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
+    }
 
     emit(lState.toSubmitting);
 
@@ -127,34 +145,68 @@ class AuthCubit extends Cubit<FormBlocState<AuthFormData>> {
       data.email.value!,
     );
 
-    setPassword('');
-    setConfirmPassword('');
-
-    return _emitSubmissionStatus(sessionOrFailure);
-  }
-
-  bool _emitSubmissionStatus(
-    Either<Failure, dynamic> successOrFailure,
-  ) {
-    final lState = state.asLoaded;
-    if (lState == null) return false;
-
-    return successOrFailure.fold(
+    return sessionOrFailure.fold(
       (l) {
-        if (l == Failure.ssoModalClosed) {
-          emit(
-            lState.copyWithNoFailure(),
-          );
-          return false;
-        }
         emit(
           lState.toSubmissionFailed(l),
         );
-        return false;
+        return l;
       },
       (r) {
         emit(lState.toSubmitted);
-        return true;
+        return null;
+      },
+    );
+  }
+
+  Future<Failure?> resetPassword(String code) async {
+    final lState = state.asLoaded;
+    if (lState == null) {
+      return _emitSubmissionStatus(left(Failure.invalidState));
+    }
+
+    final data = lState.data;
+    if (!lState.data.canResetPassword) {
+      return _emitSubmissionStatus(left(Failure.formIsInvalid));
+    }
+
+    emit(lState.toSubmitting);
+
+    final sessionOrFailure = await sessionUsecase.updatePassword(
+      code: code,
+      password: data.password.value!,
+    );
+
+    return sessionOrFailure.fold(
+      (l) {
+        emit(
+          lState.toSubmissionFailed(l),
+        );
+        return l;
+      },
+      (r) {
+        emit(lState.toSubmitted);
+        return null;
+      },
+    );
+  }
+
+  Failure? _emitSubmissionStatus(
+    Either<Failure, dynamic> successOrFailure,
+  ) {
+    final lState = state.asLoaded;
+    if (lState == null) return Failure.invalidState;
+
+    return successOrFailure.fold(
+      (l) {
+        emit(
+          lState.toSubmissionFailed(l),
+        );
+        return l;
+      },
+      (r) {
+        emit(lState.toSubmitted);
+        return null;
       },
     );
   }

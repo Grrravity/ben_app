@@ -1,11 +1,9 @@
 import 'package:ben_app/data/client/utils/rest_api_logger.dart';
-import 'package:ben_app/data/datasource/remote/session_api.dart';
 import 'package:dio/dio.dart';
 
 class DioInterceptor extends Interceptor {
-  DioInterceptor({this.sessionApiSource, required this.clientName});
+  DioInterceptor({required this.clientName});
 
-  final SessionDataSource? sessionApiSource;
   final String clientName;
 
   @override
@@ -13,14 +11,6 @@ class DioInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    if (sessionApiSource != null) {
-      final authToken = await sessionApiSource!.getToken();
-
-      if (authToken != null) {
-        options.headers['Authorization'] = 'Bearer ${authToken.accessToken}';
-      }
-      options.headers['Content-Type'] = 'application/json';
-    }
     DioApiLogger(clientName).onRequestLogger(options);
 
     super.onRequest(options, handler);

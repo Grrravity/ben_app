@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -8,6 +9,18 @@ enum EnvType { prod, inte, dev }
 enum FlavorType { prod, inte }
 
 Future<FlavorType> getFlavor() async {
+  if (kIsWeb) {
+    const flavor = String.fromEnvironment('flavor', defaultValue: 'inte');
+
+    switch (flavor) {
+      case 'prod':
+        return FlavorType.prod;
+      case 'inte':
+        return FlavorType.inte;
+      default:
+        return FlavorType.inte;
+    }
+  }
   final packageInfo = await PackageInfo.fromPlatform();
   switch (packageInfo.packageName) {
     case 'fr.app.ben.benapp':
@@ -86,6 +99,16 @@ extension OnEnvType on EnvType {
         return 'https://changeme/api'; // TODO changeme
       case EnvType.dev:
         return 'http://$_localhost:3000/api';
+    }
+  }
+
+  String get website {
+    switch (this) {
+      case EnvType.inte:
+      case EnvType.dev:
+        return 'benapp-dev.web.app';
+      case EnvType.prod:
+        return 'bureaudetudebenapp.web.app';
     }
   }
 

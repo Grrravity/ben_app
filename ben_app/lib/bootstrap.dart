@@ -15,14 +15,11 @@ class AppBlocObserver extends BlocObserver {
 
   static Logger logger = Logger('MainObserver');
 
-  @override
-  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-    logger.process('''
-Bloc changes
-From ${change.currentState} to ${change.nextState}
-Type : ${bloc.runtimeType}
-''');
-    super.onChange(bloc, change);
+  String abstractString(dynamic value) {
+    if (value.toString().length >= 200) {
+      return '${value.toString().substring(0, 200)}\x1B[35m...\x1B[0m';
+    }
+    return value.toString();
   }
 
   @override
@@ -31,17 +28,19 @@ Type : ${bloc.runtimeType}
 Bloc Error
 Error : $error
 Type : ${bloc.runtimeType}
-Stacktrace : $stackTrace
-''');
+Stacktrace : $stackTrace''');
     super.onError(bloc, error, stackTrace);
   }
 
   @override
+  void onCreate(BlocBase<dynamic> bloc) {
+    logger.process('Bloc Created : ${bloc.runtimeType}');
+    super.onCreate(bloc);
+  }
+
+  @override
   void onClose(BlocBase<dynamic> bloc) {
-    logger.process('''
-Bloc Closed
-Type : ${bloc.runtimeType}
-''');
+    logger.process('Bloc Closed : ${bloc.runtimeType}');
     super.onClose(bloc);
   }
 }
@@ -62,10 +61,10 @@ Future<void> initServices() async {
   final bindings = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: bindings);
 
-  HydratedBloc.storage = await BenAppHydratedStorage.build();
-  await EnvCubit.instance.init();
   final flavorType = await getFlavor();
   await FirebaseInitDataSource().init(flavorType);
+  HydratedBloc.storage = await BenAppHydratedStorage.build();
+  await EnvCubit.instance.init();
   FlutterNativeSplash.remove();
 
   return;

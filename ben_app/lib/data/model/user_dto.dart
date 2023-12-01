@@ -1,92 +1,60 @@
 import 'dart:core';
 
 import 'package:ben_app/domain/entities/user.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/user_dto.freezed.dart';
 part 'generated/user_dto.g.dart';
 
-/// Currently connected User profile
 @freezed
-class CurrentUserDto with _$CurrentUserDto {
-  const factory CurrentUserDto({
+class UserDto with _$UserDto {
+  const factory UserDto({
     @JsonKey(name: 'id') required String uuid, // ! remove id, to keep uuid
-    required String username,
-  }) = _CurrentUserDto;
+    required String email,
+  }) = _UserDto;
 
-  const CurrentUserDto._();
+  const UserDto._();
 
-  factory CurrentUserDto.fromJson(Map<String, dynamic> json) =>
-      _$CurrentUserDtoFromJson(json);
-}
-
-/// Other users profiles
-@freezed
-class MemberUserDto with _$MemberUserDto {
-  const factory MemberUserDto({
-    @JsonKey(name: 'id') required String uuid,
-    required String username,
-  }) = _MemberUserDto;
-
-  const MemberUserDto._();
-
-  factory MemberUserDto.fromJson(Map<String, dynamic> json) =>
-      _$MemberUserDtoFromJson(json);
-}
-
-/// Other users profiles
-@freezed
-class CreationUserDto with _$CreationUserDto {
-  const factory CreationUserDto({
-    required String username,
-  }) = _CreationUserDto;
-
-  const CreationUserDto._();
-
-  factory CreationUserDto.fromJson(Map<String, dynamic> json) =>
-      _$CreationUserDtoFromJson(json);
-}
-
-extension OnCreationUserDto on CreationUser {
-  CreationUserDto get toDTO {
-    return CreationUserDto(
-      username: username,
+  factory UserDto.fromFirebaseAuthUser(
+    firebase_auth.User firebaseUser,
+  ) {
+    return UserDto(
+      uuid: firebaseUser.uid,
+      email: firebaseUser.email ?? '',
     );
   }
+
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
 }
 
-extension OnListCreationUserDtoJson on List<Map<String, dynamic>> {
-  List<CreationUserDto> get toDTOList {
-    return map(CreationUserDto.fromJson).toList();
-  }
-}
-
-extension OnMemberUserDto on MemberUser {
-  MemberUserDto get toDTO {
-    return MemberUserDto(
+extension OnUser on UserDto {
+  User get toEntity {
+    return User(
       uuid: uuid,
-      username: username,
+      email: email,
     );
   }
 }
 
-extension OnUserDtoList on List<MemberUser> {
-  List<MemberUserDto> get toDTO {
-    return map((e) => e.toDTO).toList();
+extension OnListUser on List<UserDto> {
+  List<User> get toEntity {
+    return map((UserDto user) => user.toEntity).toList();
   }
 }
 
-extension OnListMemberUserDtoJson on List<Map<String, dynamic>> {
-  List<MemberUserDto> get toDTOList {
-    return map(MemberUserDto.fromJson).toList();
-  }
-}
-
-extension OnCurrentUserDto on CurrentUser {
-  CurrentUserDto get toDTO {
-    return CurrentUserDto(
+extension OnUserDto on User {
+  UserDto get toDTO {
+    return UserDto(
       uuid: uuid,
-      username: username,
+      email: email,
     );
+  }
+}
+
+extension OnListCurrentUserDtoJson on List<Map<String, dynamic>> {
+  List<UserDto> get toDTO {
+    return map(UserDto.fromJson).toList();
   }
 }

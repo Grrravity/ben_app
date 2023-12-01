@@ -6,15 +6,15 @@ part of 'auth_cubit.dart';
 class AuthFormData with _$AuthFormData {
   const factory AuthFormData({
     required EmailInput email,
-    required StringInput password,
-    required StringInput confirmPassword,
+    required PasswordInput password,
+    required PasswordInput confirmPassword,
     required bool hidden,
   }) = _AuthFormData;
 
   factory AuthFormData.empty() => AuthFormData(
         email: EmailInput(),
-        password: StringInput(),
-        confirmPassword: StringInput(),
+        password: PasswordInput(),
+        confirmPassword: PasswordInput(),
         hidden: true,
       );
 
@@ -25,7 +25,11 @@ class AuthFormData with _$AuthFormData {
 
   AuthFormDataBuilder get builder => AuthFormDataBuilder(this);
 
-  bool get canLogin => email.isValid && password.isValid;
+  bool get canLogin =>
+      email.isValid &&
+      email.value != '' &&
+      password.isValid &&
+      password.value != '';
 
   bool get canRegister =>
       email.isValid &&
@@ -38,8 +42,6 @@ class AuthFormData with _$AuthFormData {
   bool get canRequestPassword => email.isValid;
 
   bool get canResetPassword => password.isValid && confirmPassword.isValid;
-
-  static bool get okkk => true;
 }
 
 class AuthFormDataBuilder {
@@ -50,8 +52,8 @@ class AuthFormDataBuilder {
         _hidden = data.hidden;
 
   EmailInput _email;
-  StringInput _password;
-  StringInput _confirmPassword;
+  PasswordInput _password;
+  PasswordInput _confirmPassword;
   bool _hidden;
 
   AuthFormData build() => AuthFormData(
@@ -62,8 +64,8 @@ class AuthFormDataBuilder {
       );
 
   set email(EmailInput email) => _email = email;
-  set password(StringInput password) => _password = password;
-  set confirmPassword(StringInput confirmPassword) =>
+  set password(PasswordInput password) => _password = password;
+  set confirmPassword(PasswordInput confirmPassword) =>
       _confirmPassword = confirmPassword;
   set hidden(bool hidden) => _hidden = hidden;
 }

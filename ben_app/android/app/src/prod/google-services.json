@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "768042519033",
-    "project_id": "benapp-dev",
-    "storage_bucket": "benapp-dev.appspot.com"
+    "project_number": "156253621348",
+    "project_id": "bureaudetudebenapp",
+    "storage_bucket": "bureaudetudebenapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:768042519033:android:8a0944503fa8d616b81528",
+        "mobilesdk_app_id": "1:156253621348:android:77cbc28374ad7a9094e371",
         "android_client_info": {
-          "package_name": "fr.app.ben.benapp.dev"
+          "package_name": "fr.app.ben.benapp"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDjTng-QbS9gJDSjn6oa7bmvxLqEdsy0ro"
+          "current_key": "AIzaSyCWa3jjNzJ_zWDjk0mhpt_aCqmW9PEa0QU"
         }
       ],
       "services": {

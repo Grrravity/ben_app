@@ -29,7 +29,7 @@
             "lib/main_inte.dart"
           ],
           "toolArgs": [
-            "--dart-define-from-file .config.inte.json"
+            "--dart-define-from-file=${workspaceFolder:App}/.config.inte.json"
           ]
         },
         {
@@ -40,12 +40,12 @@
           "program": "${workspaceFolder:App}/lib/main_prod.dart",
           "args": [
               "--flavor",
-              "production",
+              "prod",
               "--target",
               "lib/main_prod.dart"
           ],
           "toolArgs": [
-            "--dart-define-from-file .config.json"
+            "--dart-define-from-file=${workspaceFolder:App}/.config.json"
           ]
         },
         {
@@ -56,13 +56,15 @@
           "deviceId": "chrome",
           "program": "${workspaceFolder:App}/lib/main_inte.dart",
           "args": [
+            "--flavor",
+            "inte",
               "--web-port",
               "8888",
             "--target",
             "lib/main_inte.dart"
           ],
           "toolArgs": [
-            "--dart-define-from-file .config.inte.json"
+            "--dart-define-from-file=${workspaceFolder:App}/.config.inte.json"
           ]
         },
         {
@@ -73,13 +75,15 @@
           "deviceId": "chrome",
           "program": "${workspaceFolder:App}/lib/main_prod.dart",
           "args": [
+              "--flavor",
+              "prod",
               "--web-port",
               "8888",
               "--target",
               "lib/main_prod.dart"
           ],
           "toolArgs": [
-            "--dart-define-from-file .config.json"
+            "--dart-define-from-file=${workspaceFolder:App}/.config.json"
           ]
         }
       ]

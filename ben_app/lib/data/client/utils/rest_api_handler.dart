@@ -156,7 +156,6 @@ class RestApiHandler {
         case DioExceptionType.cancel:
           throw Failure.connectivity;
         case DioExceptionType.badCertificate:
-          throw Failure.other;
         case DioExceptionType.unknown:
           throw Failure.other;
         case DioExceptionType.badResponse:
@@ -172,17 +171,9 @@ class RestApiHandler {
             case HttpStatus.unauthorized:
               throw Failure.unauthorized;
             case HttpStatus.badRequest:
-              final keycloakErrorDescription = (e.response?.data
-                  as Map<String, dynamic>)['error_description'];
-              if (keycloakErrorDescription == 'Account is not fully set up') {
-                throw Failure.notVerified;
-              }
-              if (keycloakErrorDescription == 'Invalid refresh token') {
-                throw Failure.expiredSession;
-              }
               throw Failure.invalidCommand;
             case HttpStatus.conflict:
-              throw Failure.emailAlreadyUsed;
+              throw Failure.other;
           }
       }
       throw Failure.other;
