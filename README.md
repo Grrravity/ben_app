@@ -14,7 +14,8 @@
   - [Firebase Distribution](#firebase-distribution)
   - [Firebase Speech-to-text](#firebase-speech-to-text)
 - [Running the project](#running-the-project)
-- [Front-end documentation](#front-end-documentation)
+- [Front-end documentation](./firebase/README.md)
+- [Firebase documentation](./ben_app//README.md)
 
 ---
 
@@ -29,11 +30,13 @@ Projects are structured as so :
 3. Name, id, picture... basic fields that caracterize a project.
 
 ### Responsive frontend
-This app is built using [Responsive Frameworks](https://pub.dev/packages/responsive_framework) as to try it and to handle ben's need to use the app on web, mobile and tablet.
+This app is built using [Responsive Frameworks](https://pub.dev/packages/responsive_framework).
+It answer the need to build this app for any type of device : Tablet, Phone, Desktop...
+It's also away to try this package as it's not so easy to build responsive web apps.
   
 
 ## Web
-The webapp is the core part of this project. It has several purpose :
+The webapp is the core part of this project. It has several purposes :
 1. Generating project from a bunch of images extracted from another software and imported in Firebase Storage
 2. Setting-up custom settings for on-site pictures requirement
 3. Overviewing project completion
@@ -50,38 +53,35 @@ The mobile app's main purpose is to write down data on-site :
 Ben's app uses firebase as it's purpose is to be used by Ben only and should not use more than Firebase's quota.
 Knowing that, Firebase performances are the most cost-effective choice performance and "eco-systeme" wise ;)
 
-Thus, as ben requires file hosting and speech-to-text feature, we better use all of firebase free capabilities
+>Thus, as ben requires file hosting and speech-to-text feature, we better use all of firebase free capabilities
 
 ### Firebase Firestore
 Firestore is quite usefull to make data management fast and smooth.
 
-The drawback is that document-oriented database could be tricky to evolve. It misses SQL migration :p
-
-Tho, as ben will only have up to 3 project ongoing simultaneously and will cleanup each project datas once extracted to powerpoint, I feel this drawback is acceptable.
+>The drawback is that document-oriented database could be tricky to evolve. It misses SQL migrations :p
+>
+>As ben will only have up to 3 project ongoing simultaneously and will cleanup each project datas once extracted to powerpoint, I feel this drawback is acceptable.
 
 ### Firebase Storage
 One foot in firebase's ecosystem and you better go all in ;)
 
 There's almost no configurations. Let's do it.
 
-This project, with at most 3 projects simultaneously, should not use much GB monthly as the pictures taken does not need to be HD.
+>This project, with at most 3 projects simultaneously, should not use much GB monthly as the pictures taken does not need to be HD.
 
 ### Firebase Hosting
 Ben does not own any domain and does not wish to handle certifications nor redirections as he don't beat a thing on technical stuffs.
 
-I've choosen Firebase hosting to make it easy and leave Google handle all the boring stuff
+>I've choosen Firebase hosting to make it easy and leave Google handle all the boring stuff
 
 ### Firebase Distribution
 Ben requirements in terms of deployment is only to handle Android store.
 
-Firebase's app distribution is quite powerfull and strait-forward to handle testing with real devices so I did all the setup so that it handle tests builds seemlesly
+>Firebase's app distribution is quite powerfull and strait-forward to handle testing with real devices so I did all the setup so that it handle tests builds seemlesly
 
-However, it misses CI to build and deploy this this automatically. Should do it soon
+*However, it misses CI to build and deploy this this automatically. Should do it soon*
 
 ### Firebase Speech-to-text
 Last but not least, Ben wish to have a speech-to-text feature to help him not forgetting stuff he note on site and may give some usefull information when he presents his studies to municipalities.
 
-The one provided by Google is way good enougth for this purpose.
-
-# Running the project
-# Front-end documentation
+>The one provided by Google is way good enougth for this purpose.
