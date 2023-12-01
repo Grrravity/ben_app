@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
-
 const _red = '\x1B[31m';
 const _green = '\x1B[32m';
 const _yellow = '\x1B[33m';
@@ -54,21 +52,21 @@ class Logger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    if (kDebugMode) {
-      if (name != null) {
-        log(
-          color + message.toString() + _reset,
-          name: name!,
-          error: error,
-          stackTrace: stackTrace,
-        );
-        return;
-      }
+    // if (kDebugMode) {
+    if (name != null) {
       log(
         color + message.toString() + _reset,
+        name: name!,
         error: error,
         stackTrace: stackTrace,
       );
+      return;
     }
+    log(
+      color + message.toString() + _reset,
+      error: error,
+      stackTrace: stackTrace,
+    );
+    //}
   }
 }

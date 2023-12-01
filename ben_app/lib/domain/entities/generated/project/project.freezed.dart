@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Project {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<DocumentReference<Object>> get parcoursReferences =>
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences =>
       throw _privateConstructorUsedError;
   ProjectSettings get settings => throw _privateConstructorUsedError;
   int get totalSections => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $ProjectCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<DocumentReference<Object>> parcoursReferences,
+      List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
       ProjectSettings settings,
       int totalSections,
       int doneSections,
@@ -82,7 +82,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
       parcoursReferences: null == parcoursReferences
           ? _value.parcoursReferences
           : parcoursReferences // ignore: cast_nullable_to_non_nullable
-              as List<DocumentReference<Object>>,
+              as List<DocumentReference<Map<String, dynamic>>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<DocumentReference<Object>> parcoursReferences,
+      List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
       ProjectSettings settings,
       int totalSections,
       int doneSections,
@@ -168,7 +168,7 @@ class __$$ProjectImplCopyWithImpl<$Res>
       parcoursReferences: null == parcoursReferences
           ? _value._parcoursReferences
           : parcoursReferences // ignore: cast_nullable_to_non_nullable
-              as List<DocumentReference<Object>>,
+              as List<DocumentReference<Map<String, dynamic>>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -199,7 +199,8 @@ class _$ProjectImpl implements _Project {
   const _$ProjectImpl(
       {required this.id,
       required this.name,
-      required final List<DocumentReference<Object>> parcoursReferences,
+      required final List<DocumentReference<Map<String, dynamic>>>
+          parcoursReferences,
       required this.settings,
       required this.totalSections,
       required this.doneSections,
@@ -211,9 +212,9 @@ class _$ProjectImpl implements _Project {
   final String id;
   @override
   final String name;
-  final List<DocumentReference<Object>> _parcoursReferences;
+  final List<DocumentReference<Map<String, dynamic>>> _parcoursReferences;
   @override
-  List<DocumentReference<Object>> get parcoursReferences {
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences {
     if (_parcoursReferences is EqualUnmodifiableListView)
       return _parcoursReferences;
     // ignore: implicit_dynamic_type
@@ -280,7 +281,8 @@ abstract class _Project implements Project {
   const factory _Project(
       {required final String id,
       required final String name,
-      required final List<DocumentReference<Object>> parcoursReferences,
+      required final List<DocumentReference<Map<String, dynamic>>>
+          parcoursReferences,
       required final ProjectSettings settings,
       required final int totalSections,
       required final int doneSections,
@@ -292,7 +294,7 @@ abstract class _Project implements Project {
   @override
   String get name;
   @override
-  List<DocumentReference<Object>> get parcoursReferences;
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences;
   @override
   ProjectSettings get settings;
   @override
@@ -312,7 +314,7 @@ abstract class _Project implements Project {
 /// @nodoc
 mixin _$CreateProjectCmd {
   String get name => throw _privateConstructorUsedError;
-  List<Parcours> get parcours => throw _privateConstructorUsedError;
+  List<ParcoursCmd> get parcours => throw _privateConstructorUsedError;
   ProjectSettings get settings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -326,7 +328,8 @@ abstract class $CreateProjectCmdCopyWith<$Res> {
           CreateProjectCmd value, $Res Function(CreateProjectCmd) then) =
       _$CreateProjectCmdCopyWithImpl<$Res, CreateProjectCmd>;
   @useResult
-  $Res call({String name, List<Parcours> parcours, ProjectSettings settings});
+  $Res call(
+      {String name, List<ParcoursCmd> parcours, ProjectSettings settings});
 
   $ProjectSettingsCopyWith<$Res> get settings;
 }
@@ -356,7 +359,7 @@ class _$CreateProjectCmdCopyWithImpl<$Res, $Val extends CreateProjectCmd>
       parcours: null == parcours
           ? _value.parcours
           : parcours // ignore: cast_nullable_to_non_nullable
-              as List<Parcours>,
+              as List<ParcoursCmd>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -381,7 +384,8 @@ abstract class _$$CreateProjectCmdImplCopyWith<$Res>
       __$$CreateProjectCmdImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, List<Parcours> parcours, ProjectSettings settings});
+  $Res call(
+      {String name, List<ParcoursCmd> parcours, ProjectSettings settings});
 
   @override
   $ProjectSettingsCopyWith<$Res> get settings;
@@ -410,7 +414,7 @@ class __$$CreateProjectCmdImplCopyWithImpl<$Res>
       parcours: null == parcours
           ? _value._parcours
           : parcours // ignore: cast_nullable_to_non_nullable
-              as List<Parcours>,
+              as List<ParcoursCmd>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -424,15 +428,15 @@ class __$$CreateProjectCmdImplCopyWithImpl<$Res>
 class _$CreateProjectCmdImpl implements _CreateProjectCmd {
   const _$CreateProjectCmdImpl(
       {required this.name,
-      required final List<Parcours> parcours,
+      required final List<ParcoursCmd> parcours,
       required this.settings})
       : _parcours = parcours;
 
   @override
   final String name;
-  final List<Parcours> _parcours;
+  final List<ParcoursCmd> _parcours;
   @override
-  List<Parcours> get parcours {
+  List<ParcoursCmd> get parcours {
     if (_parcours is EqualUnmodifiableListView) return _parcours;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_parcours);
@@ -472,13 +476,13 @@ class _$CreateProjectCmdImpl implements _CreateProjectCmd {
 abstract class _CreateProjectCmd implements CreateProjectCmd {
   const factory _CreateProjectCmd(
       {required final String name,
-      required final List<Parcours> parcours,
+      required final List<ParcoursCmd> parcours,
       required final ProjectSettings settings}) = _$CreateProjectCmdImpl;
 
   @override
   String get name;
   @override
-  List<Parcours> get parcours;
+  List<ParcoursCmd> get parcours;
   @override
   ProjectSettings get settings;
   @override

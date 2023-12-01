@@ -15,7 +15,7 @@ class ProjectDTO with _$ProjectDTO {
     required String id,
     required String name,
     @DocumentSerializer()
-    required List<DocumentReference<Object>> parcoursReferences,
+    required List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
     required ProjectSettingsDTO settings,
     required int totalSections,
     required int doneSections,
@@ -29,7 +29,7 @@ class ProjectDTO with _$ProjectDTO {
   factory ProjectDTO.fromCreateProjectCmd({
     required CreateProjectCmdDTO cmd,
     required String id,
-    required List<DocumentReference<Object>> parcoursReferences,
+    required List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
   }) =>
       ProjectDTO(
         id: id,

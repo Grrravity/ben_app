@@ -1,5 +1,8 @@
+import 'package:ben_app/data/model/project/intersection/intersection_dto.dart';
 import 'package:ben_app/data/model/project/parcours_dto.dart';
 import 'package:ben_app/data/model/project/project_settings_dto.dart';
+import 'package:ben_app/data/model/project/section/section_dto.dart';
+import 'package:ben_app/domain/entities/project/parcours.dart';
 import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,7 +25,18 @@ class CreateProjectCmdDTO with _$CreateProjectCmdDTO {
 extension OnCreateProjectCmd on CreateProjectCmd {
   CreateProjectCmdDTO get toDto => CreateProjectCmdDTO(
         name: name,
-        parcours: parcours.toDto,
+        parcours: parcours
+            .map(
+              (e) => ParcoursDTO(
+                id: '',
+                name: e.name,
+                ways: e.ways,
+                municipalities: e.municipalities,
+                sections: e.sections.toDto,
+                intersections: e.intersections.toDto,
+              ),
+            )
+            .toList(),
         settings: settings.toDto,
       );
 }
@@ -34,7 +48,17 @@ extension OnCreateProjectCmdList on List<CreateProjectCmd> {
 extension OnCreateProjectCmdDTO on CreateProjectCmdDTO {
   CreateProjectCmd get toEntity => CreateProjectCmd(
         name: name,
-        parcours: parcours.toEntity,
+        parcours: parcours
+            .map(
+              (e) => ParcoursCmd(
+                name: e.name,
+                ways: e.ways,
+                municipalities: e.municipalities,
+                sections: e.sections.toEntity,
+                intersections: e.intersections.toEntity,
+              ),
+            )
+            .toList(),
         settings: settings.toEntity,
       );
 }

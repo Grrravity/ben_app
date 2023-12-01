@@ -8,6 +8,7 @@ part of '../../project/parcours_dto.dart';
 
 _$ParcoursDTOImpl _$$ParcoursDTOImplFromJson(Map<String, dynamic> json) =>
     _$ParcoursDTOImpl(
+      id: json['id'] as String,
       name: json['name'] as String,
       ways: (json['ways'] as List<dynamic>).map((e) => e as String).toList(),
       municipalities: (json['municipalities'] as List<dynamic>)
@@ -23,6 +24,7 @@ _$ParcoursDTOImpl _$$ParcoursDTOImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ParcoursDTOImplToJson(_$ParcoursDTOImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'ways': instance.ways,
       'municipalities': instance.municipalities,

@@ -3,6 +3,7 @@ import 'package:ben_app/data/client/api_client.dart';
 import 'package:ben_app/data/client/utils/rest_api_handler.dart';
 import 'package:ben_app/data/datasource/local/session_local_source.dart';
 import 'package:ben_app/data/datasource/remote/files_api_source.dart';
+import 'package:ben_app/data/datasource/remote/parcours_api_source.dart';
 import 'package:ben_app/data/datasource/remote/project_api_source.dart';
 import 'package:ben_app/data/datasource/remote/session_api_source.dart';
 import 'package:ben_app/data/datasource/remote/user_api.dart';
@@ -41,6 +42,11 @@ Future<void> _registerApiSources() async {
     )
     ..registerLazySingleton<ProjectApiSource>(
       () => ProjectApiSourceImpl(
+        firestore: getIt<FirebaseFirestore>(),
+      ),
+    )
+    ..registerLazySingleton<ParcoursApiSource>(
+      () => ParcoursApiSourceImpl(
         firestore: getIt<FirebaseFirestore>(),
       ),
     )

@@ -7,10 +7,22 @@ part '../generated/project/parcours.freezed.dart';
 @freezed
 class Parcours with _$Parcours {
   const factory Parcours({
+    required String id,
     required String name,
     required List<String> ways,
     required List<String> municipalities,
     required List<Section> sections,
     required List<Intersection> intersections,
   }) = _Parcours;
+}
+
+@freezed
+class ParcoursCmd with _$ParcoursCmd {
+  const factory ParcoursCmd({
+    required String name,
+    required List<String> ways,
+    required List<String> municipalities,
+    required List<Section> sections,
+    required List<Intersection> intersections,
+  }) = _ParcoursCmd;
 }

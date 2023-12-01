@@ -10,6 +10,7 @@ part '../generated/project/parcours_dto.g.dart';
 class ParcoursDTO with _$ParcoursDTO {
   @JsonSerializable(explicitToJson: true)
   const factory ParcoursDTO({
+    required String id,
     required String name,
     required List<String> ways,
     required List<String> municipalities,
@@ -23,6 +24,7 @@ class ParcoursDTO with _$ParcoursDTO {
 
 extension OnParcours on Parcours {
   ParcoursDTO get toDto => ParcoursDTO(
+        id: id,
         name: name,
         ways: ways,
         municipalities: municipalities,
@@ -37,6 +39,7 @@ extension OnParcoursList on List<Parcours> {
 
 extension OnParcoursDTO on ParcoursDTO {
   Parcours get toEntity => Parcours(
+        id: id,
         name: name,
         ways: ways,
         municipalities: municipalities,

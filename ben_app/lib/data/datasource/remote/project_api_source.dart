@@ -1,3 +1,4 @@
+import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/utils/logger.dart';
 import 'package:ben_app/data/model/project/create_project_dto.cmd.dart';
 import 'package:ben_app/data/model/project/project_dto.dart';
@@ -5,8 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: one_member_abstracts
 abstract class ProjectApiSource {
-  Future<ProjectDTO> createProject(CreateProjectCmdDTO project);
+  Future<ProjectDTO> createProject(
+    CreateProjectCmdDTO project,
+    List<DocumentReference<Map<String, dynamic>>> references,
+  );
   Future<List<ProjectDTO>> getProjects();
+  Future<ProjectDTO> getProject(String projectId);
 }
 
 class ProjectApiSourceImpl implements ProjectApiSource {
@@ -35,25 +40,36 @@ class ProjectApiSourceImpl implements ProjectApiSource {
   }
 
   @override
-  Future<ProjectDTO> createProject(CreateProjectCmdDTO projectCmd) async {
+  Future<ProjectDTO> getProject(String projectId) async {
     return _log(
       () async {
-        final batch = firestore.batch();
-        final refs = <DocumentReference<Map<String, dynamic>>>[];
-        for (final parcours in projectCmd.parcours) {
-          final now = DateTime.now().millisecondsSinceEpoch;
-          final ref = firestore.doc(
-            '$_parcoursCollection/${projectCmd.name}_${parcours.name}_$now',
-          );
-          refs.add(ref);
-          batch.set(ref, projectCmd.toJson());
+        final result =
+            await firestore.collection(_projectCollection).doc(projectId).get();
+        final data = result.data();
+        if (data == null) {
+          throw Failure.elementNotFound;
         }
+        return ProjectDTO.fromJson(
+          data..addAll(<String, dynamic>{'id': result.id}),
+        );
+      },
+      'getProjects',
+      _projectCollection,
+    );
+  }
+
+  @override
+  Future<ProjectDTO> createProject(
+    CreateProjectCmdDTO projectCmd,
+    List<DocumentReference<Map<String, dynamic>>> references,
+  ) async {
+    return _log(
+      () async {
         final project = ProjectDTO.fromCreateProjectCmd(
           cmd: projectCmd,
           id: '',
-          parcoursReferences: refs,
+          parcoursReferences: references,
         );
-        await batch.commit();
 
         final json = project.toJson()..remove('id');
         final result = await firestore
@@ -64,7 +80,7 @@ class ProjectApiSourceImpl implements ProjectApiSource {
         return ProjectDTO.fromCreateProjectCmd(
           cmd: projectCmd,
           id: result.id,
-          parcoursReferences: refs,
+          parcoursReferences: references,
         );
       },
       'createProject',
