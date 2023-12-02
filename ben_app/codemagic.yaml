@@ -109,19 +109,21 @@ workflows:
       groups:
         - firebase_credentials
       android_signing:
-        - theTribe
-      ios_signing:
-        certificates:
-          - certificate: theTribe
-            environment_variable: ~/Library/MobileDevice/Certificates
-        provisioning_profiles:
-          - profile: changeme ## TODO Changeme
-            environment_variable: ~/Library/MobileDevice/Provisioning Profiles
+        - changeme ## TODO Changeme
+      ## Unused iOS Config
+      ## ios_signing:
+      ##   certificates:
+      ##     - certificate: changeme ## TODO Changeme
+      ##       environment_variable: ~/Library/MobileDevice/Certificates
+      ##   provisioning_profiles:
+      ##     - profile: changeme ## TODO Changeme
+      ##       environment_variable: ~/Library/MobileDevice/Provisioning Profiles
       vars:
         FLAVOR: inte
         TARGET: lib/main_inte.dart
-    integrations:
-      app_store_connect: theTribe
+    ## Unused iOS Config
+    ## integrations:
+    ##   app_store_connect: changeme ## TODO Changeme
     triggering:
       events:
         - push
@@ -133,30 +135,35 @@ workflows:
     scripts:
       - *android-setup-keystore
       - *android-setup-local-properties
-      - *ios-setup-xcode
+      ## Unused iOS Config
+      ## - *ios-setup-xcode
       - *get-package-dependencies
       - *get-flutter-dependencies
-      - *ios-install-pods
+      ## Unused iOS Config
+      ## - *ios-install-pods
       - *build-appbundle
       - *build-apk
-      # NOTE May be of use
-      #- *ios-initialize-keychain
-      #- *ios-fetch-signing-files
-      #- *ios-add-keychain
-      - *build-ipa
+      ## Unused iOS Config
+      ##- *ios-initialize-keychain
+      ##- *ios-fetch-signing-files
+      ##- *ios-add-keychain
+      ## - *build-ipa
     artifacts:
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+      ## Unused iOS Config
+      ## - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
       - build/**/outputs/**/mapping.txt
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
+      ## Unused iOS Config
+      ## - build/ios/ipa/*.ipa
+      ## - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
       - test-results/flutter.xml
     publishing:
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
+      ## Unused iOS Config
+      ## app_store_connect:
+      ##   auth: integration
+      ##   submit_to_testflight: true
       google_play:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: internal
@@ -167,7 +174,7 @@ workflows:
           app_id: changeme ## TODO Changeme
           artifact_type: "apk"
           groups:
-            - thetribe
+            - changeme ## TODO Changeme
             - ben_app ## TODO Changeme
       slack:
         channel: "#ben_app-pipeline" ## TODO Changeme
@@ -184,19 +191,21 @@ workflows:
       groups:
         - firebase_credentials
       android_signing:
-        - theTribe
-      ios_signing:
-        certificates:
-          - certificate: theTribe
-            environment_variable: ~/Library/MobileDevice/Certificates
-        provisioning_profiles:
-          - profile: changeme ## TODO Changeme
-            environment_variable: ~/Library/MobileDevice/Provisioning Profiles
+        - changeme ## TODO Changeme
+      ## Unused iOS Config
+      ## ios_signing:
+      ##   certificates:
+      ##     - certificate: changeme ## TODO Changeme
+      ##       environment_variable: ~/Library/MobileDevice/Certificates
+      ##   provisioning_profiles:
+      ##     - profile: changeme ## TODO Changeme
+      ##       environment_variable: ~/Library/MobileDevice/Provisioning Profiles
       vars:
         FLAVOR: prod
         TARGET: lib/main_prod.dart
-    integrations:
-      app_store_connect: theTribe
+    ## Unused iOS Config
+    ## integrations:
+    ##   app_store_connect: changeme ## TODO Changeme
     triggering:
       events:
         - push
@@ -207,31 +216,36 @@ workflows:
       cancel_previous_builds: true
     scripts:
       - *android-setup-keystore
-      - *android-setup-local-properties
       - *get-package-dependencies
+      ## Unused iOS Config
+      ## - *ios-setup-xcode
       - *get-flutter-dependencies
+      - *android-setup-local-properties
+      ## Unused iOS Config
+      ## - *ios-install-pods
       - *build-appbundle
       - *build-apk
-      - *ios-install-pods
-      # NOTE may be used
-      #- *ios-initialize-keychain
-      #- *ios-fetch-signing-files
-      #- *ios-add-keychain
-      - *ios-setup-xcode
-      - *build-ipa
+      ## Unused iOS Config
+      ## - *ios-initialize-keychain
+      ## - *ios-fetch-signing-files
+      ## - *ios-add-keychain
+      ## - *build-ipa
     artifacts:
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+      ## Unused iOS Config
+      ## - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
       - build/**/outputs/**/mapping.txt
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
+      ## Unused iOS Config
+      ## - build/ios/ipa/*.ipa
+      ## - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
       - test-results/flutter.xml
     publishing:
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
+      ## Unused iOS Config
+      ## app_store_connect:
+      ##   auth: integration
+      ##   submit_to_testflight: true
       google_play:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: internal
@@ -242,7 +256,7 @@ workflows:
           app_id: changeme # TODO changeme
           artifact_type: "apk"
           groups:
-            - thetribe
+            - changeme ## TODO Changeme
             - ben_app # TODO changeme
       slack:
         channel: "#ben_app-pipeline" # TODO changeme
