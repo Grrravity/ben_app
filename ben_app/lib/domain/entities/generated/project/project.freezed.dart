@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Project {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<DocumentReference<Object>> get parcoursReferences =>
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences =>
       throw _privateConstructorUsedError;
   ProjectSettings get settings => throw _privateConstructorUsedError;
   int get totalSections => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $ProjectCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<DocumentReference<Object>> parcoursReferences,
+      List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
       ProjectSettings settings,
       int totalSections,
       int doneSections,
@@ -82,7 +82,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
       parcoursReferences: null == parcoursReferences
           ? _value.parcoursReferences
           : parcoursReferences // ignore: cast_nullable_to_non_nullable
-              as List<DocumentReference<Object>>,
+              as List<DocumentReference<Map<String, dynamic>>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<DocumentReference<Object>> parcoursReferences,
+      List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
       ProjectSettings settings,
       int totalSections,
       int doneSections,
@@ -168,7 +168,7 @@ class __$$ProjectImplCopyWithImpl<$Res>
       parcoursReferences: null == parcoursReferences
           ? _value._parcoursReferences
           : parcoursReferences // ignore: cast_nullable_to_non_nullable
-              as List<DocumentReference<Object>>,
+              as List<DocumentReference<Map<String, dynamic>>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -199,7 +199,8 @@ class _$ProjectImpl implements _Project {
   const _$ProjectImpl(
       {required this.id,
       required this.name,
-      required final List<DocumentReference<Object>> parcoursReferences,
+      required final List<DocumentReference<Map<String, dynamic>>>
+          parcoursReferences,
       required this.settings,
       required this.totalSections,
       required this.doneSections,
@@ -211,9 +212,9 @@ class _$ProjectImpl implements _Project {
   final String id;
   @override
   final String name;
-  final List<DocumentReference<Object>> _parcoursReferences;
+  final List<DocumentReference<Map<String, dynamic>>> _parcoursReferences;
   @override
-  List<DocumentReference<Object>> get parcoursReferences {
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences {
     if (_parcoursReferences is EqualUnmodifiableListView)
       return _parcoursReferences;
     // ignore: implicit_dynamic_type
@@ -280,7 +281,8 @@ abstract class _Project implements Project {
   const factory _Project(
       {required final String id,
       required final String name,
-      required final List<DocumentReference<Object>> parcoursReferences,
+      required final List<DocumentReference<Map<String, dynamic>>>
+          parcoursReferences,
       required final ProjectSettings settings,
       required final int totalSections,
       required final int doneSections,
@@ -292,7 +294,7 @@ abstract class _Project implements Project {
   @override
   String get name;
   @override
-  List<DocumentReference<Object>> get parcoursReferences;
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences;
   @override
   ProjectSettings get settings;
   @override

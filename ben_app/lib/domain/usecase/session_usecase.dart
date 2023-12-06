@@ -8,37 +8,37 @@ import 'package:dartz/dartz.dart';
 
 class SessionUsecase {
   SessionUsecase({
-    required this.sessionRepository,
-  });
+    required SessionRepository sessionRepository,
+  }) : _sessionRepository = sessionRepository;
 
-  final SessionRepository sessionRepository;
+  final SessionRepository _sessionRepository;
 
-  User? get currentUser => sessionRepository.currentUser;
+  User? get currentUser => _sessionRepository.currentUser;
 
   ///Login
   Future<Either<Failure, User>> login(Credentials credentials) async =>
-      sessionRepository.signInWithEmailPassword(credentials);
+      _sessionRepository.signInWithEmailPassword(credentials);
 
   Future<Either<Failure, User>> signupWithEmailPassword(
     Credentials credentials,
   ) async =>
-      sessionRepository.signupWithEmailPassword(credentials);
+      _sessionRepository.signupWithEmailPassword(credentials);
 
   Future<Either<Failure, User>> signInWithMicrosoft() async =>
-      sessionRepository.signInWithMicrosoft();
+      _sessionRepository.signInWithMicrosoft();
 
   Future<Either<Failure, bool>> requestNewPassword(
     String email,
   ) async =>
-      sessionRepository.requestNewPassword(email);
+      _sessionRepository.requestNewPassword(email);
 
   Future<Either<Failure, bool>> updatePassword({
     required String code,
     required String password,
   }) async =>
-      sessionRepository.updatePassword(
+      _sessionRepository.updatePassword(
         code: code,
         password: password,
       );
-  Future<void> logOut() async => sessionRepository.logOut();
+  Future<void> logOut() async => _sessionRepository.logOut();
 }

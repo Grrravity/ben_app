@@ -23,7 +23,7 @@ mixin _$ProjectDTO {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @DocumentSerializer()
-  List<DocumentReference<Object>> get parcoursReferences =>
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences =>
       throw _privateConstructorUsedError;
   ProjectSettingsDTO get settings => throw _privateConstructorUsedError;
   int get totalSections => throw _privateConstructorUsedError;
@@ -46,7 +46,8 @@ abstract class $ProjectDTOCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @DocumentSerializer() List<DocumentReference<Object>> parcoursReferences,
+      @DocumentSerializer()
+      List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
       ProjectSettingsDTO settings,
       int totalSections,
       int doneSections,
@@ -90,7 +91,7 @@ class _$ProjectDTOCopyWithImpl<$Res, $Val extends ProjectDTO>
       parcoursReferences: null == parcoursReferences
           ? _value.parcoursReferences
           : parcoursReferences // ignore: cast_nullable_to_non_nullable
-              as List<DocumentReference<Object>>,
+              as List<DocumentReference<Map<String, dynamic>>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -134,7 +135,8 @@ abstract class _$$ProjectDTOImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      @DocumentSerializer() List<DocumentReference<Object>> parcoursReferences,
+      @DocumentSerializer()
+      List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
       ProjectSettingsDTO settings,
       int totalSections,
       int doneSections,
@@ -177,7 +179,7 @@ class __$$ProjectDTOImplCopyWithImpl<$Res>
       parcoursReferences: null == parcoursReferences
           ? _value._parcoursReferences
           : parcoursReferences // ignore: cast_nullable_to_non_nullable
-              as List<DocumentReference<Object>>,
+              as List<DocumentReference<Map<String, dynamic>>>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -210,7 +212,8 @@ class _$ProjectDTOImpl implements _ProjectDTO {
       {required this.id,
       required this.name,
       @DocumentSerializer()
-      required final List<DocumentReference<Object>> parcoursReferences,
+      required final List<DocumentReference<Map<String, dynamic>>>
+          parcoursReferences,
       required this.settings,
       required this.totalSections,
       required this.doneSections,
@@ -225,10 +228,10 @@ class _$ProjectDTOImpl implements _ProjectDTO {
   final String id;
   @override
   final String name;
-  final List<DocumentReference<Object>> _parcoursReferences;
+  final List<DocumentReference<Map<String, dynamic>>> _parcoursReferences;
   @override
   @DocumentSerializer()
-  List<DocumentReference<Object>> get parcoursReferences {
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences {
     if (_parcoursReferences is EqualUnmodifiableListView)
       return _parcoursReferences;
     // ignore: implicit_dynamic_type
@@ -304,7 +307,8 @@ abstract class _ProjectDTO implements ProjectDTO {
       {required final String id,
       required final String name,
       @DocumentSerializer()
-      required final List<DocumentReference<Object>> parcoursReferences,
+      required final List<DocumentReference<Map<String, dynamic>>>
+          parcoursReferences,
       required final ProjectSettingsDTO settings,
       required final int totalSections,
       required final int doneSections,
@@ -320,7 +324,7 @@ abstract class _ProjectDTO implements ProjectDTO {
   String get name;
   @override
   @DocumentSerializer()
-  List<DocumentReference<Object>> get parcoursReferences;
+  List<DocumentReference<Map<String, dynamic>>> get parcoursReferences;
   @override
   ProjectSettingsDTO get settings;
   @override

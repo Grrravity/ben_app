@@ -10,7 +10,7 @@ class Project with _$Project {
   const factory Project({
     required String id,
     required String name,
-    required List<DocumentReference<Object>> parcoursReferences,
+    required List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
     required ProjectSettings settings,
     required int totalSections,
     required int doneSections,

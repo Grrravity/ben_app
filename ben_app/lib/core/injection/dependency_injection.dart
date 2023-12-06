@@ -13,7 +13,7 @@ Future<void> initGetIt({
   EnvType? envType,
 }) async {
   await registerServices(envType: envType);
-  await registerApiClients();
+  //await registerApiClients(); // No rest client ATM
   await registerDataSources();
   await registerRepository();
   await registerUsecase();

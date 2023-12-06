@@ -3,38 +3,15 @@ import 'dart:async';
 import 'package:ben_app/core/error/failure.dart';
 import 'package:ben_app/core/utils/async_task.dart';
 import 'package:ben_app/core/utils/logger.dart';
-import 'package:ben_app/data/datasource/local/session_local_source.dart';
 import 'package:ben_app/data/model/user_dto.dart';
 import 'package:ben_app/domain/entities/credentials.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-abstract class SessionApiSource {
-  Stream<UserDto?> get sessionStateStream;
-
-  Future<UserDto> signInWithEmailPassword(Credentials credentials);
-  Future<UserDto> signupWithEmailPassword(Credentials credentials);
-  Future<UserDto> signInWithMicrosoft();
-
-  Future<bool> requestNewPassword(String email);
-
-  Future<bool> updatePassword({
-    required String code,
-    required String password,
-  });
-
-  Future<UserDto?> getCurrentAuthUser();
-
-  Future<void> logout();
-
-  /// Get current token. Refreshes it automatically if necessary.
-}
-
-class SessionApiSourceImpl implements SessionApiSource {
-  SessionApiSourceImpl({
-    required this.localSource,
-    required this.firebaseAuth,
-  }) {
+class SessionApiSource {
+  SessionApiSource({
+    required FirebaseAuth firebaseAuth,
+  }) : _firebaseAuth = firebaseAuth {
     _getUserTask = AsyncTask<UserDto?>(
       name: 'GetToken',
       task: () async {
@@ -43,29 +20,26 @@ class SessionApiSourceImpl implements SessionApiSource {
     );
   }
 
-  final logger = Logger('SessionDataSource');
+  final _logger = Logger('SessionDataSource');
 
   // Used to avoid running concurrently multiple times the
   // token renewal operation.
   late final AsyncTask<UserDto?> _getUserTask;
-  final SessionLocalSource localSource;
-  final FirebaseAuth firebaseAuth;
+  final FirebaseAuth _firebaseAuth;
 
-  @override
   Stream<UserDto?> get sessionStateStream =>
-      firebaseAuth.authStateChanges().map((firebaseUser) {
+      _firebaseAuth.authStateChanges().map((firebaseUser) {
         if (firebaseUser == null) {
           return null;
         }
         return UserDto.fromFirebaseAuthUser(firebaseUser);
       });
 
-  @override
   Future<UserDto> signInWithEmailPassword(
     Credentials credentials,
   ) async {
     try {
-      final credential = await firebaseAuth.signInWithEmailAndPassword(
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
         email: credentials.login,
         password: credentials.password,
       );
@@ -76,7 +50,7 @@ class SessionApiSourceImpl implements SessionApiSource {
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
     } on FirebaseAuthException catch (error) {
-      Logger('Firebase login').error(error.message.toString());
+      _logger.error(error.message.toString());
       switch (error.code) {
         case 'user-disabled':
           throw Failure.userNotFound;
@@ -90,20 +64,19 @@ class SessionApiSourceImpl implements SessionApiSource {
           throw Failure.authentication;
       }
     } catch (error) {
-      Logger('Firebase login').error(error.toString());
+      _logger.error(error.toString());
       throw Failure.authentication;
     }
   }
 
-  @override
   Future<UserDto> signInWithMicrosoft() async {
     final microsoftProvider = MicrosoftAuthProvider();
     try {
       UserCredential credential;
       if (kIsWeb) {
-        credential = await firebaseAuth.signInWithPopup(microsoftProvider);
+        credential = await _firebaseAuth.signInWithPopup(microsoftProvider);
       } else {
-        credential = await firebaseAuth.signInWithProvider(microsoftProvider);
+        credential = await _firebaseAuth.signInWithProvider(microsoftProvider);
       }
 
       if (credential.user == null) {
@@ -112,7 +85,7 @@ class SessionApiSourceImpl implements SessionApiSource {
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
     } on FirebaseAuthException catch (error) {
-      Logger('Microsoft Auth').error(error.message.toString());
+      _logger.error(error.message.toString());
       switch (error.code) {
         case 'user-disabled':
           throw Failure.userNotFound;
@@ -130,17 +103,16 @@ class SessionApiSourceImpl implements SessionApiSource {
           throw Failure.authentication;
       }
     } catch (error) {
-      Logger('Microsoft Auth').error(error.toString());
+      _logger.error(error.toString());
       throw Failure.authentication;
     }
   }
 
-  @override
   Future<void> logout() async {
     try {
-      await firebaseAuth.signOut();
+      await _firebaseAuth.signOut();
     } catch (error) {
-      Logger('Firebase logout').error(
+      _logger.error(
         error is FirebaseAuthException
             ? error.message.toString()
             : error.toString(),
@@ -150,10 +122,9 @@ class SessionApiSourceImpl implements SessionApiSource {
     }
   }
 
-  @override
   Future<UserDto> signupWithEmailPassword(Credentials credentials) async {
     try {
-      final credential = await firebaseAuth.createUserWithEmailAndPassword(
+      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: credentials.login,
         password: credentials.password,
       );
@@ -164,7 +135,7 @@ class SessionApiSourceImpl implements SessionApiSource {
 
       return UserDto.fromFirebaseAuthUser(credential.user!);
     } on FirebaseAuthException catch (error) {
-      Logger('Firebase register').error(error.message.toString());
+      _logger.error(error.message.toString());
       switch (error.code) {
         case 'weak-password':
           throw Failure.weakPassword;
@@ -178,18 +149,17 @@ class SessionApiSourceImpl implements SessionApiSource {
           throw Failure.authentication;
       }
     } catch (error) {
-      Logger('Firebase register').error(error.toString());
+      _logger.error(error.toString());
       throw Failure.authentication;
     }
   }
 
-  @override
   Future<bool> requestNewPassword(String email) async {
     try {
-      await firebaseAuth.sendPasswordResetEmail(email: email);
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
       return true;
     } on FirebaseAuthException catch (error) {
-      Logger('Firebase reset').error(error.message.toString());
+      _logger.error(error.message.toString());
       switch (error.code) {
         case 'invalid-email':
           throw Failure.emailNotValid;
@@ -199,25 +169,24 @@ class SessionApiSourceImpl implements SessionApiSource {
           throw Failure.authentication;
       }
     } catch (error) {
-      Logger('Firebase reset').error(error.toString());
+      _logger.error(error.toString());
       throw Failure.authentication;
     }
   }
 
-  @override
   Future<bool> updatePassword({
     required String code,
     required String password,
   }) async {
     try {
-      await firebaseAuth.confirmPasswordReset(
+      await _firebaseAuth.confirmPasswordReset(
         code: code,
         newPassword: password,
       );
 
       return true;
     } on FirebaseAuthException catch (error) {
-      Logger('Firebase reset').error(error.message.toString());
+      _logger.error(error.message.toString());
       switch (error.code) {
         case 'expired-action-code':
           throw Failure.expiredAuthCode;
@@ -233,18 +202,17 @@ class SessionApiSourceImpl implements SessionApiSource {
           throw Failure.authentication;
       }
     } catch (error) {
-      Logger('Firebase reset').error(error.toString());
+      _logger.error(error.toString());
       throw Failure.authentication;
     }
   }
 
-  @override
   Future<UserDto?> getCurrentAuthUser() async {
     return _getUserTask.run();
   }
 
   Future<UserDto?> _getCurrentAuthUser() async {
-    final currentUser = firebaseAuth.currentUser;
+    final currentUser = _firebaseAuth.currentUser;
     return currentUser != null
         ? UserDto.fromFirebaseAuthUser(currentUser)
         : null;

@@ -6,23 +6,42 @@ import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:ben_app/domain/entities/upload_file.dart';
 import 'package:ben_app/domain/entities/upload_file_result.dart';
 import 'package:ben_app/domain/repositories/files_repository.dart';
+import 'package:ben_app/domain/repositories/parcours_repository.dart';
 import 'package:ben_app/domain/repositories/project_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class ProjectUsecase {
   ProjectUsecase({
-    required this.projectRepository,
-    required this.filesRepository,
-  });
+    required ProjectRepository projectRepository,
+    required ParcoursRepository parcoursRepository,
+    required FilesRepository filesRepository,
+  })  : _filesRepository = filesRepository,
+        _parcoursRepository = parcoursRepository,
+        _projectRepository = projectRepository;
 
-  final ProjectRepository projectRepository;
-  final FilesRepository filesRepository;
+  final ProjectRepository _projectRepository;
+  final ParcoursRepository _parcoursRepository;
+  final FilesRepository _filesRepository;
 
   Future<Either<Failure, List<Project>>> getProjects() =>
-      projectRepository.getProjects();
+      _projectRepository.getProjects();
 
-  Future<Either<Failure, Project>> createProject(CreateProjectCmd project) =>
-      projectRepository.createProject(project);
+  Future<Either<Failure, Project>> getProject(String projectId) =>
+      _projectRepository.getProject(projectId);
+
+  Future<Either<Failure, Project>> createProject(
+    CreateProjectCmd project,
+  ) async {
+    final refs = await _parcoursRepository.createParcours(
+      parcours: project.parcours,
+      projectName: project.name,
+    );
+    if (refs.isLeft()) throw Failure.other;
+    return _projectRepository.createProject(
+      project: project,
+      references: refs.getRight(),
+    );
+  }
 
   Future<Either<Failure, List<UploadFileResult>>> uploadFiles({
     required String projectName,
@@ -31,7 +50,7 @@ class ProjectUsecase {
     try {
       final list = await Future.wait(
         files.map((file) async {
-          final path = await filesRepository.uploadFile(
+          final path = await _filesRepository.uploadFile(
             projectName: projectName,
             uploadFile: file,
           );
