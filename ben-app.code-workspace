@@ -1,4 +1,7 @@
 {
+    "settings": {
+      "dart.flutterSdkPath": "/Users/grrravity/.asdf/installs/flutter/3.10.0"
+    },
     "folders": [
       {
         "name": "App",
