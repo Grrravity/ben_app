@@ -31,7 +31,7 @@ class ProjectDetailCubit extends Cubit<AsyncValue<ProjectDetailState, void>> {
     final project = projectOrFailure.getRight();
 
     final parcoursOrFailure =
-        await parcoursUsecase.getProjects(project.parcoursReferences);
+        await parcoursUsecase.getParcours(project.parcoursReferences);
 
     if (parcoursOrFailure.isLeft()) {
       emit(AsyncValue.failure(failure: parcoursOrFailure.getLeft()));

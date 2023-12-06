@@ -11,7 +11,7 @@ class ParcoursUsecase {
 
   final ParcoursRepository _parcoursRepository;
 
-  Future<Either<Failure, List<Parcours>>> getProjects(
+  Future<Either<Failure, List<Parcours>>> getParcours(
     List<DocumentReference<Map<String, dynamic>>> parcoursReferences,
   ) =>
       _parcoursRepository.getParcours(parcoursReferences);
