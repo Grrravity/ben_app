@@ -28,6 +28,31 @@ class ParcoursApiSource {
     );
   }
 
+  Future<List<DocumentReference<Map<String, dynamic>>>> createParcours({
+    required List<ParcoursDTO> parcours,
+    required String projectName,
+  }) async {
+    return _log(
+      () async {
+        final batch = _firestore.batch();
+        final refs = <DocumentReference<Map<String, dynamic>>>[];
+        for (final element in parcours) {
+          final now = DateTime.now().millisecondsSinceEpoch;
+          final ref = _firestore.doc(
+            '$_parcoursCollection/${projectName}_${element.name}_$now',
+          );
+          refs.add(ref);
+          batch.set(ref, element.toJson());
+        }
+        await batch.commit();
+
+        return refs;
+      },
+      'createParcours',
+      _parcoursCollection,
+    );
+  }
+
   static Future<T> _log<T>(
     Future<T> Function() call,
     String method,
@@ -52,30 +77,5 @@ class ParcoursApiSource {
         ..error('STACKTRACE: \x1B[33m$s\x1B[31m');
       rethrow;
     }
-  }
-
-  Future<List<DocumentReference<Map<String, dynamic>>>> createParcours({
-    required List<ParcoursDTO> parcours,
-    required String projectName,
-  }) async {
-    return _log(
-      () async {
-        final batch = _firestore.batch();
-        final refs = <DocumentReference<Map<String, dynamic>>>[];
-        for (final element in parcours) {
-          final now = DateTime.now().millisecondsSinceEpoch;
-          final ref = _firestore.doc(
-            '$_parcoursCollection/${projectName}_${element.name}_$now',
-          );
-          refs.add(ref);
-          batch.set(ref, element.toJson());
-        }
-        await batch.commit();
-
-        return refs;
-      },
-      'createParcours',
-      _parcoursCollection,
-    );
   }
 }
