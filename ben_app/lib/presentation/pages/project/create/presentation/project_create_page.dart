@@ -4,6 +4,7 @@ import 'package:ben_app/core/injection/dependency_injection.dart';
 import 'package:ben_app/core/theme/theme.dart';
 import 'package:ben_app/core/utils/form_state.dart';
 import 'package:ben_app/core/utils/input_object.dart';
+import 'package:ben_app/domain/usecase/files_usecase.dart';
 import 'package:ben_app/domain/usecase/project_usecase.dart';
 import 'package:ben_app/localization/string_to_arb.dart';
 import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page.dart';
@@ -35,6 +36,7 @@ class ProjectCreatePage extends StatelessWidget {
       body: BlocProvider(
         create: (context) => ProjectCreateCubit(
           projectUsecase: getIt<ProjectUsecase>(),
+          filesUsecase: getIt<FilesUsecase>(),
         ),
         child:
             BlocListener<ProjectCreateCubit, FormBlocState<ProjectCreateState>>(
