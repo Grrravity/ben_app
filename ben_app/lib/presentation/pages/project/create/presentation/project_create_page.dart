@@ -28,10 +28,11 @@ class ProjectCreatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return MainScaffold(
       menuSelectedIndex: 1,
-      appBar: const MainAppBar(
-        title: 'Créer un projet',
+      appBar: MainAppBar(
+        title: l10n.createProject_appbarTitle,
       ),
       body: BlocProvider(
         create: (context) => ProjectCreateCubit(
@@ -55,348 +56,7 @@ class ProjectCreatePage extends StatelessWidget {
             builder: (context, state) {
               return state.map(
                 loaded: (_) {
-                  final cubit = context.read<ProjectCreateCubit>();
-                  final projectName =
-                      context.select<ProjectCreateCubit, StringInput>(
-                    (cubit) => cubit.state.asLoaded!.data.projectName,
-                  );
-                  final sectionSettings =
-                      context.select<ProjectCreateCubit, MapIntInput>(
-                    (cubit) => cubit.state.asLoaded!.data.sectionPictureSetting,
-                  );
-                  final intersectionSettings =
-                      context.select<ProjectCreateCubit, MapIntInput>(
-                    (cubit) =>
-                        cubit.state.asLoaded!.data.intersectionPictureSetting,
-                  );
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Text(
-                              'Paramétrages général',
-                              style: context.textTheme.titleLarge,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 12,
-                            ),
-                            child: CustomTextFormField.required(
-                              label: 'Nom du projet',
-                              initialValue: projectName.value,
-                              hintText: 'renseignez le nom du projet',
-                              onChanged: cubit.setProjectName,
-                              onSaved: cubit.setProjectName,
-                              validator: (_) =>
-                                  projectName.failure.localized(context),
-                            ),
-                          ),
-                          const Divider(
-                            thickness: 2,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Text(
-                              'Paramétrages des sections',
-                              style: context.textTheme.titleLarge,
-                            ),
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: sectionSettings.value!.entries.length,
-                            itemBuilder: (context, index) {
-                              final element = sectionSettings.value!.entries
-                                  .elementAt(index);
-                              return Row(
-                                children: [
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 16),
-                                      child: CustomTextFormField.required(
-                                        label: 'Titre de la section photo',
-                                        initialValue: element.key,
-                                        hintText: 'renseignez un nom',
-                                        onChanged: (key) => cubit
-                                            .setSectionPictureSettingFromIndex(
-                                          MapEntry<String, int>(
-                                            key,
-                                            element.value,
-                                          ),
-                                          element.key,
-                                          false,
-                                        ),
-                                        onSaved: (key) => key != null
-                                            ? cubit
-                                                .setSectionPictureSettingFromIndex(
-                                                MapEntry<String, int>(
-                                                  key,
-                                                  element.value,
-                                                ),
-                                                element.key,
-                                                false,
-                                              )
-                                            : null,
-                                        validator: (_) => sectionSettings
-                                            .failure
-                                            .localized(context),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: CustomTextFormField.required(
-                                      label: 'Nombre de photos',
-                                      initialValue: element.value.toString(),
-                                      hintText: 'renseingez un nombre',
-                                      onChanged: (value) => cubit
-                                          .setSectionPictureSettingFromIndex(
-                                        MapEntry<String, int>(
-                                          element.key,
-                                          int.parse(value),
-                                        ),
-                                        element.key,
-                                        true,
-                                      ),
-                                      onSaved: (value) => value != null
-                                          ? cubit
-                                              .setSectionPictureSettingFromIndex(
-                                              MapEntry<String, int>(
-                                                element.key,
-                                                int.parse(value),
-                                              ),
-                                              element.key,
-                                              true,
-                                            )
-                                          : null,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                      ],
-                                      keyboardType: TextInputType.number,
-                                      validator: (_) => sectionSettings.failure
-                                          .localized(context),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 16,
-                                      top: 12,
-                                    ),
-                                    child: IconButton(
-                                      onPressed: index != 0
-                                          ? () =>
-                                              cubit.removeSectionPictureSetting(
-                                                element.key,
-                                              )
-                                          : null,
-                                      icon: Icon(
-                                        index != 0
-                                            ? Icons.delete
-                                            : Icons.delete_forever,
-                                        color: index != 0
-                                            ? null
-                                            : context
-                                                .theme.colorScheme.onBackground
-                                                .withOpacity(0.2),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: Center(
-                              child: SizedBox(
-                                child: FittedBox(
-                                  fit: BoxFit.fitHeight,
-                                  child: CustomButton.outlined(
-                                    value: 'Ajouter une section photo',
-                                    onPressed: cubit.addSectionPictureSetting,
-                                    borderColor:
-                                        context.theme.colorScheme.onBackground,
-                                    textStyle:
-                                        context.textTheme.text1670016letter1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Divider(
-                            thickness: 2,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Text(
-                              'Paramétrages des intersections',
-                              style: context.textTheme.titleLarge,
-                            ),
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount:
-                                intersectionSettings.value!.entries.length,
-                            itemBuilder: (context, index) {
-                              final element = intersectionSettings
-                                  .value!.entries
-                                  .elementAt(index);
-                              return Row(
-                                children: [
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 16),
-                                      child: CustomTextFormField.required(
-                                        label: 'Titre de la section photo',
-                                        initialValue: element.key,
-                                        hintText: 'renseignez un nom',
-                                        onChanged: (key) => cubit
-                                            .setIntersectionPictureSettingFromIndex(
-                                          MapEntry<String, int>(
-                                            key,
-                                            element.value,
-                                          ),
-                                          element.key,
-                                          false,
-                                        ),
-                                        onSaved: (key) => key != null
-                                            ? cubit
-                                                .setIntersectionPictureSettingFromIndex(
-                                                MapEntry<String, int>(
-                                                  key,
-                                                  element.value,
-                                                ),
-                                                element.key,
-                                                false,
-                                              )
-                                            : null,
-                                        validator: (_) => intersectionSettings
-                                            .failure
-                                            .localized(context),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: CustomTextFormField.required(
-                                      label: 'Nombre de photos',
-                                      initialValue: element.value.toString(),
-                                      hintText: 'renseingez un nombre',
-                                      onChanged: (value) => cubit
-                                          .setIntersectionPictureSettingFromIndex(
-                                        MapEntry<String, int>(
-                                          element.key,
-                                          int.parse(value),
-                                        ),
-                                        element.key,
-                                        true,
-                                      ),
-                                      onSaved: (value) => value != null
-                                          ? cubit
-                                              .setIntersectionPictureSettingFromIndex(
-                                              MapEntry<String, int>(
-                                                element.key,
-                                                int.parse(value),
-                                              ),
-                                              element.key,
-                                              true,
-                                            )
-                                          : null,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                      ],
-                                      keyboardType: TextInputType.number,
-                                      validator: (_) => intersectionSettings
-                                          .failure
-                                          .localized(context),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 16,
-                                      top: 12,
-                                    ),
-                                    child: IconButton(
-                                      onPressed: index != 0
-                                          ? () => cubit
-                                                  .removeIntersectionPictureSetting(
-                                                element.key,
-                                              )
-                                          : null,
-                                      icon: Icon(
-                                        index != 0
-                                            ? Icons.delete
-                                            : Icons.delete_forever,
-                                        color: index != 0
-                                            ? null
-                                            : context
-                                                .theme.colorScheme.onBackground
-                                                .withOpacity(0.2),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: Center(
-                              child: SizedBox(
-                                child: FittedBox(
-                                  fit: BoxFit.fitHeight,
-                                  child: CustomButton.outlined(
-                                    value: 'Ajouter une section photo',
-                                    onPressed:
-                                        cubit.addIntersectionPictureSetting,
-                                    borderColor:
-                                        context.theme.colorScheme.onBackground,
-                                    textStyle:
-                                        context.textTheme.text1670016letter1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 32),
-                            child: CustomButton.filled(
-                              disabledBackgroundColor:
-                                  context.theme.colorScheme.onBackground,
-                              value: 'Importer',
-                              enabled: cubit.state.asLoaded!.canBeSubmitted,
-                              onPressed: () async {
-                                final result =
-                                    await FilePicker.platform.pickFiles(
-                                  allowMultiple: true,
-                                  type: FileType.image,
-                                );
-                                if (result?.files != null) {
-                                  final filesOk = cubit.setFiles(result!.files);
-                                  if (filesOk) {
-                                    await cubit.createProject().then(
-                                      (value) {
-                                        if (value) {
-                                          ShowSnackBar.showSuccess(
-                                            title: 'Création effectuée !',
-                                          );
-                                          context.goNamed(
-                                            DashboardPage.routeName,
-                                          );
-                                        }
-                                      },
-                                    );
-                                  }
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return const _CreationForm();
                 },
                 loading: (_) =>
                     const Center(child: CircularProgressIndicator()),
@@ -406,6 +66,267 @@ class ProjectCreatePage extends StatelessWidget {
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _CreationForm extends StatelessWidget {
+  const _CreationForm();
+  @override
+  Widget build(BuildContext context) {
+    return const SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _FormTitle(),
+            _ProjectNameField(),
+            Divider(
+              thickness: 2,
+            ),
+            _PictureSectionSettings(),
+            Divider(
+              thickness: 2,
+            ),
+            _PictureSectionSettings(
+              isSection: false,
+            ),
+            _CreateButton(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FormTitle extends StatelessWidget {
+  const _FormTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: Text(
+        l10n.createProject_globalParameters,
+        style: context.textTheme.titleLarge,
+      ),
+    );
+  }
+}
+
+class _ProjectNameField extends StatelessWidget {
+  const _ProjectNameField();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final setProjectName = context.read<ProjectCreateCubit>().setProjectName;
+    final projectName = context.select<ProjectCreateCubit, StringInput>(
+      (cubit) => cubit.state.asLoaded!.data.projectName,
+    );
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 12,
+      ),
+      child: CustomTextFormField.required(
+        label: l10n.createProject_projectNameLabel,
+        initialValue: projectName.value,
+        hintText: l10n.createProject_projectNameHint,
+        onChanged: setProjectName,
+        onSaved: setProjectName,
+        validator: (_) => projectName.failure.localized(context),
+      ),
+    );
+  }
+}
+
+class _PictureSectionSettings extends StatelessWidget {
+  const _PictureSectionSettings({
+    this.isSection = true,
+  });
+  final bool isSection;
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    final settings = context.select<ProjectCreateCubit, MapIntInput>(
+      (cubit) => isSection
+          ? cubit.state.asLoaded!.data.sectionPictureSetting
+          : cubit.state.asLoaded!.data.intersectionPictureSetting,
+    );
+    final setSettings = isSection
+        ? context.read<ProjectCreateCubit>().setSectionPictureSettingFromIndex
+        : context
+            .read<ProjectCreateCubit>()
+            .setIntersectionPictureSettingFromIndex;
+    final removeSetting = isSection
+        ? context.read<ProjectCreateCubit>().removeSectionPictureSetting
+        : context.read<ProjectCreateCubit>().removeIntersectionPictureSetting;
+    final addSetting = isSection
+        ? context.read<ProjectCreateCubit>().addSectionPictureSetting
+        : context.read<ProjectCreateCubit>().addIntersectionPictureSetting;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Text(
+            isSection
+                ? l10n.createProject_pictureSectionSettingsTitle
+                : l10n.createProject_pictureIntersectionSettingsTitle,
+            style: context.textTheme.titleLarge,
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: settings.value!.entries.length,
+          itemBuilder: (context, index) {
+            final element = settings.value!.entries.elementAt(index);
+            return Row(
+              children: [
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: CustomTextFormField.required(
+                      label: l10n.createProject_pictureSectionLabel,
+                      initialValue: element.key,
+                      hintText: l10n.createProject_pictureSectionHint,
+                      onChanged: (key) => setSettings(
+                        MapEntry<String, int>(
+                          key,
+                          element.value,
+                        ),
+                        element.key,
+                        false,
+                      ),
+                      onSaved: (key) => key == null
+                          ? null
+                          : setSettings(
+                              MapEntry<String, int>(
+                                key,
+                                element.value,
+                              ),
+                              element.key,
+                              false,
+                            ),
+                      validator: (_) => settings.failure.localized(context),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: CustomTextFormField.required(
+                    label: l10n.createProject_PictureNumberlabel,
+                    initialValue: element.value.toString(),
+                    hintText: l10n.createProject_pictureNumberHint,
+                    onChanged: (value) => setSettings(
+                      MapEntry<String, int>(
+                        element.key,
+                        int.parse(value),
+                      ),
+                      element.key,
+                      true,
+                    ),
+                    onSaved: (value) => value == null
+                        ? null
+                        : setSettings(
+                            MapEntry<String, int>(
+                              element.key,
+                              int.parse(value),
+                            ),
+                            element.key,
+                            true,
+                          ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    keyboardType: TextInputType.number,
+                    validator: (_) => settings.failure.localized(context),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    top: 12,
+                  ),
+                  child: IconButton(
+                    onPressed: index != 0
+                        ? () => removeSetting(
+                              element.key,
+                            )
+                        : null,
+                    icon: Icon(
+                      index != 0 ? Icons.delete : Icons.delete_forever,
+                      color: index != 0
+                          ? null
+                          : context.theme.colorScheme.onBackground
+                              .withOpacity(0.2),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Center(
+            child: SizedBox(
+              child: FittedBox(
+                fit: BoxFit.fitHeight,
+                child: CustomButton.outlined(
+                  value: l10n.createProject_AddPictureSection,
+                  onPressed: addSetting,
+                  borderColor: context.theme.colorScheme.onBackground,
+                  textStyle: context.textTheme.text1670016letter1,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CreateButton extends StatelessWidget {
+  const _CreateButton();
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final cubit = context.watch<ProjectCreateCubit>();
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 32),
+      child: CustomButton.filled(
+        disabledBackgroundColor: context.theme.colorScheme.onBackground,
+        value: l10n.createProject_ImportButton,
+        enabled: cubit.state.asLoaded!.canBeSubmitted,
+        onPressed: () async {
+          final result = await FilePicker.platform.pickFiles(
+            allowMultiple: true,
+            type: FileType.image,
+          );
+          if (result?.files != null) {
+            final filesOk = cubit.setFiles(result!.files);
+            if (filesOk) {
+              await cubit.createProject().then(
+                (value) {
+                  if (value) {
+                    ShowSnackBar.showSuccess(
+                      title: l10n.createProject_DoneSnackbarTitle,
+                    );
+                    context.goNamed(
+                      DashboardPage.routeName,
+                    );
+                  }
+                },
+              );
+            }
+          }
+        },
       ),
     );
   }

@@ -56,7 +56,7 @@ class ProjectApiSource {
           id: '',
           parcoursReferences: references,
         );
-        final json = project.toJson()..remove('id');
+        final json = createdProject.toJson()..remove('id');
         final result = await _firestore
             .collection(_projectCollection)
             .add(json)

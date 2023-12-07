@@ -1,5 +1,4 @@
 import 'package:ben_app/core/config/flavor/flavor.dart';
-import 'package:ben_app/core/injection/clients_dep.dart';
 import 'package:ben_app/core/injection/cubit_dep.dart';
 import 'package:ben_app/core/injection/datasource_dep.dart';
 import 'package:ben_app/core/injection/repository_dep.dart';
@@ -18,5 +17,5 @@ Future<void> initGetIt({
   await registerRepository();
   await registerUsecase();
   await registerSessionManagement();
-  addDioInterceptor();
+  //addDioInterceptor(); // No rest client ATM
 }
