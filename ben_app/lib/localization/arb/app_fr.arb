@@ -19,6 +19,20 @@
   "createProject_pictureSectionSettingsTitle": "Paramétrages des sections",
   "createProject_projectNameHint": "renseignez le nom du projet",
   "createProject_projectNameLabel": "Nom du projet",
+  "createProjectButton": "Créer un projet",
+  "dashboard_appbarTitle": "Accueil",
+  "dashboard_filledIntersectionLabel": "Intersections complétés: ",
+  "dashboard_FilledSectionsLabel": "Sections complétés: ",
+  "dashboard_noProjectAtm": "Aucun projet actuellement",
+  "dashboard_parcoursNumber": "Parcours N° {number}: ",
+  "@dashboard_parcoursNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboard_showProjectButton": "Consulter",
   "drawerItem_Export": "Export",
   "drawerItem_Import": "Créer un projet",
   "drawerItem_Project": "Projets",
@@ -81,6 +95,7 @@
   "loginPage_passwordFieldHint": "Entrez votre mot de passe",
   "loginPage_passwordFieldLabel": "Mot de passe",
   "loginPage_registerButton": "Créer un compte",
+  "projectDetail_appbarTitle": "Détail d'un projet",
   "registerPage_appbarTitle": "S'inscrire",
   "registerPage_pageTitle": "Créer un compte",
   "registerPage_registerButton": "S'inscrire",

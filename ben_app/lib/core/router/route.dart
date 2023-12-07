@@ -11,6 +11,7 @@ import 'package:ben_app/presentation/pages/dashboard/presentation/dashboard_page
 import 'package:ben_app/presentation/pages/legal/cgu_page.dart';
 import 'package:ben_app/presentation/pages/legal/privacy_page.dart';
 import 'package:ben_app/presentation/pages/project/create/presentation/project_create_page.dart';
+import 'package:ben_app/presentation/pages/project/detail/presentation/project_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -75,6 +76,20 @@ mixin RouterMixin<T extends StatefulWidget> on State<T> {
           state: state,
           child: const DashboardPage(),
         ),
+        routes: [
+          GoRoute(
+            path: Paths.projectDetail,
+            name: ProjectDetailPage.routeName,
+            parentNavigatorKey: _parentKey,
+            pageBuilder: (context, state) => buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: ProjectDetailPage(
+                projectId: (state.pathParameters['projectId']) ?? '',
+              ),
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: Paths.projectCreate,

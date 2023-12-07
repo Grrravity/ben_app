@@ -15,12 +15,14 @@ class MainScaffold extends StatelessWidget {
     this.menuSelectedIndex = 0,
     required this.body,
     this.withDrawer = true,
+    this.backgroundColor,
   });
 
   final MainAppBar? appBar;
   final Widget body;
   final int menuSelectedIndex;
   final bool withDrawer;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,8 @@ class MainScaffold extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                   ),
-                  color: context.theme.scaffoldBackgroundColor,
+                  color:
+                      backgroundColor ?? context.theme.scaffoldBackgroundColor,
                 ),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height,
