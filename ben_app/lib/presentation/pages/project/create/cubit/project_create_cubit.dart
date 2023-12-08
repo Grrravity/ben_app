@@ -15,6 +15,7 @@ import 'package:ben_app/domain/entities/project/section/section.dart';
 import 'package:ben_app/domain/entities/project_picture_metadata.dart';
 import 'package:ben_app/domain/entities/upload_file.dart';
 import 'package:ben_app/domain/entities/upload_file_result.dart';
+import 'package:ben_app/domain/usecase/files_usecase.dart';
 import 'package:ben_app/domain/usecase/project_usecase.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +25,10 @@ part '../../../../generated/pages/project/create/cubit/project_create_cubit.free
 part 'project_create_state.dart';
 
 class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
-  ProjectCreateCubit({required this.projectUsecase})
-      : super(
+  ProjectCreateCubit({
+    required this.projectUsecase,
+    required this.filesUsecase,
+  }) : super(
           FormBlocState.loaded(
             data: ProjectCreateState(
               projectName: StringInput(),
@@ -39,6 +42,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
         );
 
   final ProjectUsecase projectUsecase;
+  final FilesUsecase filesUsecase;
 
   void setProjectName(String? value) {
     if (value == null) return;
@@ -335,7 +339,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
           (e) => UploadFile(name: e.name, data: e.bytes!),
         )
         .toList();
-    final uploadResults = await projectUsecase.uploadFiles(
+    final uploadResults = await filesUsecase.uploadFiles(
       projectName: projectName,
       files: filesToUpload,
     );

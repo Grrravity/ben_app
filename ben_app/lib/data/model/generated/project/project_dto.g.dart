@@ -12,7 +12,7 @@ _$ProjectDTOImpl _$$ProjectDTOImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       parcoursReferences: (json['parcoursReferences'] as List<dynamic>)
           .map((e) => const DocumentSerializer()
-              .fromJson(e as DocumentReference<Object>))
+              .fromJson(e as DocumentReference<Map<String, dynamic>>))
           .toList(),
       settings:
           ProjectSettingsDTO.fromJson(json['settings'] as Map<String, dynamic>),

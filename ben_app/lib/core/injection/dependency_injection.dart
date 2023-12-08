@@ -1,5 +1,4 @@
 import 'package:ben_app/core/config/flavor/flavor.dart';
-import 'package:ben_app/core/injection/clients_dep.dart';
 import 'package:ben_app/core/injection/cubit_dep.dart';
 import 'package:ben_app/core/injection/datasource_dep.dart';
 import 'package:ben_app/core/injection/repository_dep.dart';
@@ -13,10 +12,10 @@ Future<void> initGetIt({
   EnvType? envType,
 }) async {
   await registerServices(envType: envType);
-  await registerApiClients();
+  //await registerApiClients(); // No rest client ATM
   await registerDataSources();
   await registerRepository();
   await registerUsecase();
   await registerSessionManagement();
-  addDioInterceptor();
+  //addDioInterceptor(); // No rest client ATM
 }

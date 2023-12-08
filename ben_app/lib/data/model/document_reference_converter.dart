@@ -3,13 +3,19 @@ import 'package:json_annotation/json_annotation.dart';
 
 class DocumentSerializer
     implements
-        JsonConverter<DocumentReference<Object>, DocumentReference<Object>> {
+        JsonConverter<DocumentReference<Map<String, dynamic>>,
+            DocumentReference<Map<String, dynamic>>> {
   const DocumentSerializer();
 
   @override
-  DocumentReference<Object> fromJson(DocumentReference<Object> docRef) =>
+  DocumentReference<Map<String, dynamic>> fromJson(
+    DocumentReference<Map<String, dynamic>> docRef,
+  ) =>
       docRef;
 
   @override
-  DocumentReference<Object> toJson(DocumentReference<Object> docRef) => docRef;
+  DocumentReference<Map<String, dynamic>> toJson(
+    DocumentReference<Map<String, dynamic>> docRef,
+  ) =>
+      docRef;
 }
