@@ -55,9 +55,7 @@ class ProjectCreatePage extends StatelessWidget {
               FormBlocState<ProjectCreateState>>(
             builder: (context, state) {
               return state.map(
-                loaded: (_) {
-                  return const _CreationForm();
-                },
+                loaded: (_) => const _CreationForm(),
                 loading: (_) =>
                     const Center(child: CircularProgressIndicator()),
                 loadFailed: (state) =>
@@ -83,16 +81,10 @@ class _CreationForm extends StatelessWidget {
           children: [
             _FormTitle(),
             _ProjectNameField(),
-            Divider(
-              thickness: 2,
-            ),
+            Divider(thickness: 2),
             _PictureSectionSettings(),
-            Divider(
-              thickness: 2,
-            ),
-            _PictureSectionSettings(
-              isSection: false,
-            ),
+            Divider(thickness: 2),
+            _PictureSectionSettings(isSection: false),
             _CreateButton(),
           ],
         ),

@@ -109,7 +109,7 @@ class _RegisterButton extends StatelessWidget {
         context.read<AuthCubit>().register().then((value) {
           if (value != null) {
             ShowSnackBar.showSuccess(
-              title: 'Compte créé',
+              title: l10n.accountCreatedSnackbarText,
             );
           }
         });
