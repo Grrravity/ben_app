@@ -33,20 +33,14 @@ const textTheme = TextTheme(
   displayLarge: ManropeTextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w800,
-    letterSpacing: -0.9,
-    height: 1.32,
   ),
   displayMedium: ManropeTextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w800,
-    letterSpacing: -0.9,
-    height: 0.93,
   ),
   displaySmall: ManropeTextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w700,
-    letterSpacing: -0.2,
-    height: 1,
   ),
   titleLarge: ManropeTextStyle(
     fontSize: 20,
@@ -55,12 +49,10 @@ const textTheme = TextTheme(
   titleMedium: ManropeTextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    height: 1.25,
   ),
   titleSmall: ManropeTextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    height: 0.5,
   ),
   headlineLarge: ManropeTextStyle(
     fontSize: 24,
@@ -73,10 +65,9 @@ const textTheme = TextTheme(
   headlineSmall: ManropeTextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    height: 1.5,
-    letterSpacing: 1,
   ),
   labelLarge: ManropeTextStyle(
+    fontSize: 18,
     fontWeight: FontWeight.w700,
   ),
   labelMedium: ManropeTextStyle(
@@ -88,10 +79,13 @@ const textTheme = TextTheme(
     fontSize: 12,
     fontWeight: FontWeight.w400,
   ),
+  bodyLarge: ManropeTextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+  ),
   bodyMedium: ManropeTextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
-    height: 1.5,
   ),
   bodySmall: ManropeTextStyle(
     fontSize: 14,

@@ -1,5 +1,6 @@
 {
   "@@locale": "fr",
+  "accountCreatedSnackbarText": "Compte créé",
   "button_backHome": "Retourner à l'accueil",
   "button_reset": "Réinitialiser",
   "counterAppBarTitle": "Compteur",
