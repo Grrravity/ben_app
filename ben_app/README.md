@@ -1,5 +1,6 @@
 **Table of content**
 
+- [Building the app](#building-the-app)
 - [Architecture](#architecture)
 - [Env \& Flavors](#env--flavors)
 - [State management](#state-management)
@@ -7,6 +8,28 @@
 - [Responsive](#responsive)
 - [Codemagic](#codemagic)
 
+# Building the app 
+Here are the commands to build the app : 
+
+## Web :
+Inte :
+```bash
+flutter build web --release  --target lib/main_inte.dart --dart-define-from-file ./.config.inte.json --no-tree-shake-icons
+```
+Prod (requires to createa .config.json) :
+```bash
+flutter build web --release  --target lib/main_prod.dart --dart-define-from-file ./.config.json --no-tree-shake-icons
+```
+
+## Mobile :
+Inte :
+```bash
+flutter build appbundle --release  --flavor inte --target lib/main_inte.dart --dart-define-from-file ./.config.inte.json
+```
+Prod (requires to createa .config.json) :
+```bash
+flutter build appbundle --release  --flavor prod --target lib/main_prod.dart --dart-define-from-file ./.config.json
+```
 
 # Architecture
 Ben_app is using Clean Architecture pattern.
