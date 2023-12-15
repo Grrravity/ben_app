@@ -20,7 +20,7 @@ class ProjectInformationTab extends StatelessWidget {
               _MainTile(project),
               const Divider(),
               _SectionsTile(project),
-              const SizedBox(height: 18)
+              const SizedBox(height: 18),
             ],
           ),
         ),

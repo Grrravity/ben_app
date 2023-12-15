@@ -20,7 +20,7 @@ class ProjectSettingsTab extends StatelessWidget {
               _SectionSettingsTile(settings),
               const Divider(),
               _IntersectionSettingsTile(settings),
-              const SizedBox(height: 18)
+              const SizedBox(height: 18),
             ],
           ),
         ),
