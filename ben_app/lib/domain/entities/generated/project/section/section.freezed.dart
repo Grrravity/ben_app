@@ -280,7 +280,7 @@ class _$SectionImpl implements _Section {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SectionImpl &&
@@ -479,7 +479,7 @@ class _$SectionContentImpl implements _SectionContent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SectionContentImpl &&

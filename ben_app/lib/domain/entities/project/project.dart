@@ -23,7 +23,7 @@ class Project with _$Project {
 class CreateProjectCmd with _$CreateProjectCmd {
   const factory CreateProjectCmd({
     required String name,
-    required List<Parcours> parcours,
+    required List<CreateParcoursCmd> parcours,
     required ProjectSettings settings,
   }) = _CreateProjectCmd;
 }

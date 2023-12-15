@@ -11,7 +11,7 @@ class CreateProjectCmdDTO with _$CreateProjectCmdDTO {
   @JsonSerializable(explicitToJson: true)
   const factory CreateProjectCmdDTO({
     required String name,
-    required List<ParcoursDTO> parcours,
+    required List<CreateParcoursCmdDTO> parcours,
     required ProjectSettingsDTO settings,
   }) = _CreateProjectCmdDTO;
 

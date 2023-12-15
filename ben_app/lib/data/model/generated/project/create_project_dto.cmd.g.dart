@@ -11,7 +11,7 @@ _$CreateProjectCmdDTOImpl _$$CreateProjectCmdDTOImplFromJson(
     _$CreateProjectCmdDTOImpl(
       name: json['name'] as String,
       parcours: (json['parcours'] as List<dynamic>)
-          .map((e) => ParcoursDTO.fromJson(e as Map<String, dynamic>))
+          .map((e) => CreateParcoursCmdDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
       settings:
           ProjectSettingsDTO.fromJson(json['settings'] as Map<String, dynamic>),

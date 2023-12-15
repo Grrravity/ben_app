@@ -132,7 +132,7 @@ class _$ProjectContentDTOImpl implements _ProjectContentDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProjectContentDTOImpl &&

@@ -165,7 +165,7 @@ class _$AsyncValueLoadingImpl<DataT, MetadataT>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AsyncValueLoadingImpl<DataT, MetadataT> &&
@@ -336,7 +336,7 @@ class _$AsyncValueLoadedImpl<DataT, MetadataT>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AsyncValueLoadedImpl<DataT, MetadataT> &&
@@ -515,7 +515,7 @@ class _$AsyncValueErrorImpl<DataT, MetadataT>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AsyncValueErrorImpl<DataT, MetadataT> &&

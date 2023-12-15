@@ -18,7 +18,7 @@ class ParcoursUsecase {
 
   Future<Either<Failure, List<DocumentReference<Map<String, dynamic>>>>>
       createParcours({
-    required List<Parcours> parcours,
+    required List<CreateParcoursCmd> parcours,
     required String projectName,
   }) =>
           _parcoursRepository.createParcours(

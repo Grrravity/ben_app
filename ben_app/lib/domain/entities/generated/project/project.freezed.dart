@@ -238,7 +238,7 @@ class _$ProjectImpl implements _Project {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProjectImpl &&
@@ -314,7 +314,7 @@ abstract class _Project implements Project {
 /// @nodoc
 mixin _$CreateProjectCmd {
   String get name => throw _privateConstructorUsedError;
-  List<Parcours> get parcours => throw _privateConstructorUsedError;
+  List<CreateParcoursCmd> get parcours => throw _privateConstructorUsedError;
   ProjectSettings get settings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -328,7 +328,10 @@ abstract class $CreateProjectCmdCopyWith<$Res> {
           CreateProjectCmd value, $Res Function(CreateProjectCmd) then) =
       _$CreateProjectCmdCopyWithImpl<$Res, CreateProjectCmd>;
   @useResult
-  $Res call({String name, List<Parcours> parcours, ProjectSettings settings});
+  $Res call(
+      {String name,
+      List<CreateParcoursCmd> parcours,
+      ProjectSettings settings});
 
   $ProjectSettingsCopyWith<$Res> get settings;
 }
@@ -358,7 +361,7 @@ class _$CreateProjectCmdCopyWithImpl<$Res, $Val extends CreateProjectCmd>
       parcours: null == parcours
           ? _value.parcours
           : parcours // ignore: cast_nullable_to_non_nullable
-              as List<Parcours>,
+              as List<CreateParcoursCmd>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -383,7 +386,10 @@ abstract class _$$CreateProjectCmdImplCopyWith<$Res>
       __$$CreateProjectCmdImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, List<Parcours> parcours, ProjectSettings settings});
+  $Res call(
+      {String name,
+      List<CreateParcoursCmd> parcours,
+      ProjectSettings settings});
 
   @override
   $ProjectSettingsCopyWith<$Res> get settings;
@@ -412,7 +418,7 @@ class __$$CreateProjectCmdImplCopyWithImpl<$Res>
       parcours: null == parcours
           ? _value._parcours
           : parcours // ignore: cast_nullable_to_non_nullable
-              as List<Parcours>,
+              as List<CreateParcoursCmd>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -426,15 +432,15 @@ class __$$CreateProjectCmdImplCopyWithImpl<$Res>
 class _$CreateProjectCmdImpl implements _CreateProjectCmd {
   const _$CreateProjectCmdImpl(
       {required this.name,
-      required final List<Parcours> parcours,
+      required final List<CreateParcoursCmd> parcours,
       required this.settings})
       : _parcours = parcours;
 
   @override
   final String name;
-  final List<Parcours> _parcours;
+  final List<CreateParcoursCmd> _parcours;
   @override
-  List<Parcours> get parcours {
+  List<CreateParcoursCmd> get parcours {
     if (_parcours is EqualUnmodifiableListView) return _parcours;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_parcours);
@@ -449,7 +455,7 @@ class _$CreateProjectCmdImpl implements _CreateProjectCmd {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProjectCmdImpl &&
@@ -474,13 +480,13 @@ class _$CreateProjectCmdImpl implements _CreateProjectCmd {
 abstract class _CreateProjectCmd implements CreateProjectCmd {
   const factory _CreateProjectCmd(
       {required final String name,
-      required final List<Parcours> parcours,
+      required final List<CreateParcoursCmd> parcours,
       required final ProjectSettings settings}) = _$CreateProjectCmdImpl;
 
   @override
   String get name;
   @override
-  List<Parcours> get parcours;
+  List<CreateParcoursCmd> get parcours;
   @override
   ProjectSettings get settings;
   @override

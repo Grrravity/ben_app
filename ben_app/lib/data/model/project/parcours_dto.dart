@@ -10,6 +10,7 @@ part '../generated/project/parcours_dto.g.dart';
 class ParcoursDTO with _$ParcoursDTO {
   @JsonSerializable(explicitToJson: true)
   const factory ParcoursDTO({
+    required String id,
     required String name,
     required List<String> ways,
     required List<String> municipalities,
@@ -23,6 +24,7 @@ class ParcoursDTO with _$ParcoursDTO {
 
 extension OnParcours on Parcours {
   ParcoursDTO get toDto => ParcoursDTO(
+        id: id,
         name: name,
         ways: ways,
         municipalities: municipalities,
@@ -37,6 +39,7 @@ extension OnParcoursList on List<Parcours> {
 
 extension OnParcoursDTO on ParcoursDTO {
   Parcours get toEntity => Parcours(
+        id: id,
         name: name,
         ways: ways,
         municipalities: municipalities,
@@ -47,4 +50,49 @@ extension OnParcoursDTO on ParcoursDTO {
 
 extension OnParcoursDTOList on List<ParcoursDTO> {
   List<Parcours> get toEntity => map((dto) => dto.toEntity).toList();
+}
+
+@freezed
+class CreateParcoursCmdDTO with _$CreateParcoursCmdDTO {
+  @JsonSerializable(explicitToJson: true)
+  const factory CreateParcoursCmdDTO({
+    required String name,
+    required List<String> ways,
+    required List<String> municipalities,
+    required List<SectionDTO> sections,
+    required List<IntersectionDTO> intersections,
+  }) = _CreateParcoursCmdDTO;
+
+  factory CreateParcoursCmdDTO.fromJson(Map<String, dynamic> json) =>
+      _$CreateParcoursCmdDTOFromJson(json);
+}
+
+extension OnCreateParcoursCmd on CreateParcoursCmd {
+  CreateParcoursCmdDTO get toDto => CreateParcoursCmdDTO(
+        name: name,
+        ways: ways,
+        municipalities: municipalities,
+        sections: sections.toDto,
+        intersections: intersections.toDto,
+      );
+}
+
+extension OnCreateParcoursCmdList on List<CreateParcoursCmd> {
+  List<CreateParcoursCmdDTO> get toDto =>
+      map((CreateParcoursCmd entity) => entity.toDto).toList();
+}
+
+extension OnCreateParcoursCmdDTO on CreateParcoursCmdDTO {
+  CreateParcoursCmd get toEntity => CreateParcoursCmd(
+        name: name,
+        ways: ways,
+        municipalities: municipalities,
+        sections: sections.toEntity,
+        intersections: intersections.toEntity,
+      );
+}
+
+extension OnCreateParcoursCmdDTOList on List<CreateParcoursCmdDTO> {
+  List<CreateParcoursCmd> get toEntity =>
+      map((CreateParcoursCmdDTO dto) => dto.toEntity).toList();
 }

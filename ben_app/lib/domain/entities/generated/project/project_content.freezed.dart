@@ -123,7 +123,7 @@ class _$ProjectContentImpl implements _ProjectContent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProjectContentImpl &&

@@ -21,7 +21,7 @@ CreateProjectCmdDTO _$CreateProjectCmdDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CreateProjectCmdDTO {
   String get name => throw _privateConstructorUsedError;
-  List<ParcoursDTO> get parcours => throw _privateConstructorUsedError;
+  List<CreateParcoursCmdDTO> get parcours => throw _privateConstructorUsedError;
   ProjectSettingsDTO get settings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,9 @@ abstract class $CreateProjectCmdDTOCopyWith<$Res> {
       _$CreateProjectCmdDTOCopyWithImpl<$Res, CreateProjectCmdDTO>;
   @useResult
   $Res call(
-      {String name, List<ParcoursDTO> parcours, ProjectSettingsDTO settings});
+      {String name,
+      List<CreateParcoursCmdDTO> parcours,
+      ProjectSettingsDTO settings});
 
   $ProjectSettingsDTOCopyWith<$Res> get settings;
 }
@@ -67,7 +69,7 @@ class _$CreateProjectCmdDTOCopyWithImpl<$Res, $Val extends CreateProjectCmdDTO>
       parcours: null == parcours
           ? _value.parcours
           : parcours // ignore: cast_nullable_to_non_nullable
-              as List<ParcoursDTO>,
+              as List<CreateParcoursCmdDTO>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -93,7 +95,9 @@ abstract class _$$CreateProjectCmdDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, List<ParcoursDTO> parcours, ProjectSettingsDTO settings});
+      {String name,
+      List<CreateParcoursCmdDTO> parcours,
+      ProjectSettingsDTO settings});
 
   @override
   $ProjectSettingsDTOCopyWith<$Res> get settings;
@@ -122,7 +126,7 @@ class __$$CreateProjectCmdDTOImplCopyWithImpl<$Res>
       parcours: null == parcours
           ? _value._parcours
           : parcours // ignore: cast_nullable_to_non_nullable
-              as List<ParcoursDTO>,
+              as List<CreateParcoursCmdDTO>,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -137,7 +141,7 @@ class __$$CreateProjectCmdDTOImplCopyWithImpl<$Res>
 class _$CreateProjectCmdDTOImpl implements _CreateProjectCmdDTO {
   const _$CreateProjectCmdDTOImpl(
       {required this.name,
-      required final List<ParcoursDTO> parcours,
+      required final List<CreateParcoursCmdDTO> parcours,
       required this.settings})
       : _parcours = parcours;
 
@@ -146,9 +150,9 @@ class _$CreateProjectCmdDTOImpl implements _CreateProjectCmdDTO {
 
   @override
   final String name;
-  final List<ParcoursDTO> _parcours;
+  final List<CreateParcoursCmdDTO> _parcours;
   @override
-  List<ParcoursDTO> get parcours {
+  List<CreateParcoursCmdDTO> get parcours {
     if (_parcours is EqualUnmodifiableListView) return _parcours;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_parcours);
@@ -163,7 +167,7 @@ class _$CreateProjectCmdDTOImpl implements _CreateProjectCmdDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProjectCmdDTOImpl &&
@@ -196,7 +200,7 @@ class _$CreateProjectCmdDTOImpl implements _CreateProjectCmdDTO {
 abstract class _CreateProjectCmdDTO implements CreateProjectCmdDTO {
   const factory _CreateProjectCmdDTO(
       {required final String name,
-      required final List<ParcoursDTO> parcours,
+      required final List<CreateParcoursCmdDTO> parcours,
       required final ProjectSettingsDTO settings}) = _$CreateProjectCmdDTOImpl;
 
   factory _CreateProjectCmdDTO.fromJson(Map<String, dynamic> json) =
@@ -205,7 +209,7 @@ abstract class _CreateProjectCmdDTO implements CreateProjectCmdDTO {
   @override
   String get name;
   @override
-  List<ParcoursDTO> get parcours;
+  List<CreateParcoursCmdDTO> get parcours;
   @override
   ProjectSettingsDTO get settings;
   @override

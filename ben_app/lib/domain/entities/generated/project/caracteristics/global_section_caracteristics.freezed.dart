@@ -241,7 +241,7 @@ class _$GlobalSectionCaracteristicsImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GlobalSectionCaracteristicsImpl &&
@@ -433,7 +433,7 @@ class _$ParkingCaracteristicsImpl implements _ParkingCaracteristics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ParkingCaracteristicsImpl &&
@@ -678,7 +678,7 @@ class _$SpeedCaracteristicsImpl implements _SpeedCaracteristics {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SpeedCaracteristicsImpl &&

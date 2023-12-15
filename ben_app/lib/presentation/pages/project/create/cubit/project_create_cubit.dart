@@ -347,7 +347,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
     return uploadResults.getRight();
   }
 
-  List<Parcours> _generateParcours({
+  List<CreateParcoursCmd> _generateParcours({
     required List<PlatformFile> files,
     required List<UploadFileResult> filesData,
     required ProjectSettings settings,
@@ -360,7 +360,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
       }
     }
 
-    final parcours = <Parcours>[];
+    final parcours = <CreateParcoursCmd>[];
     for (final parcour in parcoursNames) {
       final matchingFiles = files
           .where(
@@ -369,7 +369,7 @@ class ProjectCreateCubit extends Cubit<FormBlocState<ProjectCreateState>> {
           )
           .toList();
       parcours.add(
-        Parcours(
+        CreateParcoursCmd(
           name: parcour,
           ways: [],
           municipalities: [],

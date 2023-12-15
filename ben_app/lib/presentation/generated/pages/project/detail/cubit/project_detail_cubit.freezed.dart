@@ -137,7 +137,7 @@ class _$ProjectDetailStateImpl extends _ProjectDetailState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProjectDetailStateImpl &&

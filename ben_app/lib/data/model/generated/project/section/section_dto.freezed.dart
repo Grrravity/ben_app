@@ -292,7 +292,7 @@ class _$SectionDTOImpl implements _SectionDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SectionDTOImpl &&
@@ -513,7 +513,7 @@ class _$SectionContentDTOImpl implements _SectionContentDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SectionContentDTOImpl &&

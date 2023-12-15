@@ -14,14 +14,18 @@ class ParcoursApiSource {
   ) async {
     return _log(
       () async {
-        final result = await _firestore.collection(_parcoursCollection).get();
-        return result.docs
-            .map(
-              (e) => ParcoursDTO.fromJson(
-                e.data()..addAll(<String, dynamic>{'id': e.id}),
-              ),
-            )
-            .toList();
+        final results = <ParcoursDTO>[];
+        for (final reference in parcoursReferences) {
+          final result = await _firestore
+              .collection(_parcoursCollection)
+              .doc(reference.id)
+              .get();
+          final data = result.data();
+          if (data != null) {
+            results.add(ParcoursDTO.fromJson(data..addAll({'id': result.id})));
+          }
+        }
+        return results;
       },
       'getProjects',
       _parcoursCollection,
@@ -29,7 +33,7 @@ class ParcoursApiSource {
   }
 
   Future<List<DocumentReference<Map<String, dynamic>>>> createParcours({
-    required List<ParcoursDTO> parcours,
+    required List<CreateParcoursCmdDTO> parcours,
     required String projectName,
   }) async {
     return _log(

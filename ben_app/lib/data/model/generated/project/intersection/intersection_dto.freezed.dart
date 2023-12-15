@@ -293,7 +293,7 @@ class _$IntersectionDTOImpl implements _IntersectionDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IntersectionDTOImpl &&
@@ -520,7 +520,7 @@ class _$IntersectionContentDTOImpl implements _IntersectionContentDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IntersectionContentDTOImpl &&

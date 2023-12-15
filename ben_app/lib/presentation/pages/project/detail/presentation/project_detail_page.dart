@@ -1,21 +1,25 @@
 import 'package:ben_app/core/extension/extension_export.dart';
 import 'package:ben_app/core/injection/dependency_injection.dart';
 import 'package:ben_app/core/utils/async_value.dart';
+import 'package:ben_app/domain/entities/project/parcours.dart';
 import 'package:ben_app/domain/entities/project/project.dart';
 import 'package:ben_app/domain/entities/project/project_settings.dart';
 import 'package:ben_app/domain/usecase/parcours_usecase.dart';
 import 'package:ben_app/domain/usecase/project_usecase.dart';
 import 'package:ben_app/presentation/pages/project/detail/cubit/project_detail_cubit.dart';
 import 'package:ben_app/presentation/widgets/app_bar.dart';
+import 'package:ben_app/presentation/widgets/button.dart';
 import 'package:ben_app/presentation/widgets/layout/custom_scaffold.dart';
 import 'package:ben_app/presentation/widgets/layout/error_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 part 'widgets/content_tab_wrappers.dart';
 part 'widgets/project_detail_tab.dart';
 part 'widgets/project_information.dart';
+part 'widgets/project_parcours.dart';
 part 'widgets/project_settings.dart';
 
 class ProjectDetailPage extends StatelessWidget {

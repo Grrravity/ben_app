@@ -100,7 +100,7 @@ class _$AnonymousImpl extends _Anonymous {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$AnonymousImpl);
   }
@@ -235,7 +235,7 @@ class _$SessionAuthenticatedImpl extends _SessionAuthenticated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SessionAuthenticatedImpl &&

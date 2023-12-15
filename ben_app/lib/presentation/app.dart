@@ -81,12 +81,12 @@ class _AppState extends State<_App> with AppThemeMixin, RouterMixin {
           Breakpoint(start: 1024, end: double.infinity, name: DESKTOP),
         ],
       ),
-      scrollBehavior: MouseClickScrollBehavior(),
+      scrollBehavior: CustomScrollBehavior(),
     );
   }
 }
 
-class MouseClickScrollBehavior extends MaterialScrollBehavior {
+class CustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {

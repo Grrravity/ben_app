@@ -97,6 +97,7 @@
   "loginPage_passwordFieldLabel": "Mot de passe",
   "loginPage_registerButton": "Créer un compte",
   "projectDetail_appbarTitle": "Détail d'un projet",
+  "projectDetail_showParcoursButton": "Consulter",
   "projectInformation_generalTileTitle": "Informations générales",
   "projectInformation_intersectionDoneTitle": "Intersections effectuées",
   "projectInformation_intersectionNumberTitle": "Nombre d'intersections",

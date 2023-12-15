@@ -200,7 +200,7 @@ class _$GlobalIntersectionCaracteristicsImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GlobalIntersectionCaracteristicsImpl &&
@@ -387,7 +387,7 @@ class _$IntersectionManagementImpl implements _IntersectionManagement {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IntersectionManagementImpl &&
@@ -564,7 +564,7 @@ class _$BikeManagementImpl implements _BikeManagement {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BikeManagementImpl &&
@@ -769,7 +769,7 @@ class _$IntersectionWaythroughImpl implements _IntersectionWaythrough {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IntersectionWaythroughImpl &&

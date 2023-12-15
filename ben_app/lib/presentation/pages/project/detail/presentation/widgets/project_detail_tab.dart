@@ -88,7 +88,7 @@ class _ProjectDetailTabState extends State<ProjectDetailTab>
                   controller: _tabController,
                   children: const [
                     ProjectInformationTab(),
-                    ProjectInformationTab(),
+                    ProjectParcoursTab(),
                     ProjectSettingsTab(),
                   ],
                 ),

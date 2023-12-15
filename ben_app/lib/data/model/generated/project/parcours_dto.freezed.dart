@@ -20,6 +20,7 @@ ParcoursDTO _$ParcoursDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ParcoursDTO {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<String> get ways => throw _privateConstructorUsedError;
   List<String> get municipalities => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $ParcoursDTOCopyWith<$Res> {
       _$ParcoursDTOCopyWithImpl<$Res, ParcoursDTO>;
   @useResult
   $Res call(
-      {String name,
+      {String id,
+      String name,
       List<String> ways,
       List<String> municipalities,
       List<SectionDTO> sections,
@@ -50,6 +52,282 @@ abstract class $ParcoursDTOCopyWith<$Res> {
 class _$ParcoursDTOCopyWithImpl<$Res, $Val extends ParcoursDTO>
     implements $ParcoursDTOCopyWith<$Res> {
   _$ParcoursDTOCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? ways = null,
+    Object? municipalities = null,
+    Object? sections = null,
+    Object? intersections = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      ways: null == ways
+          ? _value.ways
+          : ways // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      municipalities: null == municipalities
+          ? _value.municipalities
+          : municipalities // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sections: null == sections
+          ? _value.sections
+          : sections // ignore: cast_nullable_to_non_nullable
+              as List<SectionDTO>,
+      intersections: null == intersections
+          ? _value.intersections
+          : intersections // ignore: cast_nullable_to_non_nullable
+              as List<IntersectionDTO>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ParcoursDTOImplCopyWith<$Res>
+    implements $ParcoursDTOCopyWith<$Res> {
+  factory _$$ParcoursDTOImplCopyWith(
+          _$ParcoursDTOImpl value, $Res Function(_$ParcoursDTOImpl) then) =
+      __$$ParcoursDTOImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      List<String> ways,
+      List<String> municipalities,
+      List<SectionDTO> sections,
+      List<IntersectionDTO> intersections});
+}
+
+/// @nodoc
+class __$$ParcoursDTOImplCopyWithImpl<$Res>
+    extends _$ParcoursDTOCopyWithImpl<$Res, _$ParcoursDTOImpl>
+    implements _$$ParcoursDTOImplCopyWith<$Res> {
+  __$$ParcoursDTOImplCopyWithImpl(
+      _$ParcoursDTOImpl _value, $Res Function(_$ParcoursDTOImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? ways = null,
+    Object? municipalities = null,
+    Object? sections = null,
+    Object? intersections = null,
+  }) {
+    return _then(_$ParcoursDTOImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      ways: null == ways
+          ? _value._ways
+          : ways // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      municipalities: null == municipalities
+          ? _value._municipalities
+          : municipalities // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sections: null == sections
+          ? _value._sections
+          : sections // ignore: cast_nullable_to_non_nullable
+              as List<SectionDTO>,
+      intersections: null == intersections
+          ? _value._intersections
+          : intersections // ignore: cast_nullable_to_non_nullable
+              as List<IntersectionDTO>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$ParcoursDTOImpl implements _ParcoursDTO {
+  const _$ParcoursDTOImpl(
+      {required this.id,
+      required this.name,
+      required final List<String> ways,
+      required final List<String> municipalities,
+      required final List<SectionDTO> sections,
+      required final List<IntersectionDTO> intersections})
+      : _ways = ways,
+        _municipalities = municipalities,
+        _sections = sections,
+        _intersections = intersections;
+
+  factory _$ParcoursDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ParcoursDTOImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String name;
+  final List<String> _ways;
+  @override
+  List<String> get ways {
+    if (_ways is EqualUnmodifiableListView) return _ways;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_ways);
+  }
+
+  final List<String> _municipalities;
+  @override
+  List<String> get municipalities {
+    if (_municipalities is EqualUnmodifiableListView) return _municipalities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_municipalities);
+  }
+
+  final List<SectionDTO> _sections;
+  @override
+  List<SectionDTO> get sections {
+    if (_sections is EqualUnmodifiableListView) return _sections;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sections);
+  }
+
+  final List<IntersectionDTO> _intersections;
+  @override
+  List<IntersectionDTO> get intersections {
+    if (_intersections is EqualUnmodifiableListView) return _intersections;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_intersections);
+  }
+
+  @override
+  String toString() {
+    return 'ParcoursDTO(id: $id, name: $name, ways: $ways, municipalities: $municipalities, sections: $sections, intersections: $intersections)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ParcoursDTOImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._ways, _ways) &&
+            const DeepCollectionEquality()
+                .equals(other._municipalities, _municipalities) &&
+            const DeepCollectionEquality().equals(other._sections, _sections) &&
+            const DeepCollectionEquality()
+                .equals(other._intersections, _intersections));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_ways),
+      const DeepCollectionEquality().hash(_municipalities),
+      const DeepCollectionEquality().hash(_sections),
+      const DeepCollectionEquality().hash(_intersections));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ParcoursDTOImplCopyWith<_$ParcoursDTOImpl> get copyWith =>
+      __$$ParcoursDTOImplCopyWithImpl<_$ParcoursDTOImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ParcoursDTOImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ParcoursDTO implements ParcoursDTO {
+  const factory _ParcoursDTO(
+      {required final String id,
+      required final String name,
+      required final List<String> ways,
+      required final List<String> municipalities,
+      required final List<SectionDTO> sections,
+      required final List<IntersectionDTO> intersections}) = _$ParcoursDTOImpl;
+
+  factory _ParcoursDTO.fromJson(Map<String, dynamic> json) =
+      _$ParcoursDTOImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  List<String> get ways;
+  @override
+  List<String> get municipalities;
+  @override
+  List<SectionDTO> get sections;
+  @override
+  List<IntersectionDTO> get intersections;
+  @override
+  @JsonKey(ignore: true)
+  _$$ParcoursDTOImplCopyWith<_$ParcoursDTOImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+CreateParcoursCmdDTO _$CreateParcoursCmdDTOFromJson(Map<String, dynamic> json) {
+  return _CreateParcoursCmdDTO.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CreateParcoursCmdDTO {
+  String get name => throw _privateConstructorUsedError;
+  List<String> get ways => throw _privateConstructorUsedError;
+  List<String> get municipalities => throw _privateConstructorUsedError;
+  List<SectionDTO> get sections => throw _privateConstructorUsedError;
+  List<IntersectionDTO> get intersections => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreateParcoursCmdDTOCopyWith<CreateParcoursCmdDTO> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateParcoursCmdDTOCopyWith<$Res> {
+  factory $CreateParcoursCmdDTOCopyWith(CreateParcoursCmdDTO value,
+          $Res Function(CreateParcoursCmdDTO) then) =
+      _$CreateParcoursCmdDTOCopyWithImpl<$Res, CreateParcoursCmdDTO>;
+  @useResult
+  $Res call(
+      {String name,
+      List<String> ways,
+      List<String> municipalities,
+      List<SectionDTO> sections,
+      List<IntersectionDTO> intersections});
+}
+
+/// @nodoc
+class _$CreateParcoursCmdDTOCopyWithImpl<$Res,
+        $Val extends CreateParcoursCmdDTO>
+    implements $CreateParcoursCmdDTOCopyWith<$Res> {
+  _$CreateParcoursCmdDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,11 +369,11 @@ class _$ParcoursDTOCopyWithImpl<$Res, $Val extends ParcoursDTO>
 }
 
 /// @nodoc
-abstract class _$$ParcoursDTOImplCopyWith<$Res>
-    implements $ParcoursDTOCopyWith<$Res> {
-  factory _$$ParcoursDTOImplCopyWith(
-          _$ParcoursDTOImpl value, $Res Function(_$ParcoursDTOImpl) then) =
-      __$$ParcoursDTOImplCopyWithImpl<$Res>;
+abstract class _$$CreateParcoursCmdDTOImplCopyWith<$Res>
+    implements $CreateParcoursCmdDTOCopyWith<$Res> {
+  factory _$$CreateParcoursCmdDTOImplCopyWith(_$CreateParcoursCmdDTOImpl value,
+          $Res Function(_$CreateParcoursCmdDTOImpl) then) =
+      __$$CreateParcoursCmdDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +385,11 @@ abstract class _$$ParcoursDTOImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ParcoursDTOImplCopyWithImpl<$Res>
-    extends _$ParcoursDTOCopyWithImpl<$Res, _$ParcoursDTOImpl>
-    implements _$$ParcoursDTOImplCopyWith<$Res> {
-  __$$ParcoursDTOImplCopyWithImpl(
-      _$ParcoursDTOImpl _value, $Res Function(_$ParcoursDTOImpl) _then)
+class __$$CreateParcoursCmdDTOImplCopyWithImpl<$Res>
+    extends _$CreateParcoursCmdDTOCopyWithImpl<$Res, _$CreateParcoursCmdDTOImpl>
+    implements _$$CreateParcoursCmdDTOImplCopyWith<$Res> {
+  __$$CreateParcoursCmdDTOImplCopyWithImpl(_$CreateParcoursCmdDTOImpl _value,
+      $Res Function(_$CreateParcoursCmdDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +401,7 @@ class __$$ParcoursDTOImplCopyWithImpl<$Res>
     Object? sections = null,
     Object? intersections = null,
   }) {
-    return _then(_$ParcoursDTOImpl(
+    return _then(_$CreateParcoursCmdDTOImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -151,8 +429,8 @@ class __$$ParcoursDTOImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$ParcoursDTOImpl implements _ParcoursDTO {
-  const _$ParcoursDTOImpl(
+class _$CreateParcoursCmdDTOImpl implements _CreateParcoursCmdDTO {
+  const _$CreateParcoursCmdDTOImpl(
       {required this.name,
       required final List<String> ways,
       required final List<String> municipalities,
@@ -163,8 +441,8 @@ class _$ParcoursDTOImpl implements _ParcoursDTO {
         _sections = sections,
         _intersections = intersections;
 
-  factory _$ParcoursDTOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ParcoursDTOImplFromJson(json);
+  factory _$CreateParcoursCmdDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateParcoursCmdDTOImplFromJson(json);
 
   @override
   final String name;
@@ -202,14 +480,14 @@ class _$ParcoursDTOImpl implements _ParcoursDTO {
 
   @override
   String toString() {
-    return 'ParcoursDTO(name: $name, ways: $ways, municipalities: $municipalities, sections: $sections, intersections: $intersections)';
+    return 'CreateParcoursCmdDTO(name: $name, ways: $ways, municipalities: $municipalities, sections: $sections, intersections: $intersections)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ParcoursDTOImpl &&
+            other is _$CreateParcoursCmdDTOImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._ways, _ways) &&
             const DeepCollectionEquality()
@@ -232,27 +510,30 @@ class _$ParcoursDTOImpl implements _ParcoursDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ParcoursDTOImplCopyWith<_$ParcoursDTOImpl> get copyWith =>
-      __$$ParcoursDTOImplCopyWithImpl<_$ParcoursDTOImpl>(this, _$identity);
+  _$$CreateParcoursCmdDTOImplCopyWith<_$CreateParcoursCmdDTOImpl>
+      get copyWith =>
+          __$$CreateParcoursCmdDTOImplCopyWithImpl<_$CreateParcoursCmdDTOImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ParcoursDTOImplToJson(
+    return _$$CreateParcoursCmdDTOImplToJson(
       this,
     );
   }
 }
 
-abstract class _ParcoursDTO implements ParcoursDTO {
-  const factory _ParcoursDTO(
-      {required final String name,
-      required final List<String> ways,
-      required final List<String> municipalities,
-      required final List<SectionDTO> sections,
-      required final List<IntersectionDTO> intersections}) = _$ParcoursDTOImpl;
+abstract class _CreateParcoursCmdDTO implements CreateParcoursCmdDTO {
+  const factory _CreateParcoursCmdDTO(
+          {required final String name,
+          required final List<String> ways,
+          required final List<String> municipalities,
+          required final List<SectionDTO> sections,
+          required final List<IntersectionDTO> intersections}) =
+      _$CreateParcoursCmdDTOImpl;
 
-  factory _ParcoursDTO.fromJson(Map<String, dynamic> json) =
-      _$ParcoursDTOImpl.fromJson;
+  factory _CreateParcoursCmdDTO.fromJson(Map<String, dynamic> json) =
+      _$CreateParcoursCmdDTOImpl.fromJson;
 
   @override
   String get name;
@@ -266,6 +547,6 @@ abstract class _ParcoursDTO implements ParcoursDTO {
   List<IntersectionDTO> get intersections;
   @override
   @JsonKey(ignore: true)
-  _$$ParcoursDTOImplCopyWith<_$ParcoursDTOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreateParcoursCmdDTOImplCopyWith<_$CreateParcoursCmdDTOImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

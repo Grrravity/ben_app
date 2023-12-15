@@ -197,7 +197,7 @@ class _$BikabledCaracteristicsDTOImpl implements _BikabledCaracteristicsDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BikabledCaracteristicsDTOImpl &&
@@ -604,7 +604,7 @@ class _$CycleManagementCaracteristicsDTOImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CycleManagementCaracteristicsDTOImpl &&
@@ -878,7 +878,7 @@ class _$RoadcareCaracteristicsDTOImpl implements _RoadcareCaracteristicsDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RoadcareCaracteristicsDTOImpl &&
@@ -1081,7 +1081,7 @@ class _$RoadQualityCaracteristicsDTOImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RoadQualityCaracteristicsDTOImpl &&

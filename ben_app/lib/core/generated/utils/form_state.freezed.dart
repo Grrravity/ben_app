@@ -114,7 +114,7 @@ class _$LoadingFormImpl<DataT> extends LoadingForm<DataT> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoadingFormImpl<DataT>);
   }
@@ -248,7 +248,7 @@ class _$LoadFailedFormImpl<DataT> extends LoadFailedForm<DataT> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadFailedFormImpl<DataT> &&
@@ -437,7 +437,7 @@ class _$LoadedFormImpl<DataT> extends LoadedForm<DataT> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedFormImpl<DataT> &&
