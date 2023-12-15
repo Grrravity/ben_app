@@ -1,4 +1,4 @@
-import 'package:ben_app/core/error/logger.dart';
+import 'package:ben_app/core/utils/logger.dart';
 import 'package:dio/dio.dart';
 
 class DioApiLogger {

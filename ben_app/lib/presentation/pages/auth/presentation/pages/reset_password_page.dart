@@ -44,7 +44,7 @@ class ResetPasswordLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveRowColumn(
-      layout: ResponsiveBreakpoints.of(context).largerThan(TABLET)
+      layout: context.rf.largerThan(TABLET)
           ? ResponsiveRowColumnType.ROW
           : ResponsiveRowColumnType.COLUMN,
       children: [

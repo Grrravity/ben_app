@@ -45,7 +45,7 @@ class LoginLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return ResponsiveRowColumn(
-      layout: ResponsiveBreakpoints.of(context).largerThan(TABLET)
+      layout: context.rf.largerThan(TABLET)
           ? ResponsiveRowColumnType.ROW
           : ResponsiveRowColumnType.COLUMN,
       children: [

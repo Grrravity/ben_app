@@ -12,9 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-part './widgets/content_tab_wrapper.dart';
-part './widgets/project_detail_tab.dart';
-part './widgets/project_information.dart';
+part 'widgets/content_tab_wrappers.dart';
+part 'widgets/project_detail_tab.dart';
+part 'widgets/project_information.dart';
+part 'widgets/project_settings.dart';
 
 class ProjectDetailPage extends StatelessWidget {
   const ProjectDetailPage({super.key, required this.projectId});

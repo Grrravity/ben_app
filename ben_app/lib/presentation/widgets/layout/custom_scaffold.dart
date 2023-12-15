@@ -26,6 +26,7 @@ class MainScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsiveFrameworks = context.rf;
     return Scaffold(
       backgroundColor: context.theme.colorScheme.onTertiaryContainer,
       appBar: appBar != null
@@ -46,7 +47,7 @@ class MainScaffold extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: ResponsiveBreakpoints.of(context).smallerThan(TABLET)
+              padding: responsiveFrameworks.smallerThan(TABLET)
                   ? const EdgeInsets.only(left: 30)
                   : const EdgeInsets.only(left: 110),
               child: DecoratedBox(
@@ -168,8 +169,8 @@ class _CustomDrawerState extends State<_CustomDrawer>
 
   @override
   Widget build(BuildContext context) {
-    final shouldHover = ResponsiveBreakpoints.of(context).smallerThan(DESKTOP);
-    final isSmallLayout = ResponsiveBreakpoints.of(context).smallerThan(TABLET);
+    final shouldHover = context.rf.smallerThan(DESKTOP);
+    final isSmallLayout = context.rf.smallerThan(TABLET);
     return shouldHover
         ? GestureDetector(
             onTap: () => _controller.isCompleted ? _reverse() : _forward(),
@@ -329,7 +330,7 @@ class _ShrinkedMenuElement extends StatelessWidget {
   final MenuElement element;
   @override
   Widget build(BuildContext context) {
-    final isSmallLayout = ResponsiveBreakpoints.of(context).smallerThan(TABLET);
+    final isSmallLayout = context.rf.smallerThan(TABLET);
     return Container(
       height: 56,
       color: isSelected

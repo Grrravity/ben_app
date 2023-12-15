@@ -1,7 +1,7 @@
 part of '../project_detail_page.dart';
 
-class ProjectInformation extends StatelessWidget {
-  const ProjectInformation({super.key});
+class ProjectSettings extends StatelessWidget {
+  const ProjectSettings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class ProjectInformation extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _MainTile(project),
+              _SectionSettingsTile(project),
               const Divider(),
-              _SectionsTile(project),
+              _IntersectionSettingsTile(project),
             ],
           ),
         ),
@@ -28,8 +28,8 @@ class ProjectInformation extends StatelessWidget {
   }
 }
 
-class _MainTile extends StatelessWidget {
-  const _MainTile(this.project);
+class _SectionSettingsTile extends StatelessWidget {
+  const _SectionSettingsTile(this.project);
 
   final Project project;
 
@@ -81,8 +81,8 @@ class _MainTile extends StatelessWidget {
   }
 }
 
-class _SectionsTile extends StatelessWidget {
-  const _SectionsTile(this.project);
+class _IntersectionSettingsTile extends StatelessWidget {
+  const _IntersectionSettingsTile(this.project);
 
   final Project project;
 

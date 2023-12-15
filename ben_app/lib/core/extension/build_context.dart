@@ -14,4 +14,6 @@ extension BuildContextExtensions on BuildContext {
   ThemeRadius get radius => theme.radius;
 
   AppLocalizations get l10n => AppLocalizations.of(this);
+
+  ResponsiveBreakpointsData get rf => ResponsiveBreakpoints.of(this);
 }
