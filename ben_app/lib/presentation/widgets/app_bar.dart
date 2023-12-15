@@ -20,7 +20,7 @@ class MainAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSmallLayout = ResponsiveBreakpoints.of(context).smallerThan(TABLET);
+    final isSmallLayout = context.rf.smallerThan(TABLET);
     return Container(
       height: 60,
       decoration: BoxDecoration(

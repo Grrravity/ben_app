@@ -14,6 +14,7 @@ import 'package:ben_app/presentation/widgets/layout/error_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -117,7 +118,9 @@ class _TileTitle extends StatelessWidget {
       children: [
         Text(
           project.name,
-          style: context.textTheme.titleLarge,
+          style: context.rf.smallerOrEqualTo(MOBILE)
+              ? context.textTheme.titleMedium
+              : context.textTheme.titleLarge,
         ),
         Container(
           padding: const EdgeInsets.only(right: 12),
