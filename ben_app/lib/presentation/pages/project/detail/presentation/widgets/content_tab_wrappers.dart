@@ -60,7 +60,7 @@ class FlexRowColumnWrapper extends StatelessWidget {
     required this.isRow,
     required this.child,
     required this.flex,
-    this.paddingFallback = const EdgeInsets.all(20),
+    this.paddingFallback = const EdgeInsets.all(12),
   });
 
   final bool isRow;

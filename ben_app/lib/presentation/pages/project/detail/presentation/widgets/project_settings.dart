@@ -1,12 +1,12 @@
 part of '../project_detail_page.dart';
 
-class ProjectSettings extends StatelessWidget {
-  const ProjectSettings({super.key});
+class ProjectSettingsTab extends StatelessWidget {
+  const ProjectSettingsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final project = context.select<ProjectDetailCubit, Project>(
-      (cubit) => cubit.state.asLoaded!.data.project,
+    final settings = context.select<ProjectDetailCubit, ProjectSettings>(
+      (cubit) => cubit.state.asLoaded!.data.project.settings,
     );
     return SingleChildScrollView(
       child: ConstrainedBox(
@@ -17,9 +17,10 @@ class ProjectSettings extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _SectionSettingsTile(project),
+              _SectionSettingsTile(settings),
               const Divider(),
-              _IntersectionSettingsTile(project),
+              _IntersectionSettingsTile(settings),
+              const SizedBox(height: 18)
             ],
           ),
         ),
@@ -29,9 +30,9 @@ class ProjectSettings extends StatelessWidget {
 }
 
 class _SectionSettingsTile extends StatelessWidget {
-  const _SectionSettingsTile(this.project);
+  const _SectionSettingsTile(this.settings);
 
-  final Project project;
+  final ProjectSettings settings;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class _SectionSettingsTile extends StatelessWidget {
           flex: 2,
           paddingFallback: const EdgeInsets.only(bottom: 12),
           child: Text(
-            l10n.projectInformation_generalTileTitle,
+            l10n.projectSettings_SectionTitle,
             style: context.theme.textTheme.titleLarge,
           ),
         ),
@@ -54,37 +55,59 @@ class _SectionSettingsTile extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RowOrColumnData(
-                title: l10n.projectInformation_projectNameTitle,
-                data: project.name,
-              ),
-            ],
+            children:
+                List.generate(settings.sectionPictureSetting.length, (index) {
+              final setting = settings.sectionPictureSetting[index];
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RowOrColumnData(
+                    title: l10n.projectSettings_sectionSettingName,
+                    data: setting.name,
+                  ),
+                  if (!responsiveFrameworks.largerThan(TABLET))
+                    RowOrColumnData(
+                      title: l10n.projectSettings_sectionSettingImageCount,
+                      data: setting.pictureCount.toString(),
+                    ),
+                ],
+              );
+            }),
           ),
         ),
-        FlexRowColumnWrapper(
-          isRow: responsiveFrameworks.largerThan(TABLET),
-          flex: 3,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RowOrColumnData(
-                title: l10n.projectInformation_parcoursNumberTitle,
-                data: project.parcoursReferences.length.toString(),
-              ),
-            ],
+        if (responsiveFrameworks.largerThan(TABLET))
+          FlexRowColumnWrapper(
+            isRow: responsiveFrameworks.largerThan(TABLET),
+            flex: 3,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+                  List.generate(settings.sectionPictureSetting.length, (index) {
+                final setting = settings.sectionPictureSetting[index];
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RowOrColumnData(
+                      title: l10n.projectSettings_sectionSettingImageCount,
+                      data: setting.pictureCount.toString(),
+                    ),
+                  ],
+                );
+              }),
+            ),
           ),
-        ),
       ],
     );
   }
 }
 
 class _IntersectionSettingsTile extends StatelessWidget {
-  const _IntersectionSettingsTile(this.project);
+  const _IntersectionSettingsTile(this.settings);
 
-  final Project project;
+  final ProjectSettings settings;
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +123,7 @@ class _IntersectionSettingsTile extends StatelessWidget {
                 ? EdgeInsets.zero
                 : const EdgeInsets.only(bottom: 12),
             child: Text(
-              l10n.projectInformation_SecIntersecTitle,
+              l10n.projectSettings_IntersectionTitle,
               style: context.theme.textTheme.titleLarge,
             ),
           ),
@@ -111,41 +134,50 @@ class _IntersectionSettingsTile extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RowOrColumnData(
-                title: l10n.projectInformation_sectionNumberTitle,
-                data: project.totalSections.toString(),
-              ),
-              RowOrColumnData(
-                title: l10n.projectInformation_intersectionNumberTitle,
-                data: project.totalIntersections.toString(),
-              ),
-            ],
+            children: List.generate(settings.intersectionPictureSetting.length,
+                (index) {
+              final setting = settings.intersectionPictureSetting[index];
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RowOrColumnData(
+                    title: l10n.projectSettings_sectionSettingName,
+                    data: setting.name,
+                  ),
+                  if (!responsiveFrameworks.largerThan(TABLET))
+                    RowOrColumnData(
+                      title: l10n.projectSettings_sectionSettingImageCount,
+                      data: setting.pictureCount.toString(),
+                    ),
+                ],
+              );
+            }),
           ),
         ),
-        FlexRowColumnWrapper(
-          isRow: responsiveFrameworks.largerThan(TABLET),
-          flex: 3,
-          child: Padding(
-            padding: responsiveFrameworks.largerThan(TABLET)
-                ? EdgeInsets.zero
-                : const EdgeInsets.only(left: 20),
+        if (responsiveFrameworks.largerThan(TABLET))
+          FlexRowColumnWrapper(
+            isRow: responsiveFrameworks.largerThan(TABLET),
+            flex: 3,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RowOrColumnData(
-                  title: l10n.projectInformation_sectionDoneTitle,
-                  data: project.doneSections.toString(),
-                ),
-                RowOrColumnData(
-                  title: l10n.projectInformation_intersectionDoneTitle,
-                  data: project.doneIntersections.toString(),
-                ),
-              ],
+              children: List.generate(
+                  settings.intersectionPictureSetting.length, (index) {
+                final setting = settings.intersectionPictureSetting[index];
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RowOrColumnData(
+                      title: l10n.projectSettings_sectionSettingImageCount,
+                      data: setting.pictureCount.toString(),
+                    ),
+                  ],
+                );
+              }),
             ),
           ),
-        ),
       ],
     );
   }

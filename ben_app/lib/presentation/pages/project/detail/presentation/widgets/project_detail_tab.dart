@@ -87,9 +87,9 @@ class _ProjectDetailTabState extends State<ProjectDetailTab>
                 child: TabBarView(
                   controller: _tabController,
                   children: const [
-                    ProjectInformation(),
-                    ProjectInformation(),
-                    ProjectInformation(),
+                    ProjectInformationTab(),
+                    ProjectInformationTab(),
+                    ProjectSettingsTab(),
                   ],
                 ),
               ),

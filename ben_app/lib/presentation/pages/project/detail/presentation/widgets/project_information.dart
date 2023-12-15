@@ -1,7 +1,7 @@
 part of '../project_detail_page.dart';
 
-class ProjectInformation extends StatelessWidget {
-  const ProjectInformation({super.key});
+class ProjectInformationTab extends StatelessWidget {
+  const ProjectInformationTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,7 @@ class ProjectInformation extends StatelessWidget {
               _MainTile(project),
               const Divider(),
               _SectionsTile(project),
+              const SizedBox(height: 18)
             ],
           ),
         ),
@@ -42,7 +43,7 @@ class _MainTile extends StatelessWidget {
         FlexRowColumnWrapper(
           isRow: responsiveFrameworks.largerThan(TABLET),
           flex: 2,
-          paddingFallback: const EdgeInsets.only(bottom: 12),
+          paddingFallback: const EdgeInsets.only(bottom: 6),
           child: Text(
             l10n.projectInformation_generalTileTitle,
             style: context.theme.textTheme.titleLarge,
@@ -59,23 +60,29 @@ class _MainTile extends StatelessWidget {
                 title: l10n.projectInformation_projectNameTitle,
                 data: project.name,
               ),
+              if (!responsiveFrameworks.largerThan(TABLET))
+                RowOrColumnData(
+                  title: l10n.projectInformation_parcoursNumberTitle,
+                  data: project.parcoursReferences.length.toString(),
+                ),
             ],
           ),
         ),
-        FlexRowColumnWrapper(
-          isRow: responsiveFrameworks.largerThan(TABLET),
-          flex: 3,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RowOrColumnData(
-                title: l10n.projectInformation_parcoursNumberTitle,
-                data: project.parcoursReferences.length.toString(),
-              ),
-            ],
+        if (responsiveFrameworks.largerThan(TABLET))
+          FlexRowColumnWrapper(
+            isRow: responsiveFrameworks.largerThan(TABLET),
+            flex: 3,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RowOrColumnData(
+                  title: l10n.projectInformation_parcoursNumberTitle,
+                  data: project.parcoursReferences.length.toString(),
+                ),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }
@@ -98,7 +105,7 @@ class _SectionsTile extends StatelessWidget {
           child: Padding(
             padding: responsiveFrameworks.largerThan(TABLET)
                 ? EdgeInsets.zero
-                : const EdgeInsets.only(bottom: 12),
+                : const EdgeInsets.only(bottom: 6),
             child: Text(
               l10n.projectInformation_SecIntersecTitle,
               style: context.theme.textTheme.titleLarge,
@@ -116,36 +123,47 @@ class _SectionsTile extends StatelessWidget {
                 title: l10n.projectInformation_sectionNumberTitle,
                 data: project.totalSections.toString(),
               ),
-              RowOrColumnData(
-                title: l10n.projectInformation_intersectionNumberTitle,
-                data: project.totalIntersections.toString(),
-              ),
-            ],
-          ),
-        ),
-        FlexRowColumnWrapper(
-          isRow: responsiveFrameworks.largerThan(TABLET),
-          flex: 3,
-          child: Padding(
-            padding: responsiveFrameworks.largerThan(TABLET)
-                ? EdgeInsets.zero
-                : const EdgeInsets.only(left: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              if (!responsiveFrameworks.largerThan(TABLET))
                 RowOrColumnData(
                   title: l10n.projectInformation_sectionDoneTitle,
                   data: project.doneSections.toString(),
                 ),
+              RowOrColumnData(
+                title: l10n.projectInformation_intersectionNumberTitle,
+                data: project.totalIntersections.toString(),
+              ),
+              if (!responsiveFrameworks.largerThan(TABLET))
                 RowOrColumnData(
                   title: l10n.projectInformation_intersectionDoneTitle,
                   data: project.doneIntersections.toString(),
                 ),
-              ],
-            ),
+            ],
           ),
         ),
+        if (responsiveFrameworks.largerThan(TABLET))
+          FlexRowColumnWrapper(
+            isRow: responsiveFrameworks.largerThan(TABLET),
+            flex: 3,
+            child: Padding(
+              padding: responsiveFrameworks.largerThan(TABLET)
+                  ? EdgeInsets.zero
+                  : const EdgeInsets.only(left: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RowOrColumnData(
+                    title: l10n.projectInformation_sectionDoneTitle,
+                    data: project.doneSections.toString(),
+                  ),
+                  RowOrColumnData(
+                    title: l10n.projectInformation_intersectionDoneTitle,
+                    data: project.doneIntersections.toString(),
+                  ),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }
