@@ -2,6 +2,7 @@ import 'package:ben_app/core/extension/extension_export.dart';
 import 'package:ben_app/core/theme/data/colors.dart';
 import 'package:ben_app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 /// A spacer whose height is equivalent to a CustomButton's one.
 class CustomButtonVerticalSpacer extends StatelessWidget {
@@ -258,8 +259,10 @@ class CustomButton extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: borderRadius ??
-            const BorderRadius.all(
-              Radius.circular(16),
+            BorderRadius.all(
+              context.rf.smallerThan(TABLET)
+                  ? const Radius.circular(12)
+                  : const Radius.circular(16),
             ),
         side: BorderSide(
           color: borderColor ?? Colors.transparent,
@@ -271,12 +274,17 @@ class CustomButton extends StatelessWidget {
         onTap: !isProcessing && enabled ? onPressed : null,
         child: Container(
           width: width,
-          height: height ?? 48,
+          height: height ?? (context.rf.smallerThan(TABLET) ? 35 : 48),
           padding: padding ??
-              const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 14,
-              ),
+              (context.rf.smallerThan(TABLET)
+                  ? const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    )
+                  : const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    )),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -303,8 +311,11 @@ class CustomButton extends StatelessWidget {
                     Text(
                       value,
                       style: textStyle ??
-                          context.textTheme.text1670016letter1
-                              .copyWith(color: Colors.white),
+                          (context.rf.smallerThan(TABLET)
+                              ? context.textTheme.text1470014letter1
+                                  .copyWith(color: Colors.white)
+                              : context.textTheme.text1670016letter1
+                                  .copyWith(color: Colors.white)),
                     ),
                     if (endIcon != null)
                       Padding(

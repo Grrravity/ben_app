@@ -26,9 +26,21 @@ class ProjectParcoursTab extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
                 child: ExpansionTile(
                   expandedAlignment: Alignment.topLeft,
-                  shape: const Border(),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                  ),
+                  collapsedShape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                  ),
                   childrenPadding: const EdgeInsets.all(12),
                   expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                  collapsedBackgroundColor:
+                      context.colorScheme.surface.withOpacity(0.6),
+                  backgroundColor: context.colorScheme.surface.withOpacity(0.6),
                   title: _TileTitle(
                     parcour: parcours[index],
                     projectId: projectId,
@@ -63,73 +75,78 @@ class _TileTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              parcour.name,
-              style: context.rf.smallerOrEqualTo(MOBILE)
-                  ? context.textTheme.titleMedium
-                  : context.textTheme.titleLarge,
-            ),
-            if (parcour.municipalities.isNotEmpty)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Municipalités',
-                    style: context.rf.smallerOrEqualTo(MOBILE)
-                        ? context.textTheme.titleSmall
-                        : context.textTheme.titleMedium,
-                  ),
-                  Wrap(
-                    children: List.generate(
-                      parcour.municipalities.length,
-                      (index) => Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          index == parcour.municipalities.length - 1
-                              ? parcour.municipalities[index]
-                              : '${parcour.ways[index]},',
-                          style: context.rf.smallerOrEqualTo(MOBILE)
-                              ? context.textTheme.bodyMedium
-                              : context.textTheme.bodyLarge,
+        Flexible(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                parcour.name,
+                style: context.rf.smallerOrEqualTo(MOBILE)
+                    ? context.textTheme.titleMedium
+                    : context.textTheme.titleLarge,
+              ),
+              if (parcour.municipalities.isNotEmpty)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Municipalités',
+                      style: context.rf.smallerOrEqualTo(MOBILE)
+                          ? context.textTheme.titleSmall
+                          : context.textTheme.titleMedium,
+                    ),
+                    Wrap(
+                      children: List.generate(
+                        parcour.municipalities.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Text(
+                            index == parcour.municipalities.length - 1
+                                ? parcour.municipalities[index]
+                                : '${parcour.municipalities[index]},',
+                            style: context.rf.smallerOrEqualTo(MOBILE)
+                                ? context.textTheme.bodyMedium
+                                : context.textTheme.bodyLarge,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            if (parcour.ways.isNotEmpty)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Municipalités',
-                    style: context.rf.smallerOrEqualTo(MOBILE)
-                        ? context.textTheme.titleSmall
-                        : context.textTheme.titleMedium,
-                  ),
-                  Wrap(
-                    children: List.generate(
-                      parcour.ways.length,
-                      (index) => Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          index == parcour.ways.length - 1
-                              ? parcour.ways[index]
-                              : '${parcour.ways[index]},',
-                          style: context.rf.smallerOrEqualTo(MOBILE)
-                              ? context.textTheme.bodyMedium
-                              : context.textTheme.bodyLarge,
+                  ],
+                ),
+              if (parcour.ways.isNotEmpty)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Rues',
+                      style: context.rf.smallerOrEqualTo(MOBILE)
+                          ? context.textTheme.titleSmall
+                          : context.textTheme.titleMedium,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.5,
+                      child: Wrap(
+                        children: List.generate(
+                          parcour.ways.length,
+                          (index) => Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Text(
+                              index == parcour.ways.length - 1
+                                  ? parcour.ways[index]
+                                  : '${parcour.ways[index]},',
+                              style: context.rf.smallerOrEqualTo(MOBILE)
+                                  ? context.textTheme.bodyMedium
+                                  : context.textTheme.bodyLarge,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-          ],
+                  ],
+                ),
+            ],
+          ),
         ),
         Container(
           padding: const EdgeInsets.only(right: 12),
